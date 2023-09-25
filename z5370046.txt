@@ -1,0 +1,30 @@
+z5370046 Work Diary for COMP9900
+
+Week 1:
+Group formed and named on Friday. 
+Sam Harrington elected as both the Team Lead and Scrum Master. 
+Discord channel set up for team communications by other members.
+Contact details shared between some members.
+Coordinated team to select a project through decision matrices and assessment of team skills.
+Wrote an initial document describing how our team met the requirements for the project. 
+
+Week 2:
+Jira Project set up 
+Github repo set up
+Google Drive Folder set up
+Worked on User Stories for proposal
+Organised meeting with Ming
+Generated most of the questions asked to Ming to understand and clarify the project requirements 
+Led the meeting and email interactions with Ming. 
+Organised connecting all Team Leads that were available. MS Teams channel with Team Leads now set up. 
+Got team to fill out team introduction so the team introduction could be sent to Ming. 
+Decided we would use python for the backend and potentially front end. 
+
+
+Week 3:
+Attempted to organise follow up meeting with Ming, only available on Friday, which is a bit late for proposal feedback.
+Finished user stories and met with the team to decide on what we would include in our project proposal.
+Provided project direction assistance for the team.
+Arranged team meeting. 
+Finally got in contact with the fourth team and their respective team lead. 
+Reviewed and provided feedback on the storyboards
