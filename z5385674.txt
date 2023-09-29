@@ -1,0 +1,17 @@
+z5385674 Work Diary for COMP9900
+
+Week 1:
+Group formed and named,
+Choosed back-end roll for the project
+Searched for similar project to learn: Email verification, sign-in, sign-out, profile
+
+Week 2:
+Attended the weekly meeting
+Decided the language for back-end as python.
+Started working on the proposal.
+
+Week 3:
+Attended the weekly meeting
+Updated the proposal,
+Finished the flow network,
+Finished the user story for metrics page after login.
