@@ -1,0 +1,1 @@
+This is the frontend section of the project
