@@ -1,0 +1,18 @@
+week 1:
+Team formation
+Trying to find 2 other teammates to form a team of five
+Brief research on desire projects
+Possible project selection P20 P22 P23 management platform 
+Send team formation letter to Rachid with 2 team member working on frontend and 3 team member working on backend
+
+week 2:
+Formed Team Glitch successfully with 5 members 
+Choose project P8 ESG big data management platform
+Start in-depth research into ESG
+researched different ESG platforms
+
+week 3:
+Start design interface flowchart with DongXuan
+Did authentication and profile part of user story
+Require more clarification from Ming to proceed with interface design due to unclear goals and client requirements
+Finish interface flowchart and finishing the project proposal with the team
