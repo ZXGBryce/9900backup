@@ -28,3 +28,18 @@ Provided project direction assistance for the team.
 Arranged team meeting. 
 Finally got in contact with the fourth team and their respective team lead. 
 Reviewed and provided feedback on the storyboards
+
+Coordinated Glitch team to put together our project summary for Ming to review.
+Created template csv file to define the data format we would be expecting within our platform.
+The template csv file proved a particularly useful tool in our meeting with Ming for clarifying our expected data format
+Coordinated and led meeting with Ming. 
+Updated all relevant user stories based on meeting with Ming. 
+Planned first sprint and confirmed with team
+Wrote the Product Backlog section of the Proposal
+Reviewed the Proposal draft for the team and added comments and missing elements. 
+Made final proposal submission.
+
+
+Week 4:
+Planning the execution and task allocation for the first sprint. 
+Team Meeting
