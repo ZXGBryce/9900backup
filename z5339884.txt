@@ -1,1 +1,37 @@
+week1
 
+Researched issues regarding different project selections.
+
+Evaluated several projects under consideration for the backend and provided opinions.
+
+Participated in group meetings, discussed the choice of backend applications and the selection of the database management system.
+
+week2
+
+Attended a meeting with Ming.
+
+Designed the backend system architecture.
+
+Conducted extensive research on the ESG framework and prepared questions to ask Ming.
+
+Searched online for ESG-related data.
+
+Found similar websites to use as reference templates.
+
+Chose Flask as the backend application.
+
+Evaluated ESG data types and decided to use the MySQL relational database.
+
+week3
+
+Completed the entire system architecture section in the proposal.
+
+Wrote the basic backend framework on GitHub and crated the corresponding files.
+
+Participated in discussions with teammates, further researching various issues with ESG data processing.
+
+Raised critical questions regarding data sources and the workings of the ESG framework, and consulted Ming about them.
+
+Designed the website's user registration and authentication process.
+
+Finely formatted and optimized the entire proposal.
