@@ -49,8 +49,4 @@ def sign_in(request: SignInRequest) -> Response[SignInResponse]:
     # 实现登录逻辑
     pass
 
-@auth_blueprint.post('/sign_in')
-@handle_with_pydantic(SignInRequest)
-def sign_in(request: SignInRequest) -> Response[SignInResponse]:
-    # 实现登录逻辑
-    pass
+
