@@ -1,6 +1,4 @@
 .idea
 __pycache__
 flask_example.db
-echo .DS_Store >> ~/.gitignore_global
-git config --global core.excludesfile ~/.gitignore_global
-
+.DS_Store
