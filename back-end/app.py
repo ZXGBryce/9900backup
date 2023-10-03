@@ -1,9 +1,9 @@
 from flask import Flask
 
-from flask_example.libs.data_access import DataAccess
-from flask_example.libs.db.db import database
-from flask_example.libs.registry import DependencyRegistry
-from flask_example.server.api.auth import auth_blueprint
+from flask_app.libs.data_access import DataAccess
+from flask_app.libs.db.db import database
+from flask_app.libs.registry import DependencyRegistry
+from flask_app.server.api.auth import auth_blueprint
 
 # 实例化flask app
 app = Flask(__name__)

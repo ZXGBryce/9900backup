@@ -5,7 +5,7 @@ from flask import Request, request
 from flask.typing import RouteCallable, ResponseReturnValue
 from pydantic import BaseModel, ValidationError
 
-from flask_example.server.consts.response_format import Response, Code
+from flask_app.server.consts.response_format import Response, Code
 
 RT = TypeVar("RT", bound=BaseModel)
 TypedHandler_F = Callable[[RT], Response]
