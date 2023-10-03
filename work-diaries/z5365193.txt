@@ -1,0 +1,20 @@
+z5365193 Work Diary for COMP9900
+
+Week 1:
+The group formed and named
+Chose a front-end role for the project
+Roughly decided to choose P8 Project
+Joined Jira
+
+Week 2:
+Set up the Github Group
+Attended the weekly meeting
+Decided the programming language for the front-end as React JavaScript.
+Started working on the proposal.
+
+Week 3:
+Attended the weekly meeting
+Updated the proposal
+Finished part of the Introduction section
+Finished part of the User Stories section
+Finished part of the Interface and flow diagram section
