@@ -1,4 +1,5 @@
+.DS_Store
 .idea
 __pycache__
 flask_example.db
-.DS_Store
+
