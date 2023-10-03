@@ -22,14 +22,4 @@ app.py 项目入口文件 写在根目录。
 
       - `middlewares`：中间件实现目录，比如鉴权中间件
 
-前置知识：
-1. pydantic是什么
-2. typehint
-3. 装饰器
 
-写接口流程
-1. 打开server/api文件夹，看要写的接口的分类，选择对应的文件，比如`auth.py`
-2. 确定请求的结构和响应的结构
-3. 模仿`sign_up`函数定义新的请求处理函数
-4. 编写请求处理函数逻辑
-   1. 判断用不用访问数据库，如果需要就在`libs/data_access.py`中加方法，模仿`get_user_by_username`写。
