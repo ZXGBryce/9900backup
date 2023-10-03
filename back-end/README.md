@@ -6,9 +6,9 @@ app.py 项目入口文件 写在根目录。
 
 - `app.py`：项目入口文件，位于根目录。
 
-- `flask-example`：项目目录
+- `flask`：项目目录
 
-  - `flask_example`：包目录（PEP517 PEP518）
+  - `flask`：包目录（PEP517 PEP518）
 
     - `libs`：第三方中间件目录，包括各种依赖项，例如数据库连接的初始化和 Redis 连接
 
