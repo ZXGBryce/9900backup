@@ -2,7 +2,7 @@ from typing import Optional
 
 from peewee import Database
 
-from ..models.user import AuthUserTab
+from flask_app.models.user import AuthUserTab
 
 
 class DataAccess:

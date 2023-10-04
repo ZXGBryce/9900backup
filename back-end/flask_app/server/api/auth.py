@@ -1,10 +1,10 @@
 from flask import Blueprint, Request
 from pydantic import BaseModel
 
-from ...libs.registry import DependencyRegistry as dep
-from ...server.consts.response_format import Response, Code
-from ...server.utils.password import hash_password
-from ...server.utils.request_parser import handle_with_pydantic
+from flask_app.libs.registry import DependencyRegistry as dep
+from flask_app.server.consts.response_format import Response, Code
+from flask_app.server.utils.password import hash_password
+from flask_app.server.utils.request_parser import handle_with_pydantic
 # 定义blueprint可以把一类的接口放在一起管理，不用像quickstart中都一股脑写在app上
 # url_prefix是/auth 访问下面的sign_up接口时地址就是这样的http://localhost:8000/auth/sign_up
 auth_blueprint = Blueprint('auth', __name__, url_prefix="/auth")

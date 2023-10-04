@@ -3,7 +3,7 @@ from enum import Enum
 
 from pydantic import BaseModel
 
-from ..libs.db.db_config import DBConfig
+from flask_app.libs.db.db_config import DBConfig
 
 
 class DeployEnv(str, Enum):
