@@ -18,7 +18,6 @@ DependencyRegistry.init(DataAccess(database))
 def run_debug_server():
     app.run(debug=True)
 
-#1111
 
 if __name__ == '__main__':
     run_debug_server()
