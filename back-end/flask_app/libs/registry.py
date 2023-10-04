@@ -1,4 +1,4 @@
-from flask_app.libs.data_access import DataAccess
+from ..libs.data_access import DataAccess
 
 
 class DependencyRegistry:

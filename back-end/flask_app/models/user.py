@@ -1,7 +1,7 @@
 import time
 
 from peewee import Model
-from flask_app.libs.db.db import database
+from ..libs.db.db import database
 import peewee as p
 
 
