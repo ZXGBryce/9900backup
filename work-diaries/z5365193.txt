@@ -7,14 +7,16 @@ Roughly decided to choose P8 Project
 Joined Jira
 
 Week 2:
-Set up the Github Group
-Attended the weekly meeting
+Set up the Github Group and Joined it
+Attended the group meeting
+Attended the meeting with the client
 Decided the programming language for the front-end as React JavaScript.
-Started working on the proposal.
+Started working on the proposal
 
 Week 3:
-Attended the weekly meeting
+Attended the group meeting
+Attended the meeting with the client
 Updated the proposal
-Finished part of the Introduction section
-Finished part of the User Stories section
-Finished part of the Interface and flow diagram section
+Finished parts of the Introduction section in the proposal
+Finished parts of the User Stories section in the proposal
+Finished parts of the Interface and flow diagram section in the proposal
