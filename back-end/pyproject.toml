@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "flask-app"
+version = "0.1.0"
+description = ""
+authors = ["Xiangeng Zhao <zhaoxiangeng@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+lanfit-resp = "^0.1.2"
+Flask = "^3.0.0"
+pydantic = { version = "^1.8", platform = "arm64" }
+peewee = "^3.16.3"
+pydantic-core = "^2.10.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
