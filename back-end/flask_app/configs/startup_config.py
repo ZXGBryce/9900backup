@@ -17,7 +17,6 @@ class StartupConfig(BaseModel):
 def load_startup_config() -> StartupConfig:
     # 从环境变量获取当前部署环境，如果没有环境变量就使用DEV环境
     deploy_env = DeployEnv(os.environ.get("env", DeployEnv.DEV.value))
-    print(deploy_env)
     config_name = f"{deploy_env.value}.json"
     # 配置文件和当前文件在同一目录，获取当前目录
     config_dir = os.path.dirname(__file__)

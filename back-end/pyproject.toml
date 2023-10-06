@@ -17,3 +17,6 @@ pydantic-core = "^2.10.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+dev = 'app:run_debug_server'

@@ -5,6 +5,7 @@ from flask_app.libs.registry import DependencyRegistry as dep
 from flask_app.server.consts.response_format import Response, Code
 from flask_app.server.utils.password import hash_password
 from flask_app.server.utils.request_parser import handle_with_pydantic
+
 # 定义blueprint可以把一类的接口放在一起管理，不用像quickstart中都一股脑写在app上
 # url_prefix是/auth 访问下面的sign_up接口时地址就是这样的http://localhost:8000/auth/sign_up
 auth_blueprint = Blueprint('auth', __name__, url_prefix="/auth")
@@ -20,7 +21,6 @@ class SignUpRequest(BaseModel):
 @auth_blueprint.post('/sign_up')  # 在blueprint注册请求
 @handle_with_pydantic(SignUpRequest)  # 这里点进去看
 def sign_up(request: SignUpRequest) -> Response:
-    # 判断密码和重复密码输入是否一致
     if request.password != request.repeat_password:
         return Response(code=Code.REPEAT_PASSWORD_WRONG)
     # 判断密码强度，略，没写
@@ -34,6 +34,7 @@ def sign_up(request: SignUpRequest) -> Response:
 
 
 class SignInRequest(BaseModel):
+    # 登陆请求用户名 + 密码
     username: str
     password: str
 
