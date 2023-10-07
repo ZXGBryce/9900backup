@@ -42,4 +42,7 @@ Made final proposal submission.
 
 Week 4:
 Planning the execution and task allocation for the first sprint. 
-Team Meeting
+Created and implemented agenda for Team Meeting
+Created script for generating the synthetic dataset required for our project.
+Monitoring team progress and commitments for sprint 1. 
+
