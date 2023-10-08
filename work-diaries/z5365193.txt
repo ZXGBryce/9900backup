@@ -22,10 +22,9 @@ Attended the group meeting
 Attended the meeting with the client
 
 Week 4:
-
-Attended the group meeting
 Figured out how Router works in React and set the path to each page
 Wrote index.js andApp.js
 Co-designed and wrote home page (home.jsx)
 Co-designed and wrote register page (register.jsx)
 Co-designed and wrote login page (login.jsx)
+Attended the group meeting
