@@ -1,4 +1,4 @@
-How to run the website at the Terminal:
+Instructions on how to run the website at the Terminal:
 
 cd backend 
 npm install 
