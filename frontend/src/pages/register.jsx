@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { MyButton } from '../components/MyButton';
 import { TextField } from '@mui/material';
 import { useEmptyValidation, useEmailValidation } from '../helper';
+import { Link } from 'react-router-dom'
+
 
 const Register = (props) => {
   const [email, setEmail] = React.useState('');
@@ -47,28 +49,34 @@ const Register = (props) => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <div style={{ width: '75%', margin: '20% auto', display: 'flex', justifyContent: 'center' }}>
-    <div >
-      <div style={{ display: 'flex' }} >
-        <div style={{ display: 'flex', alignItems: 'center', marginRight: '31px' }}>Email: &nbsp;</div>
-        <TextField onChange={(e) => setEmail(e.target.value)} label='email' value={email} variant="outlined" />
+      <div style={{ width: '75%', margin: '20% auto', display: 'flex', justifyContent: 'center' }}>
+        <div >
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20%'}}>Sign Up</div>
+          <div style={{ display: 'flex' }} >
+            <div style={{ display: 'flex', alignItems: 'center', marginRight: '31px' }}>Email: &nbsp;</div>
+            <TextField onChange={(e) => setEmail(e.target.value)} label='email' value={email} variant="outlined" />
+          </div>
+          <br />
+          <div style={{ display: 'flex' }} >
+            <div style={{ display: 'flex', alignItems: 'center' }}>Password: &nbsp;</div>
+            <TextField onChange={(e) => setPassword(e.target.value)} label='password' value={password} variant="outlined" />
+          </div>
+          <br />
+          <div style={{ display: 'flex' }} >
+            <div style={{ display: 'flex', alignItems: 'center', marginRight: '27px' }}>Name: &nbsp;</div>
+            <TextField onChange={(e) => setName(e.target.value)} label='name' value={name} variant="outlined" />
+          </div>
+          <br />
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <MyButton onClick={registerAction} disabled={!readyToSubmit} text={readyToSubmit ? 'Register' : 'Please Enter valid Details'}></MyButton>
+          </div>
+          
+          <Link to="/login" href="#" variant="body2" style={{ display: 'flex', justifyContent: 'center', marginTop: '5%'}}>
+            Already have an account? Sign in
+          </Link>
+    
+        </div>
       </div>
-      <br />
-      <div style={{ display: 'flex' }} >
-        <div style={{ display: 'flex', alignItems: 'center' }}>Password: &nbsp;</div>
-        <TextField onChange={(e) => setPassword(e.target.value)} label='password' value={password} variant="outlined" />
-      </div>
-      <br />
-      <div style={{ display: 'flex' }} >
-        <div style={{ display: 'flex', alignItems: 'center', marginRight: '27px' }}>Name: &nbsp;</div>
-        <TextField onChange={(e) => setName(e.target.value)} label='name' value={name} variant="outlined" />
-      </div>
-      <br />
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <MyButton onClick={registerAction} disabled={!readyToSubmit} text={readyToSubmit ? 'Register' : 'Please Enter valid Details'}></MyButton>
-      </div>
-    </div>
-    </div>
     </div>
   );
 }
