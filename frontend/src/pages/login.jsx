@@ -49,7 +49,7 @@ const Login = (props) => {
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div style={{ width: '75%', margin: '20% auto', display: 'flex', justifyContent: 'center' }}>
         <div >
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20%'}}>Sign Up</div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20%'}}>Sign In</div>
           <div style={{ display: 'flex' }} >
             <div style={{ display: 'flex', alignItems: 'center', marginRight: '40px' }}>Email: </div>
             <TextField onChange={(e) => setEmail(e.target.value)} label='email' value={email} variant="outlined" />
