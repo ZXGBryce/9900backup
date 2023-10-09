@@ -34,5 +34,5 @@ Optimized the interface of the login and register page
 Added Confirm Password in the register page (register.jsx)
 Added some helper functions in helper.js
 Added Avatar in login and register page
-Added Copyright in login and register page
+Added Copyright in landing, login and register page
 Attended the group meeting
