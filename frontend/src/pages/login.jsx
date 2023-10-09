@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MyButton } from '../components/MyButton';
 import { TextField } from '@mui/material';
-import { useEmptyValidation, useEmailValidation } from '../helper';
+import { useEmptyValidation, useEmailValidation, Copyright } from '../helper';
 import { Link } from 'react-router-dom'
-
+import Avatar from '@mui/material/Avatar';
 
 const Login = (props) => {
   const [email, setEmail] = React.useState('');
@@ -46,18 +46,20 @@ const Login = (props) => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <div style={{ width: '75%', margin: '20% auto', display: 'flex', justifyContent: 'center' }}>
-        <div >
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20%'}}>Sign In</div>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ width: '75%', margin: '3% auto', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: '30%'}}>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main',  margin: '0 auto'}}> 
+          </Avatar>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '5%'}}><h1>Sign In</h1></div>
           <div style={{ display: 'flex' }} >
-            <div style={{ display: 'flex', alignItems: 'center', marginRight: '40px' }}>Email: </div>
-            <TextField onChange={(e) => setEmail(e.target.value)} label='email' value={email} variant="outlined" />
+            {/* <div style={{ display: 'flex', alignItems: 'center', marginRight: '40px' }}>Email: </div> */}
+            <TextField onChange={(e) => setEmail(e.target.value)} label='Email/User Name*' value={email} variant="outlined" style={{ width: '100%'}}/>
           </div>
           <br />
           <div style={{ display: 'flex' }} >
-            <div style={{ display: 'flex', alignItems: 'center' }}>Password: &nbsp;</div>
-            <TextField onChange={(e) => setPassword(e.target.value)} label='password' value={password} variant="outlined" />
+            {/* <div style={{ display: 'flex', alignItems: 'center' }}>Password: &nbsp;</div> */}
+            <TextField onChange={(e) => setPassword(e.target.value)} label='Password*' value={password} variant="outlined"  type="password" style={{ width: '100%'}}/>
           </div>
           <br />
           <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -67,6 +69,8 @@ const Login = (props) => {
           <Link to="/register" variant="body2" style={{ display: 'flex', justifyContent: 'center', marginTop: '5%'}}> 
             {"Don't have an account? Sign Up"}
           </Link>
+          
+          <Copyright sx={{ mt: 8, mb: 4 }} />
           
         </div>
       </div>

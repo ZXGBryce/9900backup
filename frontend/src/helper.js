@@ -1,3 +1,17 @@
+import Typography from '@mui/material/Typography';
+
+export function Copyright (props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+        Glitch
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+
 export function fileToDataUrl (file) {
   const validFileTypes = ['image/jpeg', 'image/png', 'image/jpg']
   const valid = validFileTypes.find(type => type === file.type);

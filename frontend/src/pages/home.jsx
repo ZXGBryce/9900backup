@@ -11,7 +11,7 @@ const CustomButton = styled(Button)({
   // marginLeft: '4%',
   backgroundColor: '#4dabf5',
   color: '#fff',
-  '& .MuiButton-label': { fontSize: '16px',},
+  '& .MuiButton-label': { fontSize: '100%',},
   '&:hover': { backgroundColor: '#1976d2',},
 });
 
