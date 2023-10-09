@@ -5,7 +5,7 @@ import { TextField } from '@mui/material';
 import { useEmptyValidation, useEmailValidation, Copyright} from '../helper';
 import { Link } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 
 const Register = (props) => {
