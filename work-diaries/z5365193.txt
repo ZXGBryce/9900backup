@@ -30,7 +30,7 @@ Co-designed and wrote login page (login.jsx)
 Attended the group meeting
 
 Week 5:
-Optimized the interface of the login and registration page
+Optimized the interface of the login and register page
 Added Confirm Password in the register page (register.jsx)
 Added some helper functions in helper.js
 Added Avatar in login and register page
