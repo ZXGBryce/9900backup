@@ -17,8 +17,9 @@ const Register = (props) => {
   const passwordIsValid = useEmptyValidation(password);
   const nameIsValid = useEmptyValidation(name);
   const [readyToSubmit, setReadyToSubmit] = React.useState(false);
+  
   React.useEffect(() => {
-    if (emailIsValid && passwordIsValid && nameIsValid) {
+    if (emailIsValid && passwordIsValid && nameIsValid && password === confirmPassword) {
       setReadyToSubmit(true);
     } else {
       setReadyToSubmit(false);
