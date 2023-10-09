@@ -8,7 +8,7 @@ Joined Jira
 
 Week 2:
 Set up the Github Group and Joined it
-Decided the programming language for the front-end as React JavaScript.
+Decided the programming language for the front-end as React JavaScript
 Started working on the proposal
 Attended the group meeting
 Attended the meeting with the client
@@ -27,4 +27,12 @@ Wrote index.js andApp.js
 Co-designed and wrote home page (home.jsx)
 Co-designed and wrote register page (register.jsx)
 Co-designed and wrote login page (login.jsx)
+Attended the group meeting
+
+Week 5:
+Optimized the interface of the login and registration page
+Added Confirm Password in the register page (register.jsx)
+Added some helper functions in helper.js
+Added Avatar in login and register page
+Added Copyright in login and register page
 Attended the group meeting
