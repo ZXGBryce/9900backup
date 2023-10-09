@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Link, Route, useNavigate, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
+import { Copyright } from '../helper';
 
 const CustomButton = styled(Button)({
   width: '20%',
@@ -31,8 +32,9 @@ const Home = () => {
       <hr />
       
       <div className="App">
-        Home Page
+        <h1>Home Page</h1>
       </div>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
     </>
   );
 }
