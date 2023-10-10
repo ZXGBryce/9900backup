@@ -19,23 +19,21 @@ const CustomButton = styled(Button)({
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <>
-      <div style={{ display: 'flex ', alignItems: 'center'}}>
-        <div style={{marginLeft: '5%', display: 'flex ', alignItems: 'center'}}><h2>Glitch</h2></div>
+    <div style={{height:'100vh'}}>
+      <div style={{ display: 'flex ', alignItems: 'center', height:'10%'}}>
+        <div style={{marginLeft: '5%', display: 'flex ', alignItems: 'center'}}><h1>Glitch</h1></div>
         <div style={{ display: 'flex ', alignItems: 'center', width: '100%',height: '100%'}}>
-          {/* <Button onClick={() => navigate('/register')} sx={{ width: '15%', height: '5%',padding: '1%', margin: '1.2%', marginLeft: '50%',backgroundColor: '#66bb6a', color: '#fff', '&:hover': { backgroundColor: '#43a047' } }}><h2>Register</h2></Button> */}
-          {/* <Button onClick={() => navigate('/login')} sx={{ width: '15%', height: '5%',padding: '1%', margin: '1.2%', marginLeft: '4%', fontSize: '10%', backgroundColor: '#66bb6a', color: '#fff', '&:hover': { backgroundColor: '#43a047' } }}><h2>Login</h2></Button> */}
-          <CustomButton onClick={() => navigate('/register')} sx={{marginLeft: '60%',}}>Register</CustomButton>
-          <CustomButton onClick={() => navigate('/login')}>Login</CustomButton>
+          <CustomButton onClick={() => navigate('/register')} sx={{marginLeft: '70%', height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Register</CustomButton>
+          <CustomButton onClick={() => navigate('/login')} sx={{height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Login</CustomButton>
         </div>
       </div>
       <hr />
       
       <div className="App">
-        <h1>Home Page</h1>
+        <h2>Home Page</h2>
       </div>
       <Copyright sx={{ mt: 8, mb: 4 }} />
-    </>
+    </div>
   );
 }
   
