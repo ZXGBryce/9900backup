@@ -24,14 +24,17 @@ Attended the meeting with the client
 Week 4:
 Figured out how Router works in React and set the path to each page
 Wrote index.js andApp.js
-Co-designed and Wrote home page (home.jsx)
-Co-designed and Wrote register page (register.jsx)
-Co-designed and Wrote login page (login.jsx)
+Co-designed and wrote Home page (home.jsx)
+Co-designed and wrote Register page (register.jsx)
+Co-designed and wrote Login page (login.jsx)
 Attended the group meeting
 
 Week 5:
 Optimized the interface of the login and register page
-Added and Implemented checking 'Confirm Password' is the same as 'Password' in the register page (register.jsx)
+Co-designed and wrote Dashboard page (dashboard.jsx)
+Co-designed and wrote Select Framework page (newAnalysis.jsx)
+Changed some of the CSS style to make the website more beautiful
+Added Confirm Password in the register page (register.jsx)
 Added some helper functions in helper.js
 Added Avatar in login and register page
 Added Copyright in landing, login and register page
