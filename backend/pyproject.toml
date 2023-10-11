@@ -12,6 +12,9 @@ Flask = "^3.0.0"
 pydantic = { version = "^1.8", platform = "arm64" }
 peewee = "^3.16.3"
 pydantic-core = "^2.10.1"
+bcrypt = "^4.0.1"
+flask-mail = "^0.9.1"
+pyjwt = "^2.8.0"
 
 
 [build-system]
