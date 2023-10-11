@@ -23,8 +23,10 @@ function App() {
   
   React.useEffect(() => {
     if (token) {
-      if (pathname === '/login' || pathname === '/register') {
+      if (pathname === '/login') {
         navigate('/dashboard');
+      } else if (pathname === '/register'){
+        navigate('/login');
       }
     }
   }, [token]);
@@ -36,7 +38,7 @@ function App() {
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/reset" element={<Reset />} />
-        <Route path="/dashboard" element={<Dashboard token={token}/>} />
+        <Route path="/dashboard" element={<Dashboard setToken={setToken} token={token}/>} />
         <Route path='/newAnalysis' element={<NewAnalysis />} />
       </Routes>
     </>
