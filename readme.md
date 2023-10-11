@@ -14,9 +14,9 @@ I. Instructions on how to use github (Short version)
 II. Instructions on how to run the website at the Terminal:
 
 1. Start the backend
-cd backend 
+cd backend
 pip install poetry
-poetry init
+poetry install
 run app.py
 
 3. Start the frontend
