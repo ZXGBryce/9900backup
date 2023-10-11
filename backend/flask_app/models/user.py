@@ -23,6 +23,7 @@ class AuthUserTab(BaseModel):
     password = p.FixedCharField(max_length=64)  # 密码哈希值
     create_at = p.BigIntegerField(default=timestamp)  # 账号创建的时间戳，默认值为当前时间戳，timestamp是个函数不是固定值
     last_login_at = p.BigIntegerField(null=True)  # 最后一次登录时间戳，如果没登陆过就是null
+    user_type = p.CharField(default="reg") # 用户身份
 
 
 database.create_tables([AuthUserTab])

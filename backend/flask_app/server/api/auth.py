@@ -41,7 +41,7 @@ def sign_up(request: SignUpRequest) -> Response:
 
 class SignInRequest(BaseModel):
     # 登陆请求用户名 + 密码
-    username_or_email:str
+    username_or_email: str
     password: str
 
 
@@ -54,10 +54,10 @@ class SignInResponse(BaseModel):
 @handle_with_pydantic(SignInRequest)
 def sign_in(request: SignInRequest) -> Response[SignInResponse]:
     # 检查用户名是否存在
-    user = dep.data_access.get_user_by_username(request.username)
+    user = dep.data_access.get_user_by_username(request.username_or_email)
     if not user:
         # 若用户名不存在，尝试检查邮箱是否存在
-        user = dep.data_access.get_user_by_email(request.username)  # 注意这里也使用request.username，因为用户可能输入邮箱作为用户名登录
+        user = dep.data_access.get_user_by_email(request.username_or_email)  # 注意这里也使用request.username，因为用户可能输入邮箱作为用户名登录
         if not user:
             return Response(code=Code.WRONG_USERNAME_OR_EMAIL)
 
@@ -65,8 +65,11 @@ def sign_in(request: SignInRequest) -> Response[SignInResponse]:
     if not check_password(request.password, user.password):
         return Response(code=Code.WRONG_PASSWORD)
 
+    # 生成 JWT
+    jwt_token = dep.jwt_manager.generate_token(user)
+
     # 以下可以是生成和返回JWT token的逻辑，这里为简化示例，我们只返回一个静态token
-    return Response(data=SignInResponse(token="your_jwt_token"), code=Code.OK)
+    return Response(data=SignInResponse(token=jwt_token), code=Code.OK)
 
 
 

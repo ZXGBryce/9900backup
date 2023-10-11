@@ -15,14 +15,15 @@ class JWTManager:
         payload = {
             "user_id": user.id,
             "version": user.jwt_version,
+            "user_type": user.user_type,
             "exp": datetime.datetime.utcnow() + self.expiry_duration  # 设置token时限为一天
         }
-        return jwt.encode(payload, config.jwt, algorithm=self.algorithm)
+        return jwt.encode(payload, self.secret_key, algorithm=self.algorithm)
 
     def decode_token(self, token: str) -> Optional[Union[str, dict]]:
         """ 解码 JWT token， 如果无效或过期，返回None """
         try:
-            return jwt.decode(token, config.jwt, algorithms=[self.algorithm])
+            return jwt.decode(token, self.secret_key, algorithms=[self.algorithm])
         except jwt.ExpiredSignatureError:
             # token已经过期
             return None
