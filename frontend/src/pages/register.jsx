@@ -35,9 +35,10 @@ const Register = (props) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          name,
           email,
           password,
-          name
+          confirmPassword
         })
       });
       const data = await res.json();
