@@ -17,10 +17,10 @@ II. Instructions on how to run the website at the Terminal:
 cd backend
 pip install poetry
 poetry install
-run app.py
+go to Virtual Environment
+then run app.py
 
 3. Start the frontend
-cd frontend 
+cd frontend
 yarn install
 yarn start
-
