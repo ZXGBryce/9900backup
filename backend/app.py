@@ -6,9 +6,12 @@ from flask_app.libs.db.db import database
 from flask_app.libs.registry import DependencyRegistry
 from flask_app.server.api.auth import auth_blueprint
 from flask_app.configs.startup_config import config
+from flask_cors import CORS
 
 # 实例化flask app
 app = Flask(__name__)
+
+CORS(app)
 # 注册auth_blueprint
 app.register_blueprint(auth_blueprint)
 # 初始化DependencyRegistry，正常这里应该是所有的依赖，比如访问数据库，访问缓存，消息队列，目前只有数据库
