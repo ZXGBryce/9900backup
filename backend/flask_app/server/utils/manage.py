@@ -1,4 +1,4 @@
-from getpass import getpass  # 用于安全地读取密码
+
 from flask_app.libs.data_access import DataAccess
 from flask_app.libs.db.db import database
 from flask_app.server.utils.password import hash_password
