@@ -13,7 +13,7 @@ I. Instructions on how to use github (Short version)
 
 II. Instructions on how to run the website at the Terminal:
 
-1. Start the backend
+1. Start the backend (Choose either 2.1 or 2.2)
 1)cd backend
 2.1) Install packages using poetry
    pip install poetry
