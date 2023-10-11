@@ -42,12 +42,16 @@ const Register = (props) => {
         })
       });
       const data = await res.json();
-      if (data.error) {
-        alert(data.error);
+      console.log(data);
+      if (data.code!==20000){
+        alert('Wrong email/username or password');
+      // if (data.error) {
+      //   alert(data.error);
       } else {
-        props.setToken(data.token);
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('email', email);
+        alert('Successfully registered. Please login to continue!')
+        // props.setToken(data.token);
+        // localStorage.setItem('token', data.token);
+        // localStorage.setItem('email', email);
       }
     }
   };
