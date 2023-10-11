@@ -42,8 +42,8 @@ const Login = (props) => {
       // if (data.error) {
       //   alert(data.error);
       } else {
-        props.setToken(data.token);
-        localStorage.setItem('token', data.token);
+        props.setToken(data.data.token);
+        localStorage.setItem('token', data.data.token);
         localStorage.setItem(' username_or_email',  username_or_email);
       }
     }

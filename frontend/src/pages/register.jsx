@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { MyButton } from '../components/MyButton';
 import { TextField } from '@mui/material';
 import { useEmptyValidation, useEmailValidation, Copyright} from '../helper';
-import { Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Link, Route, useNavigate, useLocation } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
@@ -17,6 +17,7 @@ const Register = (props) => {
   const passwordIsValid = useEmptyValidation(password);
   const nameIsValid = useEmptyValidation(username);
   const [readyToSubmit, setReadyToSubmit] = React.useState(false);
+  const navigate = useNavigate();
   
   React.useEffect(() => {
     if (emailIsValid && passwordIsValid && nameIsValid && password === repeat_password) {
@@ -44,11 +45,12 @@ const Register = (props) => {
       const data = await res.json();
       console.log(data);
       if (data.code!==20000){
-        alert('Wrong email/username or password');
+        alert('Email or username already exists');
       // if (data.error) {
       //   alert(data.error);
       } else {
         alert('Successfully registered. Please login to continue!')
+        navigate('/login');
         // props.setToken(data.token);
         // localStorage.setItem('token', data.token);
         // localStorage.setItem('email', email);
