@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
 
 const Login = (props) => {
-  const [email, setEmail] = React.useState('');
+  const [username_or_email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const emailIsValid = useEmailValidation(email);
+  const emailIsValid = useEmailValidation(username_or_email);
   const passwordIsValid = useEmptyValidation(password);
   const [readyToSubmit, setReadyToSubmit] = React.useState(false);
   
@@ -19,7 +19,7 @@ const Login = (props) => {
     } else {
       setReadyToSubmit(false);
     }
-  }, [email, password, emailIsValid, passwordIsValid]);
+  }, [username_or_email, password, emailIsValid, passwordIsValid]);
   console.log('readyToSubmit', readyToSubmit);
 
   //TODO: Wait for backend to be ready, then change the API call
@@ -31,7 +31,7 @@ const Login = (props) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          email,
+          username_or_email,
           password
         })
       });
@@ -41,7 +41,7 @@ const Login = (props) => {
       } else {
         props.setToken(data.token);
         localStorage.setItem('token', data.token);
-        localStorage.setItem('email', email);
+        localStorage.setItem('email', username_or_email);
       }
     }
   };
@@ -61,7 +61,7 @@ const Login = (props) => {
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '5%'}}><h2>Sign In</h2></div>
             <div style={{ display: 'flex' }} >
               {/* <div style={{ display: 'flex', alignItems: 'center', marginRight: '40px' }}>Email: </div> */}
-              <TextField onChange={(e) => setEmail(e.target.value)} label='Email/User Name*' value={email} variant="outlined" style={{ width: '100%'}}/>
+              <TextField onChange={(e) => setEmail(e.target.value)} label='Email/User Name*' value={username_or_email} variant="outlined" style={{ width: '100%'}}/>
             </div>
             <br />
             <div style={{ display: 'flex' }} >
