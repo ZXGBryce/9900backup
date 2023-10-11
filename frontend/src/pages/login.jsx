@@ -38,7 +38,7 @@ const Login = (props) => {
       const data = await res.json();
       console.log(data);
       if (data.code!==20000){
-        alert('Wrong email/username or password');
+        alert('Wrong account or password');
       // if (data.error) {
       //   alert(data.error);
       } else {
