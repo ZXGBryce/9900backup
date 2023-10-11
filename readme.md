@@ -15,11 +15,12 @@ II. Instructions on how to run the website at the Terminal:
 
 1. Start the backend
 cd backend 
-npm install 
-npm start
+pip install poetry
+poetry init
+run app.py
 
-2. Start the frontend
-cd frontend
+3. Start the frontend
+cd frontend 
 yarn install
 yarn start
 
