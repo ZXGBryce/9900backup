@@ -34,6 +34,10 @@ def sign_up(request: SignUpRequest) -> Response:
     if dep.data_access.get_user_by_username(request.username):
         return Response(code=Code.DUPLICATED_USERNAME)
 
+    # 检查邮箱是否重复
+    if dep.data_access.get_user_by_email(request.email):
+        return Response(code=Code.DUPLICATED_EMAIL)
+
     # 没问题，保存用户到数据库
     new_user = dep.data_access.create_new_user(request.username, hash_password(request.password), request.email)
     return Response()

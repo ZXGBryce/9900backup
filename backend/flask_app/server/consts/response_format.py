@@ -12,6 +12,7 @@ class Code(int, Enum):
     DUPLICATED_USERNAME = 40004
     WRONG_USERNAME_OR_EMAIL = 40005
     WRONG_PASSWORD = 40006
+    DUPLICATED_EMAIL = 40007
 
 
 Response_T = TypeVar("Response_T", bound=BaseModel)
