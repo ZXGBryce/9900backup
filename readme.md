@@ -13,14 +13,17 @@ I. Instructions on how to use github (Short version)
 
 II. Instructions on how to run the website at the Terminal:
 
-1. Start the backend
-cd backend
-pip install poetry
-poetry install
-go to Virtual Environment
-then run app.py
+1. Start the backend (Choose either 2.1 or 2.2)
+1)cd backend
+2.1) Install packages using poetry
+   pip install poetry
+   poetry install
+   go to Virtual Environment
+2.2) Install packages using shell script
+   ./install_dependencies.sh  
+3)python3 app.py
 
-3. Start the frontend
+2. Start the frontend
 cd frontend
 yarn install
 yarn start
