@@ -11,20 +11,20 @@ import Avatar from '@mui/material/Avatar';
 const Register = (props) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState(''); //TODO: Add confirmPassword field
-  const [name, setName] = React.useState('');
+  const [repeat_password, setConfirmPassword] = React.useState(''); //TODO: Add confirmPassword field
+  const [username, setName] = React.useState('');
   const emailIsValid = useEmailValidation(email);
   const passwordIsValid = useEmptyValidation(password);
-  const nameIsValid = useEmptyValidation(name);
+  const nameIsValid = useEmptyValidation(username);
   const [readyToSubmit, setReadyToSubmit] = React.useState(false);
   
   React.useEffect(() => {
-    if (emailIsValid && passwordIsValid && nameIsValid && password === confirmPassword) {
+    if (emailIsValid && passwordIsValid && nameIsValid && password === repeat_password) {
       setReadyToSubmit(true);
     } else {
       setReadyToSubmit(false);
     }
-  }, [email, password, name, emailIsValid, passwordIsValid, nameIsValid, confirmPassword]);
+  }, [email, password, username, emailIsValid, passwordIsValid, nameIsValid, repeat_password]);
   
   //TODO: Wait for backend to be ready, then change the API call
   const registerAction = async () => {
@@ -35,10 +35,10 @@ const Register = (props) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name,
+          username,
           email,
           password,
-          confirmPassword
+          repeat_password
         })
       });
       const data = await res.json();
@@ -75,7 +75,7 @@ const Register = (props) => {
             <br />
             <div style={{ display: 'flex' }} >
               {/* <div style={{ display: 'flex', alignItems: 'center', marginRight: '27px' }}>Name: &nbsp;</div> */}
-              <TextField onChange={(e) => setName(e.target.value)} label='User Name*' value={name} variant="outlined" style={{ width: '100%'}}/>
+              <TextField onChange={(e) => setName(e.target.value)} label='User Name*' value={username} variant="outlined" style={{ width: '100%'}}/>
             </div>
             <br />
             <div style={{ display: 'flex' }} >
@@ -85,7 +85,7 @@ const Register = (props) => {
             <br />
             <div style={{ display: 'flex' }} >
               {/* <div style={{ display: 'flex', alignItems: 'center', marginRight: '27px' }}>Confirm Password: &nbsp;</div> */}
-              <TextField onChange={(e) => setConfirmPassword(e.target.value)} label='Confirm Password*' value={confirmPassword} variant="outlined"  type="password" style={{ width: '100%'}}/>
+              <TextField onChange={(e) => setConfirmPassword(e.target.value)} label='Confirm Password*' value={repeat_password} variant="outlined"  type="password" style={{ width: '100%'}}/>
             </div>
             <br />
             
