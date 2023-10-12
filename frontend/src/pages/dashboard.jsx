@@ -27,7 +27,7 @@ const Dashboard = (props) => {
     // }
     function handleAdminOnClick(){
 
-      callAPI('GET','admin/check_admin', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inp4ZyIsInZlcnNpb24iOjEsImlzX2FkbWluIjp0cnVlLCJleHAiOjE2OTcyMDUwNjl9.mnwrEJnzxg-AJ6y9IGNl8t9CAJQkDYMJz7iXTqkR408')
+      callAPI('GET','admin/check_admin', token)
         .then(response => {
           console.log(response)
           if (response === true){

@@ -2,12 +2,39 @@ import { Copyright } from '../helper';
 import { BrowserRouter, Routes, Link, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Button, TextField, Container, Paper, Typography } from '@mui/material';
 import { useState } from 'react';
-import callAPI from '../callAPI.jsx'
+
 
 function Admin (){
     const [file, setFile] = useState(null)
 
+    const formData = new FormData()
+    formData.append('file',file)
+
     const token = localStorage.getItem('token')
+
+    async function callAPI (method, path) {
+        console.log('API call starts with:', method, path);
+        const options = {
+        method: 'POST',
+        headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inp4ZyIsInZlcnNpb24iOjEsImlzX2FkbWluIjp0cnVlLCJleHAiOjE2OTcyMDUwNjl9.mnwrEJnzxg-AJ6y9IGNl8t9CAJQkDYMJz7iXTqkR408`,
+        },
+        body: formData,
+        redirect: 'follow'
+    };
+    if (method === 'GET') {
+        delete options.body;
+    }
+    // console.log('calling fetch')
+    const response = await fetch(`http://127.0.0.1:5000/admin/upload_csv`, options);
+    const data = await response.json();
+    if (data.error) {
+        console.log(data.error);
+        throw new Error(data.error);
+    }
+    return data;
+    }
 
     async function handleFileUpload(){
         if (!file) {
@@ -15,12 +42,8 @@ function Admin (){
             return
         }
 
-        const formData = new FormData()
-        formData.append('file',file)
-
         try {
-            const data = await callAPI('POST', 'uploadCSV', token, formData)
-
+            const data = await callAPI('POST')
             console.log(data)
         } catch (error) {
             console.error('Error uploading file:', error)
