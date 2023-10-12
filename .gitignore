@@ -4,3 +4,4 @@
 __pycache__
 flask_app.db
 install_dependencies.sh
+readme.md
