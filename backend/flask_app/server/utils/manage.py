@@ -12,6 +12,7 @@ def create_user():
     email = input("输入邮箱: ")
     password = input("输入密码: ")  # 使用 getpass 以保护密码输入
     repeat_password = input("再次输入密码: ")
+    is_adm = input("是否为admin: ") # yes or no
 
     # 检查两次输入的密码是否匹配
     if password != repeat_password:
@@ -29,7 +30,11 @@ def create_user():
         return
 
     hashed_password = hash_password(password)  # 使用你的 hash_password 函数来哈希密码
-    data_access.create_new_user(username, hashed_password, email)
+    newuser = data_access.create_new_user(username, hashed_password, email)
+    if is_adm == "yes":
+        newuser.is_admin = True
+        newuser.save()
+
     print(f"用户 {username} 创建成功！")
 
 if __name__ == "__main__":

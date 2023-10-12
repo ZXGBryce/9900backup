@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 class Code(int, Enum):
     OK = 20000
+    IS_ADMIN = 20001
     REQ_JSON_INVALID = 40001
     INVALID_ACCOUNT_OR_PASSWORD = 40002
     REPEAT_PASSWORD_WRONG = 40003
@@ -13,6 +14,9 @@ class Code(int, Enum):
     WRONG_USERNAME_OR_EMAIL = 40005
     WRONG_PASSWORD = 40006
     DUPLICATED_EMAIL = 40007
+    PERMISSION_DENY = 40009
+    NO_FILE_PROVIDED = 40010
+    TOKEN_EXPIRY = 40011
 
 
 Response_T = TypeVar("Response_T", bound=BaseModel)

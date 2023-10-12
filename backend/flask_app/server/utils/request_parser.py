@@ -27,15 +27,16 @@ def handle_with_pydantic(request_class: Type[RT]):
             # 1. 解析请求的json，把它变成python的类便于后续使用
             # 如果出错就返回请求json错误
             try:
-                req_data: RT = request_class.model_validate(request.json)
+                req_data: RT = request_class(**request.json)
             except ValidationError as e:
-                return Response(code=Code.REQ_JSON_INVALID).model_dump()
+                print(e.json())  # 这将打印详细的错误信息。
+                return Response(code=Code.REQ_JSON_INVALID).dict()
 
             # 2. 调用用户写的请求处理函数，这里可以加错误处理，也可以在中间件加错误处理
             res: Response = func(req_data)
 
             # 3. 返回用户写的处理函数返回的结果
-            return res.model_dump()
+            return res.dict()
 
         return inner # wrapper函数接受了func函数作为参数，
 

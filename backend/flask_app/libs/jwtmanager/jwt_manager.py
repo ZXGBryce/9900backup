@@ -13,9 +13,9 @@ class JWTManager:
     def generate_token(self,user: AuthUserTab) -> str:
         """ 生成token """
         payload = {
-            "user_id": user.id,
+            "username": user.username,
             "version": user.jwt_version,
-            "user_type": user.user_type,
+            "is_admin": user.is_admin,
             "exp": datetime.datetime.utcnow() + self.expiry_duration  # 设置token时限为一天
         }
         return jwt.encode(payload, self.secret_key, algorithm=self.algorithm)

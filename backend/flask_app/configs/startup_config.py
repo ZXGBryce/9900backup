@@ -26,7 +26,7 @@ def load_startup_config() -> StartupConfig:
     config_path = os.path.join(config_dir, config_name)
     # 将配置文件解析到StartupConfig类上面
     with open(config_path, "r") as config_file:
-        return StartupConfig.model_validate_json(config_file.read())
+        return StartupConfig.parse_raw(config_file.read())
 
 
 config: StartupConfig = load_startup_config()
