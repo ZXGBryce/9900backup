@@ -8,7 +8,7 @@ function Admin (){
     const [file, setFile] = useState(null)
 
     const formData = new FormData()
-    formData.append('file',file)
+    formData.append('csv_file',file)
 
     const token = localStorage.getItem('token')
 
@@ -42,7 +42,7 @@ function Admin (){
         }
 
         try {
-            const data = await callAPI('POST','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inp4ZyIsInZlcnNpb24iOjEsImlzX2FkbWluIjp0cnVlLCJleHAiOjE2OTcyMDUwNjl9.mnwrEJnzxg-AJ6y9IGNl8t9CAJQkDYMJz7iXTqkR408')
+            const data = await callAPI('POST',token)
             console.log(data)
         } catch (error) {
             console.error('Error uploading file:', error)
