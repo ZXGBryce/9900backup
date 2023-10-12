@@ -26,8 +26,15 @@ function App() {
     if (token) {
       if (pathname === '/login') {
         navigate('/dashboard');
-      } else if (pathname === '/register'){
-        navigate('/login');
+      } 
+      // else if (pathname === '/register'){
+      //   navigate('/login');
+      // }
+    }
+    // If the user is not logged in, redirect to landing page
+    else {
+      if (pathname === '/dashboard' || pathname === '/newAnalysis' || pathname === '/admin') {
+        navigate('/');
       }
     }
   }, [token]);

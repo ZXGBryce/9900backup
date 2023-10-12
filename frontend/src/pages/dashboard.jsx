@@ -33,6 +33,9 @@ const Dashboard = (props) => {
           if (response === true){
             navigate('/admin')
           }
+          else{
+            alert("You are not an admin, please login as an admin to access this page")
+          }
         }
       )
       .catch(error => {

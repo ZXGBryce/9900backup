@@ -64,6 +64,7 @@ body {
   align-items: center;
   justify-content: center;
   border: 1px solid black;
+  font-size: 1.5vw;
 }
 /* Change color on hover */
 .clickableDiv:hover {
@@ -87,4 +88,5 @@ body {
   align-items: center;
   justify-content: center;
   border: 1px solid black;
+  font-size: 1.5vw;
 }
