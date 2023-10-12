@@ -1,9 +1,11 @@
 import { Copyright } from '../helper';
 import { BrowserRouter, Routes, Link, Route, useNavigate, useLocation } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import callAPI from '../callAPI';
 
 const Dashboard = (props) => {
     const navigate = useNavigate();
-    
+    const token = localStorage.getItem('token')
     //TODO: Wait for backend to be ready, then change the API call
     // const logoutAction = async () => {
     //   const res = await fetch('http://localhost:5005/user/auth/logout', {
@@ -23,6 +25,20 @@ const Dashboard = (props) => {
     //     navigate('/');
     //   }
     // }
+    function handleAdminOnClick(){
+
+      callAPI('GET','admin/check_admin', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inp4ZyIsInZlcnNpb24iOjEsImlzX2FkbWluIjp0cnVlLCJleHAiOjE2OTcyMDUwNjl9.mnwrEJnzxg-AJ6y9IGNl8t9CAJQkDYMJz7iXTqkR408')
+        .then(response => {
+          console.log(response)
+          if (response === true){
+            navigate('/admin')
+          }
+        }
+      )
+      .catch(error => {
+        console.error('Error:', error)
+      })
+    }
     const logoutAction = async () => {
       localStorage.clear();
       // localStorage.removeItem('token');
@@ -31,12 +47,13 @@ const Dashboard = (props) => {
       navigate('/');
     }
     
-    
     return (
       <div style={{height:'100vh'}}>
-        <div style={{ display: 'flex', alignItems: 'center', height:'10%'}}>
+        <div style={{ display: 'flex', alignItems: 'center', height:'10%',justifyContent: 'space-between', width: '100%'}}>
           <div style={{marginLeft: '5%', display: 'flex ', alignItems: 'center'}}><h1>Glitch</h1></div>
-          
+          <Button variant="contained" color="primary" onClick={handleAdminOnClick} style={{ marginRight: '5%' }}>
+            Admin
+          </Button>
         </div>
         {/* <hr /> */}
         

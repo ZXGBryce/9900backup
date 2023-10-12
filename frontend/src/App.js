@@ -8,6 +8,7 @@ import Login from './pages/login.jsx';
 import Reset from './pages/reset.jsx';
 import Dashboard from './pages/dashboard.jsx';
 import NewAnalysis from './pages/newAnalysis.jsx';
+import Admin from './pages/admin.jsx';
 
 function App() {
   const [token, setToken] = React.useState(null);
@@ -40,6 +41,7 @@ function App() {
         <Route path="/reset" element={<Reset />} />
         <Route path="/dashboard" element={<Dashboard setToken={setToken} />} />
         <Route path='/newAnalysis' element={<NewAnalysis setToken={setToken} />} />
+        <Route path='/admin' element={<Admin setToken={setToken} />} />
       </Routes>
     </>
   );
