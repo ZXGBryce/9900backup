@@ -12,13 +12,12 @@ function Admin (){
 
     const token = localStorage.getItem('token')
 
-    async function callAPI (method, path) {
-        console.log('API call starts with:', method, path);
+    async function callAPI (method,token) {
+        console.log('API call starts with:', method);
         const options = {
         method: 'POST',
         headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inp4ZyIsInZlcnNpb24iOjEsImlzX2FkbWluIjp0cnVlLCJleHAiOjE2OTcyMDUwNjl9.mnwrEJnzxg-AJ6y9IGNl8t9CAJQkDYMJz7iXTqkR408`,
+        Authorization: `Bearer ${token}`,
         },
         body: formData,
         redirect: 'follow'
@@ -43,7 +42,7 @@ function Admin (){
         }
 
         try {
-            const data = await callAPI('POST')
+            const data = await callAPI('POST','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inp4ZyIsInZlcnNpb24iOjEsImlzX2FkbWluIjp0cnVlLCJleHAiOjE2OTcyMDUwNjl9.mnwrEJnzxg-AJ6y9IGNl8t9CAJQkDYMJz7iXTqkR408')
             console.log(data)
         } catch (error) {
             console.error('Error uploading file:', error)
