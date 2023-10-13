@@ -1,8 +1,8 @@
 import { Copyright } from '../helper';
 import { BrowserRouter, Routes, Link, Route, useNavigate, useLocation } from 'react-router-dom';
-import { Button, TextField, Container, Paper, Typography } from '@mui/material';
+import { Button, TextField, Container, Paper, Typography, Drawer, List, ListItem, ListItemIcon, ListItemText, Icon } from '@mui/material';
 import { useState } from 'react';
-
+import SideBar from '../components/Sidebar.jsx'
 
 function Admin (){
     const [file, setFile] = useState(null)
@@ -12,6 +12,7 @@ function Admin (){
 
     const token = localStorage.getItem('token')
 
+    ////// replace this code later with just callAPI from callAPI page
     async function callAPI (method,token) {
         console.log('API call starts with:', method);
         const options = {
@@ -25,55 +26,68 @@ function Admin (){
     if (method === 'GET') {
         delete options.body;
     }
-    // console.log('calling fetch')
+
     const response = await fetch(`http://127.0.0.1:5000/admin/upload_csv`, options);
-    const data = await response.json();
+    const data = await response.json().then(
+
+    )
     if (data.error) {
         console.log(data.error);
         throw new Error(data.error);
     }
     return data;
     }
+    ////////////////////////////////////////////
 
     async function handleFileUpload(){
         if (!file) {
             console.error("No File Selected!")
             return
         }
-
-        try {
-            const data = await callAPI('POST',token)
-            console.log(data)
-        } catch (error) {
-            console.error('Error uploading file:', error)
-        }
+        callAPI('POST',token)
+        .then(response =>{
+                console.log(response)
+                console.log(response.data)
+                if (response.code === 20000){
+                    alert('file uploaded successfully!')
+                }
+                else{
+                        alert('file upload failed')
+                }
+            }
+        ).catch(error => {
+        console.log('Error:', error)
+            })
     }
     return (
         <Container style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Paper elevation={3} style={{ padding: '2rem', height: '300px', width: '500px' }}>
-                <Typography variant="h5" align="center" gutterBottom>
-                    CSV File Upload
-                </Typography>
-                <TextField 
-                    label="Select CSV File" 
-                    type="file" 
-                    variant="outlined" 
-                    fullWidth 
-                    style={{ marginBottom: '1rem', marginTop:'50px'}}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    inputProps={{
-                        accept: ".csv"
-                    }}
-                    onChange={(e) => setFile(e.target.files[0])}
-                />
-                <Button variant="contained" color="primary" type="submit" fullWidth onClick={handleFileUpload}>
-                    Upload
-                </Button>
-            </Paper>
+            <SideBar/>
+            <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Paper elevation={3} style={{ padding: '2rem', height: '300px', width: '500px' }}>
+                    <Typography variant="h5" align="center" gutterBottom>
+                        CSV File Upload
+                    </Typography>
+                    <TextField 
+                        label="Select CSV File" 
+                        type="file" 
+                        variant="outlined" 
+                        fullWidth 
+                        style={{ marginBottom: '1rem', marginTop:'50px'}}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        inputProps={{
+                            accept: ".csv"
+                        }}
+                        onChange={(e) => setFile(e.target.files[0])}
+                    />
+                    <Button variant="contained" color="primary" type="submit" fullWidth onClick={handleFileUpload}>
+                        Upload
+                    </Button>
+                </Paper>
+            </div>
         </Container>
-    );
+    )
 }
 
 export default Admin
