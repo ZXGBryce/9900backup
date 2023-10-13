@@ -30,7 +30,7 @@ const Dashboard = (props) => {
       callAPI('GET','admin/check_admin', token)
         .then(response => {
           console.log(response)
-          if (response === true){
+          if (response.code === 20001){
             navigate('/admin')
           }
         }
