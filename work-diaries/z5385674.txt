@@ -15,3 +15,14 @@ Attended the weekly meeting
 Updated the proposal,
 Finished the flow network,
 Finished the user story for metrics page after login.
+
+Week 4:
+Attended the weekly meeting
+planned and negotiated with the front end developers about functionality
+
+Week 5:
+Attended the weekly meeting
+participated in connecting front end and back end
+Debugged some of the issues about payload and functionality
+Small fix on some of the code.
+Attended the Demo representation.
