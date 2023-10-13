@@ -46,7 +46,8 @@ def upload_csv():
                 environment=row['environment'],
                 social=row['social'],
                 governance=row['governance'],
-                timestamp=row['timestamp']
+                timestamp=row['timestamp'],
+                data_source=row['data_source']
             )
     #return jsonify(message="Upload successful"), 200
     return Response().dict()
