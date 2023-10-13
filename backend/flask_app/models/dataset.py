@@ -16,6 +16,7 @@ class DataSetTab(BaseModel):
     social = p.BooleanField()
     governance = p.BooleanField()
     timestamp = p.DateField(formats=['%Y/%m/%d, %H:%M:%S'])
+    data_source = p.CharField()
 
     class Meta:
         database = database
