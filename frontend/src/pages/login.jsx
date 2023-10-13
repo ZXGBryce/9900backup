@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { MyButton } from '../components/MyButton';
 import { TextField } from '@mui/material';
 import { useEmptyValidation, useEmailValidation, Copyright } from '../helper';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
+import { hover } from '@testing-library/user-event/dist/hover';
+
 
 const Login = (props) => {
   const [ username_or_email,  setUsername_or_Email] = React.useState('');
@@ -21,6 +23,8 @@ const Login = (props) => {
     }
   }, [ username_or_email, password, emailIsValid, passwordIsValid]);
   console.log('readyToSubmit', readyToSubmit);
+
+  const navigate = useNavigate()
 
   //TODO: Wait for backend to be ready, then change the API call
   const LoginAction = async () => {
@@ -52,8 +56,7 @@ const Login = (props) => {
   return (
     <div style={{height:'100vh'}}>
       <div style={{ display: 'flex', alignItems: 'center', height:'10%'}}>
-        <div style={{marginLeft: '5%', display: 'flex ', alignItems: 'center'}}><h1>Glitch</h1></div>
-        
+        <div style={{marginLeft: '5%', display: 'flex ', alignItems: 'center',  cursor: 'pointer',}} onClick={ () => navigate('/') }><h1>Glitch</h1></div>
       </div>
       
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height:'90%' }}>
