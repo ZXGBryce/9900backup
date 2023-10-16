@@ -42,8 +42,8 @@ const NewAnalysis = (props) => {
         <div style={{ display: 'flex', alignItems: 'center', height:'80%', justifyContent: 'center'}}>
           <div style={{ display: 'flex', flexDirection:'column', alignItems: 'center', width: '10%', height: '100%', border: '1px solid black'}}>
             <div className='clickableDiv' onClick={() => navigate('/dashboard')}>Dashboard</div>
-            <div className='clickableDiv'>Analsis History</div>
-            <div className='unclickableDiv' onClick={() => navigate('/newAnalysis')}>New Analsis</div>
+            <div className='clickableDiv'>Analysis History</div>
+            <div className='unclickableDiv' onClick={() => navigate('/newAnalysis')}>New Analysis</div>
             <div className='clickableDiv'>Profile</div>
             <div className='clickableDiv' onClick={logoutAction}>Logout</div>
           </div>

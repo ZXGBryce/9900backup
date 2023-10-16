@@ -1,6 +1,5 @@
 import { Copyright } from '../helper';
-import { BrowserRouter, Routes, Link, Route, useNavigate, useLocation } from 'react-router-dom';
-import { Button, TextField, Container, Paper, Typography, Drawer, List, ListItem, ListItemIcon, ListItemText, Icon } from '@mui/material';
+import { Button, TextField, Container, Paper, Typography, AppBar, Toolbar, Box} from '@mui/material';
 import { useState } from 'react';
 import SideBar from '../components/Sidebar.jsx'
 
@@ -59,35 +58,69 @@ function Admin (){
         console.log('Error:', error)
             })
     }
+
     return (
-        <Container style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <SideBar/>
-            <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Box display="flex" flexDirection="column" minHeight="100vh">
+        {/* Header */}
+        <AppBar position="static" >
+            <Toolbar>
+            <Typography variant="h6">
+                Glitch
+            </Typography>
+            </Toolbar>
+        </AppBar>
+
+        {/* Main Content + Sidebars wrapped */}
+        <Box flexGrow={1}> {/* Added margin top (mt) and margin bottom (mb) */}
+            <Box display="flex" flexDirection="row" height="100%">
+            {/* Left Sidebar */}
+            <Box width='240' bgcolor="grey.200">
+                <SideBar />
+            </Box>
+
+            {/* Central Container */}
+            <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Paper elevation={3} style={{ padding: '2rem', height: '300px', width: '500px' }}>
                     <Typography variant="h5" align="center" gutterBottom>
-                        CSV File Upload
-                    </Typography>
-                    <TextField 
-                        label="Select CSV File" 
-                        type="file" 
-                        variant="outlined" 
-                        fullWidth 
-                        style={{ marginBottom: '1rem', marginTop:'50px'}}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        inputProps={{
-                            accept: ".csv"
-                        }}
-                        onChange={(e) => setFile(e.target.files[0])}
-                    />
-                    <Button variant="contained" color="primary" type="submit" fullWidth onClick={handleFileUpload}>
-                        Upload
-                    </Button>
+                                    CSV File Upload
+                                </Typography>
+                                <TextField 
+                                    label="Select CSV File" 
+                                    type="file" 
+                                    variant="outlined" 
+                                    fullWidth 
+                                    style={{ marginBottom: '1rem', marginTop:'50px'}}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    inputProps={{
+                                        accept: ".csv"
+                                    }}
+                                    onChange={(e) => setFile(e.target.files[0])}
+                                />
+                                <Button variant="contained" color="primary" type="submit" fullWidth onClick={handleFileUpload}>
+                                    Upload
+                                </Button>
                 </Paper>
-            </div>
-        </Container>
-    )
+            </Container>
+
+            {/* Right Empty Sidebar */}
+            <Box width='240' bgcolor="grey.200">
+                {/* Empty for now */}
+            </Box>
+            </Box>
+        </Box>
+
+        {/* Footer */}
+        <Box height="50px" bgcolor="grey.300" display="flex" justifyContent="center" alignItems="center">
+            <Typography>
+            Footer Content Here
+            </Typography>
+        </Box>
+        </Box>
+
+        
+    );
 }
 
 export default Admin
