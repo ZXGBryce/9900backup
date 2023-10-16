@@ -5,8 +5,8 @@ import { useState } from 'react';
 import callAPI from '../callAPI'
 
 // import components
-import SideBar from '../components/SideBar.jsx'
-import '../css/SideBar.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Navbar from '../components/NavBar.jsx'
 
 
 function Admin (){
@@ -39,8 +39,8 @@ function Admin (){
     }
 
     return (
-        <div>
-            <SideBar/>
+        <div className='App'>
+            <Navbar/>
         </div>
 
         

@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 // Default theming context to MUI components.
 const theme = createTheme();
