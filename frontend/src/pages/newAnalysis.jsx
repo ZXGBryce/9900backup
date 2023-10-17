@@ -49,7 +49,7 @@ const NewAnalysis = (props) => {
           </div>
           <div style={{ display: 'flex ', flexDirection:'column', alignItems: 'center', justifyContent: 'center', width: '80%',height: '100%', border: '1px solid black'}}>
             <div style={{width: '100%', height: '10%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid black'}}><h2>New Analysis</h2></div>
-            <div style={{width: '100%', height: '5%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid black'}}><h4>Select Framworks</h4></div>
+            <div style={{width: '100%', height: '5%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid black'}}><h4>Select Frameworks</h4></div>
             
             {/* All the Framworks */}
             <div style={{width: '100%', height: '85%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid black'}}>

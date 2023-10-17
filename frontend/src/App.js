@@ -33,7 +33,7 @@ function App() {
     }
     // If the user is not logged in, redirect to landing page
     else {
-      if (pathname === '/dashboard' || pathname === '/newAnalysis' || pathname === '/admin') {
+      if (pathname === '/dashboard' || pathname === '/newAnalysis') {
         navigate('/');
       }
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
-import Register from '../pages/Register';
-import Login from '../pages/Login';
+import Register from '../pages/register';
+import Login from '../pages/login';
 import ListingNew from '../pages/ListingNew';
 import AllListings from '../pages/AllListings';
 import MyListings from '../pages/MyListings';
