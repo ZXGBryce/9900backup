@@ -8,57 +8,73 @@ import HomeIcon from '@mui/icons-material/Home'
 import FiberNewIcon from '@mui/icons-material/FiberNew'
 import HistoryIcon from '@mui/icons-material/History'
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+
 import '../css/Navbar.css';
-import { useNavigate } from 'react-router-dom'
+import { useCustomNavigate, } from '../utils'
 
-function Navbar() {
-  const [drawerOpen, setDrawerOpen] = React.useState(window.innerWidth > 768)
-  const navigate = useNavigate()
 
-  function handleNavigate(path){
-    navigate(`/${path}`)
-  }
+function Navbar({ drawerOpen }) {
+  //const [drawerOpen, setDrawerOpen] = React.useState(window.innerWidth > 768)
+  const navigate = useCustomNavigate()
 
   return (
     <Drawer
-      variant={drawerOpen ? 'permanent' : 'temporary'}
+      variant='permanent' 
       open={drawerOpen}
     >
+
+      <div className='logo-box'>
+          <div style={{ display: 'flex', justifyContent:'center', alignItems: 'center' }}>
+            <AutoGraphIcon style={{ color: 'blue' }} fontSize="large" />
+            <h3 className='logo-text'>Glitch</h3>
+          </div>
+      </div>
+
+
       <List className='navbar-list'>
 
-        <ListItem className='navbar-first-item' onClick={() => {handleNavigate('dashboard')}}>
+        <ListItem className='navbar-first-item' onClick={() => {navigate('dashboard')}}>
           <Box className='navbar-box'>
             <ListItemIcon className='navbar-icon'>
               <HomeIcon style={{color:'grey'}}/>
             </ListItemIcon>
-            Dashboard
+            <div className='text'>
+              Dashboard
+            </div>
           </Box>
         </ListItem>
 
-        <ListItem className='navbar-item' onClick={() => {handleNavigate('analysisHistory')}}>
+        <ListItem className='navbar-item' onClick={() => {navigate('analysisHistory')}}>
           <Box className='navbar-box'>
             <ListItemIcon className='navbar-icon'>
               <HistoryIcon style={{color:'grey'}}/>
             </ListItemIcon>
-            Analysis History
+            <div className='text'>
+              Analysis History
+            </div>
           </Box>
         </ListItem>
 
-        <ListItem className='navbar-item' onClick={() => {handleNavigate('newAnalysis')}}>
+        <ListItem className='navbar-item' onClick={() => {navigate('newAnalysis')}}>
           <Box className='navbar-box'>
             <ListItemIcon className='navbar-icon'>
               <FiberNewIcon style={{color:'grey'}}/>
             </ListItemIcon>
-            New Analysis
+            <div className='text'>
+              New Analysis
+            </div>
           </Box>
         </ListItem>
 
-        <ListItem className='navbar-item' onClick={() => {handleNavigate('profile')}}>
+        <ListItem className='navbar-item' onClick={() => {navigate('profile')}}>
           <Box className='navbar-box'>
             <ListItemIcon className='navbar-icon'>
               <AccountBoxIcon style={{color:'grey'}}/>
             </ListItemIcon>
-            Profile
+            <div className='text'>
+              Profile
+            </div>
           </Box>
         </ListItem>
 

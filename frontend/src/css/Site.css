@@ -1,0 +1,14 @@
+.site-struct {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f5f6ff;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 50px - 60px); 
+    padding: 20px; 
+}

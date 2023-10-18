@@ -1,0 +1,14 @@
+header {
+    display: 'flex'; 
+    align-items: 'center';
+    justify-content: space-between;
+    padding: '10px'; 
+    background-color: #4b6ef7;
+    height: 60px;
+}
+
+@media (max-width: 767px) {
+    .btn-text {
+        display: none; 
+    }
+}
