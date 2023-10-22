@@ -26,7 +26,7 @@ class IndiResponse(BaseModel):
 @indi_blueprint.get('/indicators')  # 在blueprint注册请求
 @handle_with_pydantic(IndiRequest)
 def custom_indi(request: IndiRequest) -> Response:
-    data_query = dep.data_access.getdatasetvalue(request.entities,request.indicators,request.framework,request.sasb,request.region,request.sector,request.environment,request.social,request.governance)  # 注意这里也使用request.username，因为用户可能输入邮箱作为用户名登录
+    data_query = dep.data_access.getdatasetvalue(request.entities,request.indicators,request.framework,request.sasb,request.region,request.sector,request.environment,request.social,request.governance)  # 获取所有符合条件的项,在getdatasetvalue中转为json list
     # 返回 JSON 数据作为响应
     if data_query == []:
         return Response(data=IndiResponse(query=data_query), code=Code.REQ_JSON_INVALID)
