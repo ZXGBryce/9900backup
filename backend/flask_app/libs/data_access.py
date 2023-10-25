@@ -2,6 +2,7 @@ from typing import Optional
 
 from peewee import Database
 import pandas as pd
+import json
 from flask_app.models.user import AuthUserTab
 from flask_app.models.dataset import DataSetTab
 
@@ -9,6 +10,14 @@ from flask_app.models.dataset import DataSetTab
 class DataAccess:
     def __init__(self, db: Database):
         self.db = db
+        locate_directories(self)
+
+    def locate_directories(self):
+        self.backend_dir = os.path.abspath(os.path.dirname(__file__))
+        while self.backend_dir[-7:] != "backend":
+            self.backend_dir = os.path.abspath(os.path.join(self.backend_dir, '..'))
+        self.configs_dir = os.path.join(self.backend_dir,"flask_app","configs")
+
 
     def get_user_by_username(self, username: str) -> Optional[AuthUserTab]:
         """ 检查用户名是否存在 """
@@ -103,3 +112,18 @@ class DataAccess:
         ]
         # 返回list return list
         return data
+
+    # Note scores calculators include calculators for metrics, metric categories and overall framework
+    def get_score_calculators(self, framework_list, frameworks_dir = False):
+        for framework in framework_list:
+            if frameworks_dir:
+                json_framework_path = os.path.join(frameworks_dir,f"{framework}.json")    
+            else:
+                json_framework_path = os.path.join(self.configs_dir,f"{framework}.json")
+            with open(json_framework_path, "r") as json_framework_file:
+                framework_calculations_dict = json.load(json_framework_file)
+        return framework_calculations_dict
+    
+    def update_framework
+
+    
