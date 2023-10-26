@@ -6,6 +6,7 @@ import os
 # NOTE: If this class is called from 
 class FrameworkGenerator:
     def __init__(self):
+        self.locate_directories()
         # Structure of Frameworks:
         # Dictionary of the Metric category, 
         # where each metric category is a dictionary of actual metrics 
@@ -29,13 +30,16 @@ class FrameworkGenerator:
         self.add_weights_to_framework()
         print("Framework dictionary created")
         self.create_json_from_framework_dict()
-        locate_directories(self)
 
     def locate_directories(self):
         self.backend_dir = os.path.abspath(os.path.dirname(__file__))
         while self.backend_dir[-7:] != "backend":
             self.backend_dir = os.path.abspath(os.path.join(self.backend_dir, '..'))
         self.configs_dir = os.path.join(self.backend_dir,"flask_app","configs")
+        self.frameworks_dir = os.path.join(self.configs_dir,"frameworks")
+        if not os.path.exists(self.frameworks_dir):
+            os.mkdir(self.frameworks_dir)
+        return
 
 
     def add_weights_to_framework(self):
@@ -72,7 +76,7 @@ class FrameworkGenerator:
             if frameworks_dir:
                 json_framework_path = os.path.join(frameworks_dir,f"{framework}.json")    
             else:
-                json_framework_path = os.path.join(self.configs_dir,f"{framework}.json")
+                json_framework_path = os.path.join(self.frameworks_dir,f"{framework}.json")
             if os.path.isfile(json_framework_path):
                 creation_approved = input(f"{framework}.json already exists. Type 'yes' to overwrite or 'no' if not.")
             else:

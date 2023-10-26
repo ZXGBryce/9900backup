@@ -2,46 +2,46 @@
     "Transition Risk": {
         "Policy and Legal": {
             "Increased pricing of GHG emissions": {
-                "__weight__": 20
+                "__weight__": 32
             },
             "Enhanced emissions-reporting obligations": {
-                "__weight__": 18
+                "__weight__": 31
             },
-            "__weight__": 14
+            "__weight__": 16
         },
         "Technology": {
             "Costs to transition to lower emissions technology": {
-                "__weight__": 37
+                "__weight__": 18
             },
-            "__weight__": 2
+            "__weight__": 4
         },
         "Market": {
             "Uncertainty in market signals": {
-                "__weight__": 44
+                "__weight__": 11
             },
-            "__weight__": 2
+            "__weight__": 18
         },
         "Reputation": {
             "Increased stakeholder concern or negative stakeholder feedback": {
-                "__weight__": 24
+                "__weight__": 49
             },
-            "__weight__": 8
+            "__weight__": 12
         },
-        "__weight__": 1
+        "__weight__": 6
     },
     "Physical Risk": {
         "Acute": {
             "Increased severity of extreme weather events such as cyclones and floods": {
-                "__weight__": 46
+                "__weight__": 14
             },
-            "__weight__": 22
+            "__weight__": 24
         },
         "Chronic": {
             "Rising mean temperatures": {
-                "__weight__": 5
+                "__weight__": 28
             },
-            "__weight__": 1
+            "__weight__": 24
         },
-        "__weight__": 41
+        "__weight__": 34
     }
 }
