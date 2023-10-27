@@ -9,6 +9,7 @@ import Reset from './pages/reset.jsx';
 import Dashboard from './pages/dashboard.jsx';
 import NewAnalysis from './pages/newAnalysis.jsx';
 import Admin from './pages/admin.jsx';
+import Analysis from './pages/analysis.jsx'
 
 function App() {
   const [token, setToken] = React.useState(null);
@@ -46,9 +47,10 @@ function App() {
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/reset" element={<Reset />} />
-        <Route path="/dashboard" element={<Dashboard setToken={setToken} />} />
-        <Route path='/newAnalysis' element={<NewAnalysis setToken={setToken} />} />
+        <Route path="/dashboard" element={<Dashboard token />} />
+        <Route path='/newAnalysis' element={<NewAnalysis token />} />
         <Route path='/admin' element={<Admin setToken={setToken} />} />
+        <Route path='/analysis/:frameworkId' element={<Analysis token />} />
       </Routes>
     </>
   );

@@ -1,0 +1,38 @@
+.container-block {
+    margin-top: 20px;
+    flex: 1;
+    background-color: white;
+    border-radius: 10px; 
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.analysis-title{
+    display: flex;
+    flex-direction: row;
+}
+
+.option-block{
+    display: flex;
+    flex-direction: row;
+}
+
+@media (min-width: 1024px) {
+    .container-block  {
+        width: 800px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container-block {
+        width: 600px;  
+    }
+}
+
+@media (max-width: 768px) {
+    .container-block {
+        width: 350px;  
+    }
+}
