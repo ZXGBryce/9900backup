@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Box, Checkbox, FormControlLabel, Typography, Button } from '@mui/material'
 import { styled } from '@mui/system'
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import AddchartIcon from '@mui/icons-material/Addchart';
 
 // components
 import Header from '../components/Header'
@@ -50,7 +51,7 @@ function Analysis () {
     // dummy metrics and indicator list 
     const [metricList, setMetricList] = useState(
     {
-        'APRA_CPG_229': [
+        'metricName1': [
             {
                 'name': 'Technological innovation',
                 'value': '0.475338734',
@@ -66,7 +67,7 @@ function Analysis () {
                 'governance': 'No',
             }
         ],
-        'TNFD': [
+        'metricName2': [
             {
                 'name': 'Proportion of annual revenue exposed to physical risks',
                 'value': '0.136900998',
@@ -167,7 +168,12 @@ function Analysis () {
                     <CompanyBox companyList={filteredCompanies} onCompanySelect={handleCompanySelect} key={key}/>
                 </div>
                 <div className='container-block'>
-                    Metrics
+                    <div className='analysis-title'>
+                        <AddchartIcon style={{ fontSize: 30, color:'#979aa6' }}/>
+                        <Typography style={{ color:'#979aa6'}} variant='h5'>Metrics</Typography>
+                    </div>
+                    <hr />
+                    
                 </div>
                 <div className='container-block'>
                     Visualization
