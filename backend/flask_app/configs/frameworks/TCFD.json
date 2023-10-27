@@ -1,47 +1,21 @@
 {
-    "Transition Risk": {
-        "Policy and Legal": {
-            "Increased pricing of GHG emissions": {
-                "__weight__": 32
-            },
-            "Enhanced emissions-reporting obligations": {
-                "__weight__": 31
-            },
-            "__weight__": 16
-        },
-        "Technology": {
-            "Costs to transition to lower emissions technology": {
-                "__weight__": 18
-            },
-            "__weight__": 4
-        },
-        "Market": {
-            "Uncertainty in market signals": {
-                "__weight__": 11
-            },
-            "__weight__": 18
-        },
-        "Reputation": {
-            "Increased stakeholder concern or negative stakeholder feedback": {
-                "__weight__": 49
-            },
-            "__weight__": 12
-        },
-        "__weight__": 6
+    "Policy and Legal Transition Risk": {
+        "Increased pricing of GHG emissions": 35,
+        "Enhanced emissions-reporting obligations": 8
     },
-    "Physical Risk": {
-        "Acute": {
-            "Increased severity of extreme weather events such as cyclones and floods": {
-                "__weight__": 14
-            },
-            "__weight__": 24
-        },
-        "Chronic": {
-            "Rising mean temperatures": {
-                "__weight__": 28
-            },
-            "__weight__": 24
-        },
-        "__weight__": 34
+    "Technology Transition Risk": {
+        "Costs to transition to lower emissions technology": 45
+    },
+    "Market Transition Risk": {
+        "Uncertainty in market signals": 98
+    },
+    "Reputation Transition Risk": {
+        "Increased stakeholder concern or negative stakeholder feedback": 22
+    },
+    "Acute Physical Risk": {
+        "Increased severity of extreme weather events such as cyclones and floods": 28
+    },
+    "Chronic Physical Risk": {
+        "Rising mean temperatures": 98
     }
 }

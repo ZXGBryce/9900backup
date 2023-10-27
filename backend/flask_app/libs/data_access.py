@@ -143,18 +143,30 @@ class DataAccess:
     If any key in the framework_updates_dict does not exist in the original_framework_dict, 
     then this key and its associated value will be added to the dictionary. 
     """
-    def update_framework(self, framework_name, framework_updates_dict):
+    def update_framework(self, framework_name, framework_updates_dict, simplified = True):
         original_framework_dict = self.get_score_calculators([framework_name])
         # Case where the framework does not already exist in the frameworks directory. 
         if original_framework_dict == None:
             original_framework_dict = {}
-        self.iterative_dict_update(framework_updates_dict, original_framework_dict)
+        if simplified:
+            self.simplified_dict_update(framework_updates_dict, original_framework_dict)
+        else:
+            self.iterative_dict_update(framework_updates_dict, original_framework_dict)
         self.update_json_from_framework_dict(framework_name, original_framework_dict)
         
+    def simplified_dict_update(self, framework_updates_dict, original_framework_dict):
+        for metric, indicator_dict in framework_updates_dict.items():
+            if metric in original_framework_dict:
+                for indicator, weight in indicator_dict.items():
+                    original_framework_dict[metric][indicator] = weight
+            else:
+                original_framework_dict[metric] = indicator_dict
+    
+
     # This approach relies on the fact that when a dictionary is updated in a function, 
     # the dictionary is also updated globally. 
     def iterative_dict_update(self, dictionary_updates, original_dictionary):
-        for key,value in dictionary_updates.items():
+        for key, value in dictionary_updates.items():
             if value == "delete":
                 _ = original_dictionary.pop(key)
             elif key == "__weight__":
