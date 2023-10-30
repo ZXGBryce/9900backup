@@ -2,8 +2,6 @@ import { useState } from 'react'
 import { Box, Checkbox, FormControlLabel, Typography, Button } from '@mui/material'
 import { styled } from '@mui/system'
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
-import AddchartIcon from '@mui/icons-material/Addchart';
-import PollIcon from '@mui/icons-material/Poll';
 
 // components
 import Header from '../components/Header'
@@ -53,76 +51,80 @@ function Analysis () {
     // dummy metrics and indicator list 
     const [metricList, setMetricList] = useState(
         {
-            "category1": [
-            {
-            "name":"subcategory1",
-            "indicators": [
-                {
-                    "name": "Technological innovation",
-                    "value": "0.475338734",
-                    "environment": "No",
-                    "social": "No",
-                    "governance": "Yes"
-                },
-                {
-                    "name": "Social adaptation",
-                    "value": "0.475338734",
-                    "environment": "No",
-                    "social": "No",
-                    "governance": "Yes"
-                }
-            ],
-            "value": '10'
-            },
-            {
-            "name":"subcategory2",
-            "indicators": [
-                {
-                    "name": "Changing climate conditions",
-                    "value": "0.475338734",
-                    "environment": "No",
-                    "social": "No",
-                    "governance": "Yes"
-                }
-            ],
-            "value": '10'
-            },
-        ],
-        "category2": [
-            {
-            "name":"subcategory1",
-            "indicators": [
-                {
-                    "name": "TI",
-                    "value": "0.475338734",
-                    "environment": "No",
-                    "social": "No",
-                    "governance": "Yes"
-                },
-                {
-                    "name": "SA",
-                    "value": "0.475338734",
-                    "environment": "No",
-                    "social": "No",
-                    "governance": "Yes"
-                }
-            ],
-            "value": '10'
-            },
-            {
-            "name":"subcategory2",
-            "indicators": [
-                {
-                    "name": "CCC",
-                    "value": "0.475338734",
-                    "environment": "No",
-                    "social": "No",
-                    "governance": "Yes"
-                }
-            ],
-            "value": '10'
-            },
-        ]
+            'companyName': 'Company1',
+            'category': [
+                {"category1": [
+                    {
+                    "name":"subcategory1",
+                    "value": '10',
+                    "indicators": [
+                        {
+                            "name": "Technological innovation",
+                            "value": "0.475338734",
+                            "environment": "No",
+                            "social": "No",
+                            "governance": "Yes"
+                        },
+                        {
+                            "name": "Social adaptation",
+                            "value": "0.475338734",
+                            "environment": "No",
+                            "social": "No",
+                            "governance": "Yes"
+                        }
+                    ],
+                    },
+                    {
+                    "name":"subcategory2",
+                    "value": '10',
+                    "indicators": [
+                        {
+                            "name": "Changing climate conditions",
+                            "value": "0.475338734",
+                            "environment": "No",
+                            "social": "No",
+                            "governance": "Yes"
+                        }
+                    ],
+                    },
+                ]},
+                {"category2": [
+                    {
+                    "name":"subcategory3",
+                    "value": '10',
+                    "indicators": [
+                        {
+                            "name": "TI",
+                            "value": "0.475338734",
+                            "environment": "No",
+                            "social": "No",
+                            "governance": "Yes"
+                        },
+                        {
+                            "name": "SA",
+                            "value": "0.475338734",
+                            "environment": "No",
+                            "social": "No",
+                            "governance": "Yes"
+                        }
+                    ],
+                    },
+                    {
+                    "name":"subcategory4",
+                    "value": '10',
+                    "indicators": [
+                        {
+                            "name": "CCC",
+                            "value": "0.475338734",
+                            "environment": "No",
+                            "social": "No",
+                            "governance": "Yes"
+                        }
+                    ],
+                    },
+                ]}
+            ]
+            
     })
 
     // for company checkbox
@@ -186,40 +188,6 @@ function Analysis () {
         setSelectedCompanies([])
     };
 
-    // metrics 
-    // change indicator values
-    const handleUpdateValue = (categoryName, subcategoryName, index, newValue) => {
-        setMetricList(prevMetricList => {
-            const newMetricList = { ...prevMetricList };
-            const subcategories = newMetricList[categoryName];
-            if (subcategories) {
-                subcategories.forEach(subcategory => {
-                    if (subcategory.name === subcategoryName) {
-                        subcategory.indicators[index].value = newValue;
-                    }
-                });
-            }
-            return newMetricList;
-        });
-    };
-    // Add new indicators 
-    const handleAddIndicator = (subcategoryName, newIndicator) => {
-        setMetricList(prevMetricList => {
-            const newMetricList = { ...prevMetricList };
-            Object.entries(newMetricList).forEach(([categoryKey, subcategories]) => {
-                subcategories.forEach(subcategory => {
-                    if (subcategory.name === subcategoryName) {
-                        subcategory.indicators.push(newIndicator);
-                    }
-                });
-            });
-            return newMetricList;
-        });
-    };
-
-    console.log(selectedCompanies)
-    console.log(metricList)
-
     return (
         <div className='site-struct'>
             <Header/>
@@ -237,25 +205,6 @@ function Analysis () {
                         <Button style={{ color:"#a50221" }} onClick={handleClear}>Clear</Button>
                     </div>
                     <CompanyBox companyList={filteredCompanies} onCompanySelect={handleCompanySelect} key={key} onAddIndicator={handleAddIndicator}/>
-                </div>
-                <div className='container-block'>
-                    <div className='analysis-title'>
-                        <AddchartIcon style={{ fontSize: 30, color:'#979aa6' }}/>
-                        <Typography style={{ color:'#979aa6'}} variant='h5'>Metrics</Typography>
-                    </div>
-                    <hr />
-                    <div>
-                        {/* debug this line */}
-                        {/* have the value link with the indicator name not the index */}
-                        <Category data={metricList} onUpdateValue={handleUpdateValue}/>
-                    </div>
-                    
-                </div>
-                <div className='container-block'>
-                    <div className='analysis-title'>
-                            <AddchartIcon style={{ fontSize: 30, color:'#979aa6' }}/>
-                            <Typography style={{ color:'#979aa6'}} variant='h5'>Visualization</Typography>
-                        </div>
                 </div>
                 <Button style={{ marginTop:'10px', backgroundColor:'white'}}>Analysis</Button>
             </div>
