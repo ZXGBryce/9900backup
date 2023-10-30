@@ -14,6 +14,7 @@ import Metrics from './pages/metrics.jsx';
 import Result from './pages/result.jsx';
 import Profile from './pages/profile.jsx';
 import AnalysisHistory from './pages/analysisHistory.jsx';
+// import Loading from '../src/pages/Loading';
 
 
 function App() {
@@ -29,8 +30,7 @@ function App() {
       setToken(lsToken);
       if (pathname === '/login') {
         navigate('/dashboard');
-      } 
-      
+      }
     }
     // If the user is not logged in, redirect to landing page
     else {

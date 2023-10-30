@@ -3,25 +3,24 @@ import Footer from '../components/Footer';
 import SaveResultModal from '../components/saveResultModal';
 import React, { useState, useEffect } from 'react';
 import { Button, TextField, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
+// import Loading from './Loading';
 
 const Result = (props) => {
     const [isModalOpen, setModalOpen] = useState(false);
   
-    // const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1000);
+    // // Example of a 1 second Loading screen with a 0.1 second delay
+    // const [loading, setLoading] = useState(false);
     // useEffect(() => {
-    //   function handleResize() {
-    //       if (window.innerWidth > 1000) {
-    //           setIsMobileView(false);
-    //       } else {
-    //           setIsMobileView(true);
-    //       }
-    //   };
-    //   window.addEventListener('resize', handleResize);
-    //   return () => {
-    //       window.removeEventListener('resize', handleResize);
-    //   };
-    // }, []);
-  
+    //     setTimeout(() => {
+    //         setLoading(true);
+    //         setTimeout(() => {
+    //             setLoading(false);
+    //         }, 1000); // 1 seconds loading
+    //     }, 100); // 0.1 seconds delay
+    //   }, []);
+    // if (loading) {
+    //     return <Loading />;
+    // }
     
     const handleOpenModal = () => {
       setModalOpen(true);

@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { Copyright } from '../helper';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import { useEffect, useState } from 'react';
+import Loading from './Loading';
 
 const CustomButton = styled(Button)({
   width: '20%',
@@ -19,6 +21,21 @@ const CustomButton = styled(Button)({
 
 const Home = () => {
   const navigate = useNavigate();
+  
+  // Example of a 1 second Loading screen with a 0.1 second delay
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000); // 1 seconds loading
+    }, 100); // 0.1 seconds delay
+  }, []);
+  if (loading) {
+    return <Loading />;
+  }
+  
   return (
     <div style={{height:'100vh'}}>
       <div style={{ display: 'flex ', alignItems: 'center', height:'10%'}}>
