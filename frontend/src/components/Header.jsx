@@ -89,7 +89,7 @@ function Header() {
                         </div>
                     </Button>
 
-                    <Avatar src="path_to_profile_picture.jpg" style={{ marginRight: '10px', cursor: 'pointer'}} onClick={() => {navigate('profile/profileId')}} />
+                    <Avatar src="path_to_profile_picture.jpg" style={{ marginRight: '10px', cursor: 'pointer'}} onClick={() => {navigate('profile')}} />
                     <Button variant="contained" color="secondary" onClick={() => {logoutAction()}}>
                         <ExitToAppIcon/>
                         <div className='btn-text'>

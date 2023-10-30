@@ -67,7 +67,7 @@ function Navbar({ drawerOpen }) {
           </Box>
         </ListItem>
 
-        <ListItem className='navbar-item' onClick={() => {navigate('profile/profileId')}}>
+        <ListItem className='navbar-item' onClick={() => {navigate('profile')}}>
           <Box className='navbar-box'>
             <ListItemIcon className='navbar-icon'>
               <AccountBoxIcon style={{color:'grey'}}/>
