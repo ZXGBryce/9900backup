@@ -1,10 +1,14 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
+import { useParams } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableHead, TableRow, Checkbox, Box} from '@mui/material'
 import Button from '@mui/material/Button';
+import {useCustomNavigate} from '../../utils'
 
-function CompanyBox ({ companyList, onCompanySelect }) {
+function CompanyBox ({ companyList, onCompanySelect, frameworkId }) {
 
     const [checkedCompanies, setCheckedCompanies] = useState([])
+    const navigate = useCustomNavigate();
+    
 
     const handleToggle = (company, isChecked) => {
         if (isChecked) {
@@ -15,13 +19,14 @@ function CompanyBox ({ companyList, onCompanySelect }) {
         onCompanySelect(company, isChecked)
     }
 
-    const handleClear = () => {
-        setCheckedCompanies([])
+    function handleNextButtonClick(){
+        navigate(`analysis/${frameworkId}/metrics`)
+        // send APIcall to backend to extract metrics 
     }
 
     return (
-        <div>
-            <Box style={{ maxHeight: '350px', overflow: 'auto', marginTop:'50px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
+            <Box style={{ maxHeight: '550px', overflow: 'auto', marginTop:'50px' }}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -48,6 +53,25 @@ function CompanyBox ({ companyList, onCompanySelect }) {
                     </TableBody>
                 </Table>
             </Box>
+            <div>
+            <Button 
+                style={{ 
+                    marginTop:'50px',
+                    marginBottom: '20px', 
+                    backgroundColor: '#6200ea',  
+                    color: '#ffffff',  
+                    borderRadius: '25px',  
+                    padding: '10px 20px',  
+                    fontSize: '16px',  
+                    fontWeight: 'bold',  
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                }}
+                onClick={handleNextButtonClick}
+                >
+                    Next
+            </Button>
+            </div>
+
         </div>
     );
 };

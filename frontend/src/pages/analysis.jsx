@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Box, Checkbox, FormControlLabel, Typography, Button } from '@mui/material'
 import { styled } from '@mui/system'
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import { useParams } from 'react-router-dom';
 
 // components
 import Header from '../components/Header'
@@ -46,6 +47,31 @@ function Analysis () {
             "name": "Top Company 5 - IFRS TNFD TCFD",
             "region": "Australia",
             "sector": "Mining"
+        },
+        {
+            "name": "Top Company 6 - APRA_CPG_229 TNFD",
+            "region": "Japan,New Zealand,China",
+            "sector": "Education"
+        },
+        {
+            "name": "Top Company 7 - TCFD",
+            "region": "New Zealand",
+            "sector": "Health"
+        },
+        {
+            "name": "Top Company 8 - TCFD",
+            "region": "New Zealand,China",
+            "sector": "Health,Energy,Hospitality,Legal,Agriculture"
+        },
+        {
+            "name": "Top Company 9 - TNFD IFRS",
+            "region": "US",
+            "sector": "Agriculture"
+        },
+        {
+            "name": "Top Company 10 - IFRS TNFD TCFD",
+            "region": "Australia",
+            "sector": "Mining"
         }
     ])
 
@@ -58,6 +84,12 @@ function Analysis () {
     const [selectedSectors, setSelectedSectors] = useState([])
     // clear checked box
     const [key, setKey] = useState(0)
+    // get framework name 
+    const { frameworkId } = useParams()
+
+    useEffect(() => {
+        console.log(frameworkId)
+    }, [frameworkId])
 
     // check box handle 
     function handleCompanySelect (company, isChecked) {
@@ -113,22 +145,24 @@ function Analysis () {
     return (
         <div className='site-struct'>
             <Header/>
-            <div className='company-main-container'>
-                <div className='company-container-block'>
-                    <div className='analysis-title'>
-                        <CorporateFareIcon style={{ fontSize: 30, color:'#979aa6' }}/>
-                        <Typography style={{ color:'#979aa6'}} variant='h5'>Company List</Typography>
-                    </div>
-                    <hr />
-                    <div className='option-block'>
-                        <Dropdown title="Region" options={regions} onToggle={handleRegionToggle} />
-                        <Dropdown title="Sector" options={sectors} onToggle={handleSectorToggle} />
-                        <Button style={{ color:"#a50221" }} onClick={handleReset}>Reset Filters</Button>
-                        <Button style={{ color:"#a50221" }} onClick={handleClear}>Clear</Button>
-                    </div>
-                    <CompanyBox companyList={filteredCompanies} onCompanySelect={handleCompanySelect}/>
+            <div className='main-container'>
+                <div className='container-block'>
+                    <div>
+                        <div className='analysis-title'>
+                            <CorporateFareIcon style={{ fontSize: 30, color:'#979aa6' }}/>
+                            <Typography style={{ color:'#979aa6'}} variant='h5'>Company List</Typography>
+                        </div>
+                        <hr />
+                        <div className='option-block'>
+                            <Dropdown title="Region" options={regions} onToggle={handleRegionToggle} />
+                            <Dropdown title="Sector" options={sectors} onToggle={handleSectorToggle} />
+                            <Button style={{ color:"#a50221" }} onClick={handleReset}>Reset Filters</Button>
+                            <Button style={{ color:"#a50221" }} onClick={handleClear}>Clear</Button>
+                        </div>
+                        <CompanyBox companyList={filteredCompanies} onCompanySelect={handleCompanySelect} frameworkId={frameworkId}/>
+                        </div>
                 </div>
-                <Button style={{ marginTop:'10px', backgroundColor:'white'}}>Analysis</Button>
+
             </div>
             <Footer/>
         </div>

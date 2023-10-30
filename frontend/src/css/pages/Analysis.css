@@ -2,44 +2,25 @@
 .container-block {
     margin-top: 20px;
     flex: 1;
+    height: 50%;
     background-color: white;
     border-radius: 10px; 
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.company-main-container{
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 50px - 60px); 
-    padding: 30px; 
-    background-color: #f5f6ff;
-}
-
-.company-container-block {
-    margin-top: 20px;
-    flex: 1;
-    background-color: white;
-    border-radius: 10px; 
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    height: 350px;
+    padding: 50px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .analysis-title{
     display: flex;
     flex-direction: row;
+    margin-top: 50px;
 }
 
 .option-block{
     display: flex;
     flex-direction: row;
+    margin-top: 50px;
 }
 
 @media (min-width: 1024px) {

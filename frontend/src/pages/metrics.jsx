@@ -10,41 +10,8 @@ import Footer from '../components/Footer'
 import CompanyBox from '../components/analysis/Company'
 import Dropdown from '../components/analysis/Dropdown'
 import Category from '../components/MetricsBox'
+
 function Metrics () {
-
-
-    // metrics 
-    // change indicator values
-    const handleUpdateValue = (categoryName, subcategoryName, index, newValue) => {
-        setMetricList(prevMetricList => {
-            const newMetricList = { ...prevMetricList };
-            const subcategories = newMetricList[categoryName];
-            if (subcategories) {
-                subcategories.forEach(subcategory => {
-                    if (subcategory.name === subcategoryName) {
-                        subcategory.indicators[index].value = newValue;
-                    }
-                });
-            }
-            return newMetricList;
-        });
-    };
-    // Add new indicators 
-    const handleAddIndicator = (subcategoryName, newIndicator) => {
-        setMetricList(prevMetricList => {
-            const newMetricList = { ...prevMetricList };
-            Object.entries(newMetricList).forEach(([categoryKey, subcategories]) => {
-                subcategories.forEach(subcategory => {
-                    if (subcategory.name === subcategoryName) {
-                        subcategory.indicators.push(newIndicator);
-                    }
-                });
-            });
-            return newMetricList;
-        });
-    };
-
-    console.log(metricList)
 
     const [metricList, setMetricList] = useState(
         {
@@ -107,16 +74,6 @@ function Metrics () {
             <Header/>
             <div className='main-container'>
                 <div className='container-block'>
-                    <div className='analysis-title'>
-                        <AddchartIcon style={{ fontSize: 30, color:'#979aa6' }}/>
-                        <Typography style={{ color:'#979aa6'}} variant='h5'>Metrics</Typography>
-                    </div>
-                    <hr />
-                    <div>
-                        {/* debug this line */}
-                        {/* have the value link with the indicator name not the index */}
-                        <Category data={metricList} onUpdateValue={handleUpdateValue}/>
-                    </div>
                     
                 </div>
                 <div className='container-block'>
