@@ -39,3 +39,28 @@ Added some helper functions in helper.js
 Added Avatar in login and register page
 Added Copyright in landing, login and register page
 Attended the group meeting
+
+Week 6:
+Fixed some bugs
+Changed some of the CSS style to make the website more beautiful
+Added some helper functions
+Attended the group meeting
+
+Week 7:
+Helped Optimise the interface of the Dashboard page
+Helped Optimise the interface of the Select Framework page
+Helped Optimise the interface of the Admin page
+Changed some of the CSS style to make the website more beautiful
+Added some helper functions
+Attended the group meeting
+
+Week 8:
+Co-designed and wrote Result page
+Co-designed and wrote Pop-up Window in Result page
+Co-designed and wrote Analysis History page
+Co-designed and wrote Profile page
+Changed the logic of redirecting of the whole website(App.js)
+Helped change the Admin button
+Changed some of the CSS style to make the website more beautiful
+Added some helper functions
+Attended the group meeting
