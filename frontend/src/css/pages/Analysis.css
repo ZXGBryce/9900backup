@@ -1,3 +1,4 @@
+
 .container-block {
     margin-top: 20px;
     flex: 1;
@@ -6,6 +7,18 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.company-container-block {
+    margin-top: 20px;
+    flex: 1;
+    background-color: white;
+    border-radius: 10px; 
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 350px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -23,16 +36,25 @@
     .container-block  {
         width: 800px;
     }
+    .company-container-block{
+        width: 800px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .container-block {
         width: 600px;  
     }
+    .company-container-block{
+        width: 600px;
+    }
 }
 
 @media (max-width: 768px) {
     .container-block {
         width: 350px;  
+    }
+    .company-container-block{
+        width: 350px;
     }
 }

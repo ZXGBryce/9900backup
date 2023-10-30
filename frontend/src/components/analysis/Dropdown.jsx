@@ -4,21 +4,29 @@ import { Box, Checkbox, FormControlLabel, Menu, MenuItem, Button } from '@mui/ma
 const Dropdown = ({ title, options, onToggle }) => {
     const [anchorEl, setAnchorEl] = useState(null);
 
-    function handleClick (event) {
+    function handleClick(event) {
         setAnchorEl(event.currentTarget);
     };
 
-    function handleClose () {
+    function handleClose() {
         setAnchorEl(null);
     };
 
     return (
-        <div style={{ maxHeight: '50px', overflow: 'auto' }}>
+        <div>
             <Button onClick={handleClick}>{title}</Button>
             <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
+                MenuProps={{
+                    PaperProps: {
+                        style: {
+                            maxHeight: '50px',
+                            overflow: 'auto',
+                        },
+                    },
+                }}
             >
                 {options.map((option, index) => (
                     <MenuItem key={index}>

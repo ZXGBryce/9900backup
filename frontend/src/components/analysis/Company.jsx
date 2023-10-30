@@ -21,7 +21,7 @@ function CompanyBox ({ companyList, onCompanySelect }) {
 
     return (
         <div>
-            <Box style={{ maxHeight: '200px', overflow: 'auto' }}>
+            <Box style={{ maxHeight: '350px', overflow: 'auto', marginTop:'50px' }}>
                 <Table>
                     <TableHead>
                         <TableRow>

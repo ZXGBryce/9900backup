@@ -43,7 +43,7 @@ function Header() {
     //logout function
     function logoutAction () {
         logout()
-        navigate('/')
+        navigate('')
     }
 
     return (
