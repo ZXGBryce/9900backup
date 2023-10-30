@@ -27,7 +27,7 @@ function Navbar({ drawerOpen }) {
       <div className='logo-box'>
           <div style={{ display: 'flex', justifyContent:'center', alignItems: 'center' }}>
             <AutoGraphIcon style={{ color: 'blue' }} fontSize="large" />
-            <h3 className='logo-text'>Glitch</h3>
+            <h1 className='logo-text'>Glitch</h1>
           </div>
       </div>
 

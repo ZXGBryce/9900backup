@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Link, Route, useNavigate, useLocation } from 're
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { Copyright } from '../helper';
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 
 const CustomButton = styled(Button)({
   width: '20%',
@@ -21,7 +22,11 @@ const Home = () => {
   return (
     <div style={{height:'100vh'}}>
       <div style={{ display: 'flex ', alignItems: 'center', height:'10%'}}>
-        <div style={{marginLeft: '5%', display: 'flex ', alignItems: 'center'}}><h1>Glitch</h1></div>
+        
+        <div style={{marginLeft: '5%', display: 'flex ', alignItems: 'center'}}>
+          <AutoGraphIcon style={{ color: 'blue' }} fontSize="large" />
+          <h1>Glitch</h1>
+        </div>
         <div style={{ display: 'flex ', alignItems: 'center', width: '100%',height: '100%'}}>
           <CustomButton onClick={() => navigate('/register')} sx={{marginLeft: '70%', height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Register</CustomButton>
           <CustomButton onClick={() => navigate('/login')} sx={{height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Login</CustomButton>
@@ -29,8 +34,8 @@ const Home = () => {
       </div>
       <hr />
       
-      <div className="App">
-        <h2>Home Page</h2>
+      <div className="App" style={{ display: 'flex ', alignItems: 'center', justifyContent:'center', height:'70%'}}>
+        <h2>Welcome to Glitch Home Page, please log in to use Glitch</h2>
       </div>
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </div>

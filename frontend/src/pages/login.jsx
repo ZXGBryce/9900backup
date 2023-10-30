@@ -6,6 +6,7 @@ import { useEmptyValidation, useEmailValidation, Copyright } from '../helper';
 import { Link, useNavigate } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
 import { hover } from '@testing-library/user-event/dist/hover';
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 
 
 const Login = (props) => {
@@ -56,7 +57,10 @@ const Login = (props) => {
   return (
     <div style={{height:'100vh'}}>
       <div style={{ display: 'flex', alignItems: 'center', height:'10%'}}>
-        <div style={{marginLeft: '5%', display: 'flex ', alignItems: 'center',  cursor: 'pointer',}} onClick={ () => navigate('/') }><h1>Glitch</h1></div>
+        <div style={{marginLeft: '5%', display: 'flex ', alignItems: 'center',  cursor: 'pointer',}} onClick={ () => navigate('/') }>
+          <AutoGraphIcon style={{ color: 'blue' }} fontSize="large" />
+          <h1>Glitch</h1>
+        </div>
       </div>
       
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height:'90%' }}>
