@@ -8,11 +8,13 @@ import Navbar from './NavBar'
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import "../css/Header.css"
+import callAPI from '../callAPI';
 
 function Header() {
     const [drawerOpen, setDrawerOpen] = useState(window.innerWidth <= 1000 ? false : true);
     const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1000);
     const navigate = useCustomNavigate();
+    const token = localStorage.getItem('token')
 
     // open close drawer
     function toggleDrawer() {
@@ -39,7 +41,26 @@ function Header() {
             window.removeEventListener('resize', handleResize);
         };
     }, [isMobileView, drawerOpen]);
-
+    
+    //admin function
+    function handleAdminOnClick(){
+        console.log(token)
+        callAPI('GET','admin/check_admin', token)
+          .then(response => {
+            console.log(response)
+            if (response.code === 20001){
+              navigate('/admin')
+            }
+            else{
+              alert("You are not an admin, please login as an admin to access this page")
+            }
+          }
+        )
+        .catch(error => {
+          console.error('Error:', error)
+        })
+      }
+      
     //logout function
     function logoutAction () {
         logout()
@@ -61,7 +82,7 @@ function Header() {
                 </div>
                 
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Button variant="contained" color="primary" style={{ marginRight: '30px' }} onClick={() => {navigate('admin')}}>
+                    <Button variant="contained" color="primary" style={{ marginRight: '30px' }} onClick={handleAdminOnClick}>
                         <SupervisorAccountIcon/>
                         <div className='btn-text'>
                             Admin

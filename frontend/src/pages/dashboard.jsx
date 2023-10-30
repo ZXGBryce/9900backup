@@ -29,27 +29,6 @@ const Dashboard = (props) => {
     //     navigate('/');
     //   }
     // }
-    function handleAdminOnClick(){
-      console.log(token)
-      callAPI('GET','admin/check_admin', token)
-        .then(response => {
-          console.log(response)
-          if (response.code === 20001){
-            navigate('/admin')
-          }
-          else{
-            alert("You are not an admin, please login as an admin to access this page")
-          }
-        }
-      )
-      .catch(error => {
-        console.error('Error:', error)
-      })
-    }
-    const logoutAction = async () => {
-      localStorage.clear();
-      navigate('/');
-    }
     
     return (
       <div className='site-struct'>
