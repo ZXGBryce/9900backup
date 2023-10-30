@@ -11,6 +11,8 @@ import NewAnalysis from './pages/newAnalysis.jsx';
 import Admin from './pages/admin.jsx';
 import Analysis from './pages/analysis.jsx';
 import Result from './pages/result.jsx';
+import Profile from './pages/profile.jsx';
+import AnalysisHistory from './pages/analysisHistory.jsx';
 
 function App() {
   const [token, setToken] = React.useState(null);
@@ -52,7 +54,9 @@ function App() {
         <Route path='/newAnalysis' element={<NewAnalysis token />} />
         <Route path='/admin' element={<Admin setToken={setToken} />} />
         <Route path='/analysis/:frameworkId' element={<Analysis token />} />
-        <Route path='/analysis/result/:analysisId' element={<Result setToken={setToken} />} />
+        <Route path='/analysis/result/:analysisId' element={<Result token setToken={setToken} />} />
+        <Route path='/profile/:userId' element={<Profile token />} />
+        <Route path='/analysisHistory' element={<AnalysisHistory token />} />
       </Routes>
     </>
   );
