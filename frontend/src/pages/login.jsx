@@ -26,7 +26,6 @@ const Login = (props) => {
 
   const navigate = useNavigate()
 
-  //TODO: Wait for backend to be ready, then change the API call
   const LoginAction = async () => {
     if (readyToSubmit) {
       const res = await fetch('http://127.0.0.1:5000/auth/sign_in', {
@@ -49,6 +48,7 @@ const Login = (props) => {
         props.setToken(data.data.token);
         localStorage.setItem('token', data.data.token);
         localStorage.setItem(' username_or_email',  username_or_email);
+        navigate('/dashboard');
       }
     }
   };
