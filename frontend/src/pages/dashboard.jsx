@@ -35,11 +35,11 @@ const Dashboard = (props) => {
         <Header/>
         <div className='main-container'>
           <div className='container-block'>
-            <h3>Weekly News</h3>
+            <h1>Weekly News</h1>
           </div>
           <hr />
           <div className='container-block'>
-            <h3>System Update</h3>
+            <h1>System Update</h1>
           </div>
         </div>
         <Footer/>
