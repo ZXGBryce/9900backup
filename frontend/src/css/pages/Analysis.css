@@ -10,6 +10,16 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.company-main-container{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 50px - 60px); 
+    padding: 30px; 
+    background-color: #f5f6ff;
+}
+
 .company-container-block {
     margin-top: 20px;
     flex: 1;

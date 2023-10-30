@@ -9,7 +9,7 @@ import "../css/Site.css"
 
 const Dashboard = (props) => {
     const navigate = useNavigate();
-    const token = localStorage.getItem('token')
+    // const token = localStorage.getItem('token')
     //TODO: Wait for backend to be ready, then change the API call
     // const logoutAction = async () => {
     //   const res = await fetch('http://localhost:5005/user/auth/logout', {

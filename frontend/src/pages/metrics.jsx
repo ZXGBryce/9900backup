@@ -44,7 +44,6 @@ function Metrics () {
         });
     };
 
-    console.log(selectedCompanies)
     console.log(metricList)
 
     const [metricList, setMetricList] = useState(

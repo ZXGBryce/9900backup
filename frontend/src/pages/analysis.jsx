@@ -48,84 +48,6 @@ function Analysis () {
             "sector": "Mining"
         }
     ])
-    // dummy metrics and indicator list 
-    const [metricList, setMetricList] = useState(
-        {
-            'companyName': 'Company1',
-            'category': [
-                {"category1": [
-                    {
-                    "name":"subcategory1",
-                    "value": '10',
-                    "indicators": [
-                        {
-                            "name": "Technological innovation",
-                            "value": "0.475338734",
-                            "environment": "No",
-                            "social": "No",
-                            "governance": "Yes"
-                        },
-                        {
-                            "name": "Social adaptation",
-                            "value": "0.475338734",
-                            "environment": "No",
-                            "social": "No",
-                            "governance": "Yes"
-                        }
-                    ],
-                    },
-                    {
-                    "name":"subcategory2",
-                    "value": '10',
-                    "indicators": [
-                        {
-                            "name": "Changing climate conditions",
-                            "value": "0.475338734",
-                            "environment": "No",
-                            "social": "No",
-                            "governance": "Yes"
-                        }
-                    ],
-                    },
-                ]},
-                {"category2": [
-                    {
-                    "name":"subcategory3",
-                    "value": '10',
-                    "indicators": [
-                        {
-                            "name": "TI",
-                            "value": "0.475338734",
-                            "environment": "No",
-                            "social": "No",
-                            "governance": "Yes"
-                        },
-                        {
-                            "name": "SA",
-                            "value": "0.475338734",
-                            "environment": "No",
-                            "social": "No",
-                            "governance": "Yes"
-                        }
-                    ],
-                    },
-                    {
-                    "name":"subcategory4",
-                    "value": '10',
-                    "indicators": [
-                        {
-                            "name": "CCC",
-                            "value": "0.475338734",
-                            "environment": "No",
-                            "social": "No",
-                            "governance": "Yes"
-                        }
-                    ],
-                    },
-                ]}
-            ]
-            
-    })
 
     // for company checkbox
     const [selectedCompanies, setSelectedCompanies] = useState([])
@@ -191,7 +113,7 @@ function Analysis () {
     return (
         <div className='site-struct'>
             <Header/>
-            <div className='main-container'>
+            <div className='company-main-container'>
                 <div className='company-container-block'>
                     <div className='analysis-title'>
                         <CorporateFareIcon style={{ fontSize: 30, color:'#979aa6' }}/>
@@ -204,7 +126,7 @@ function Analysis () {
                         <Button style={{ color:"#a50221" }} onClick={handleReset}>Reset Filters</Button>
                         <Button style={{ color:"#a50221" }} onClick={handleClear}>Clear</Button>
                     </div>
-                    <CompanyBox companyList={filteredCompanies} onCompanySelect={handleCompanySelect} key={key} onAddIndicator={handleAddIndicator}/>
+                    <CompanyBox companyList={filteredCompanies} onCompanySelect={handleCompanySelect}/>
                 </div>
                 <Button style={{ marginTop:'10px', backgroundColor:'white'}}>Analysis</Button>
             </div>

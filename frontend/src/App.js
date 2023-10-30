@@ -12,6 +12,8 @@ import Admin from './pages/admin.jsx';
 import Analysis from './pages/analysis.jsx';
 import Metrics from './pages/metrics.jsx';
 import Result from './pages/result.jsx';
+import Profile from './pages/profile.jsx';
+import AnalysisHistory from './pages/analysisHistory.jsx';
 
 
 function App() {
@@ -19,29 +21,24 @@ function App() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   
+  // Redirect the user
   React.useEffect(() => {
+    // update the state
     const lsToken = localStorage.getItem('token');
     if (lsToken) {
       setToken(lsToken);
-    }
-  }, [token]);
-  
-  React.useEffect(() => {
-    if (token) {
       if (pathname === '/login') {
         navigate('/dashboard');
       } 
-      // else if (pathname === '/register'){
-      //   navigate('/login');
-      // }
+      
     }
     // If the user is not logged in, redirect to landing page
     else {
-      if (pathname === '/dashboard' || pathname === '/newAnalysis') {
+      if (pathname !== '/login' && pathname !== '/register') {
         navigate('/');
       }
     }
-  }, [token]);
+  }, [pathname, navigate]);
   
   return (
     <>
@@ -52,7 +49,7 @@ function App() {
         <Route path="/reset" element={<Reset />} />
         <Route path="/dashboard" element={<Dashboard token />} />
         <Route path='/newAnalysis' element={<NewAnalysis token />} />
-        <Route path='/admin' element={<Admin setToken={setToken} />} />
+        <Route path='/admin' element={<Admin token />} />
         <Route path='/analysis/:frameworkId' element={<Analysis token />} />
         <Route path='/analysis/:frameworkId/metrics' element={<Metrics token />} />
         <Route path='/result' element={<Result setToken={setToken} />} />
