@@ -59,6 +59,7 @@ Co-designed and wrote Result page
 Co-designed and wrote Pop-up Window in Result page
 Co-designed and wrote Analysis History page
 Co-designed and wrote Profile page
+Added a loading effect
 Changed the logic of redirecting of the whole website(App.js)
 Helped change the Admin button
 Changed some of the CSS style to make the website more beautiful
