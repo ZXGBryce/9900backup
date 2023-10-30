@@ -49,7 +49,7 @@ function Header() {
           .then(response => {
             console.log(response)
             if (response.code === 20001){
-              navigate('/admin')
+              navigate('admin')
             }
             else{
               alert("You are not an admin, please login as an admin to access this page")
