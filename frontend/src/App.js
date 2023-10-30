@@ -9,6 +9,7 @@ import Reset from './pages/reset.jsx';
 import Dashboard from './pages/dashboard.jsx';
 import NewAnalysis from './pages/newAnalysis.jsx';
 import Admin from './pages/admin.jsx';
+import Analysis from './pages/analysis.jsx';
 import Result from './pages/result.jsx';
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard setToken={setToken} />} />
         <Route path='/newAnalysis' element={<NewAnalysis setToken={setToken} />} />
         <Route path='/admin' element={<Admin setToken={setToken} />} />
+        <Route path='/analysis/:frameworkId' element={<Analysis token />} />
         <Route path='/result' element={<Result setToken={setToken} />} />
       </Routes>
     </>
