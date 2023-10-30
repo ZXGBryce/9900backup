@@ -56,11 +56,11 @@ const Dashboard = (props) => {
         <Header/>
         <div className='main-container'>
           <div className='container-block'>
-            <h1>Block 1</h1>
+            <h3>Weekly News</h3>
           </div>
           <hr />
           <div className='container-block'>
-            <h1>Block 2</h1>
+            <h3>System Update</h3>
           </div>
         </div>
         <Footer/>

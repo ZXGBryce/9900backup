@@ -48,8 +48,8 @@ function App() {
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/reset" element={<Reset />} />
-        <Route path="/dashboard" element={<Dashboard setToken={setToken} />} />
-        <Route path='/newAnalysis' element={<NewAnalysis setToken={setToken} />} />
+        <Route path="/dashboard" element={<Dashboard token />} />
+        <Route path='/newAnalysis' element={<NewAnalysis token />} />
         <Route path='/admin' element={<Admin setToken={setToken} />} />
         <Route path='/analysis/:frameworkId' element={<Analysis token />} />
         <Route path='/result' element={<Result setToken={setToken} />} />

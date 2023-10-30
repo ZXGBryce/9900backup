@@ -30,12 +30,13 @@ const NewAnalysis = (props) => {
     //     localStorage.removeItem('email');
     //     setToken(null);
     //     navigate('/');
-    //   }
+    //   } 
     // }
 
+    // for box sizes 
     const StyledBox = styled(Box)(({ theme, bgcolor, active }) => ({
-      width: '300px',
-      height: '70vh',
+      width: '250px',
+      height: '500px',
       borderRadius: '8px',
       boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)', 
       margin: theme.spacing(1),
@@ -51,9 +52,61 @@ const NewAnalysis = (props) => {
         backgroundColor: shadeColor(bgcolor, -10),  
         boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.4)', 
       },
-    
-      backgroundColor: active ? shadeColor(bgcolor, -30) : bgcolor,  // Darken more when active
+
+      '@media (min-width: 750px) and (max-width: 1024px)': {
+        width:'170px',
+        height:'340px'
+      },
+
+      '@media (min-width: 600px) and (max-width: 750px)': {
+        width:'150px',
+        height:'360px',
+      },
+
+      // Adjust fontSize for smaller screens
+      '@media (min-width: 300px) and (max-width: 650px)': {
+        margin: theme.spacing(0.5),
+        width:'83px',
+        height:'140px',
+      },
+
+      // Adjust fontSize for smaller screens
+      '@media (max-width: 300px)': {
+        margin: theme.spacing(0.5),
+        width:'63px',
+        height:'100px',
+      },
+
+      backgroundColor: active ? shadeColor(bgcolor, -30) : bgcolor,
     }));
+
+    // for front sizes 
+    const StyledTypography = styled(Typography)(({ theme }) => ({
+      // Default fontSize (for larger screens)
+      fontSize: '35px',
+      alignItems:'center',
+    
+      // Adjust fontSize for medium screens
+      '@media (min-width: 750px) and (max-width: 1024px)': {
+        fontSize: '20px',
+      },
+
+      // intermediate screen size
+      '@media (min-width: 650px) and (max-width: 750px)': {
+        fontSize: '15px',
+      },
+
+      // Adjust fontSize for smaller screens
+      '@media (min-width: 300px) and (max-width: 650px)': {
+        fontSize: '9px',
+      },
+
+      // Adjust fontSize for smaller screens
+      '@media (max-width: 300px)': {
+        fontSize: '8px',
+      },
+    }));
+
     
     // Helper function to darken or lighten a color
     function shadeColor(color, percent) {
@@ -81,21 +134,17 @@ const NewAnalysis = (props) => {
         <Header/>
         <div className='main-container'>
           <div style={{ display:'flex', flexDirection:'row', justifyContent:'center'}}>
-          <StyledBox 
-            bgcolor="#FE905D" 
-            onClick={() => handleBoxClick('TCFD')} 
-            active={activeBox === 'TCFD'}
-          >
-            <Typography variant="body1" style={{ fontSize:'35px', alignItems:'center'}}>TCFD</Typography>
+          <StyledBox bgcolor="#FE905D" onClick={() => handleBoxClick('TCFD')} active={activeBox === 'TCFD'}>
+            <StyledTypography variant="body1">TCFD</StyledTypography>
           </StyledBox>
           <StyledBox bgcolor="#FEC35D" onClick={() => handleBoxClick('TNFD')} active={activeBox === 'TNFD'}>
-            <Typography variant="body1" style={{ fontSize:'35px',}}>TNFD</Typography>
+            <StyledTypography variant="body1" >TNFD</StyledTypography>
           </StyledBox>
           <StyledBox bgcolor="#BDFC48"  onClick={() => handleBoxClick('APRA-CPG229')} active={activeBox === 'APRA-CPG229'}>
-            <Typography variant="body1" style={{ fontSize:'35px',}}> APRA-CPG229 </Typography>
+            <StyledTypography variant="body1" > APRA-CPG229 </StyledTypography>
           </StyledBox>
           <StyledBox bgcolor="#48D6FC"onClick={() => handleBoxClick('IFRS')} active={activeBox === 'IFRS'}>
-            <Typography variant="body1" style={{ fontSize:'35px',}}>IFRS</Typography>
+            <StyledTypography variant="body1" >IFRS</StyledTypography>
           </StyledBox>
           </div>
         </div>

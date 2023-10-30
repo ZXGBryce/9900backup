@@ -24,7 +24,7 @@ function Header() {
     // responsive window
     useEffect(() => {
         function handleResize() {
-            if (window.innerWidth > 1000) {
+            if (window.innerWidth > 1300) {
                 setIsMobileView(false);
                 setDrawerOpen(true);
             } else {

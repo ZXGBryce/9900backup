@@ -86,7 +86,7 @@
   fill: white
 }
 
-@media (min-width: 1001px) {
+@media (min-width: 1024px) {
   .navbar-list {
       position: fixed;
       top: 0;
