@@ -49,7 +49,7 @@ function Header() {
           .then(response => {
             console.log(response)
             if (response.code === 20001){
-              navigate('/admin')
+              navigate('admin')
             }
             else{
               alert("You are not an admin, please login as an admin to access this page")
@@ -89,7 +89,7 @@ function Header() {
                         </div>
                     </Button>
 
-                    <Avatar src="path_to_profile_picture.jpg" style={{ marginRight: '10px' }} onClick={() => {navigate('profile')}} />
+                    <Avatar src="path_to_profile_picture.jpg" style={{ marginRight: '10px', cursor: 'pointer'}} onClick={() => {navigate('profile')}} />
                     <Button variant="contained" color="secondary" onClick={() => {logoutAction()}}>
                         <ExitToAppIcon/>
                         <div className='btn-text'>

@@ -20,7 +20,7 @@ import "../css/pages/Analysis.css"
 
 
 function Analysis () {
-    // dummy company list 
+        // dummy company list 
     const [companies, setCompanies] = useState([
         {
             "name": "Top Company 1 - APRA_CPG_229 TNFD",
