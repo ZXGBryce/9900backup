@@ -15,6 +15,7 @@ import Category from '../components/MetricsBox'
 import "../css/Site.css"
 import "../css/pages/Analysis.css"
 
+import { useCustomNavigate } from '../utils'
 
 
 
@@ -22,6 +23,7 @@ import "../css/pages/Analysis.css"
 
 
 function Analysis () {
+    const navigate = useCustomNavigate()
     // dummy company list 
     const [companies, setCompanies] = useState([
         {
@@ -219,6 +221,11 @@ function Analysis () {
 
     console.log(selectedCompanies)
     console.log(metricList)
+    
+    const analysisBtn = (analysisId) => {
+        navigate(`analysis/result/${analysisId}`);
+        // console.log('analysisBtn');
+    };
 
     return (
         <div className='site-struct'>
@@ -257,7 +264,7 @@ function Analysis () {
                             <Typography style={{ color:'#979aa6'}} variant='h5'>Visualization</Typography>
                         </div>
                 </div>
-                <Button style={{ marginTop:'10px', backgroundColor:'white'}}>Analysis</Button>
+                <Button style={{ marginTop:'10px', backgroundColor:'white'}} onClick={() => analysisBtn('analysisId')}>Analysis</Button>
             </div>
             <Footer/>
         </div>
