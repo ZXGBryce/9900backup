@@ -57,7 +57,7 @@ const Login = (props) => {
   return (
     <div style={{height:'100vh'}}>
       <div style={{ display: 'flex', alignItems: 'center', height:'10%'}}>
-        <div style={{marginLeft: '5%', display: 'flex ', alignItems: 'center',  cursor: 'pointer',}} onClick={ () => navigate('/') }>
+        <div style={{marginLeft: '2%', display: 'flex ', alignItems: 'center',  cursor: 'pointer',}} onClick={ () => navigate('/') }>
           <AutoGraphIcon style={{ color: 'blue' }} fontSize="large" />
           <h1>Glitch</h1>
         </div>
