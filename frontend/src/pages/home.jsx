@@ -47,13 +47,19 @@ const Home = () => {
         </div>
       </div>
       <hr />
-      
-      <div className="App" style={{ display: 'flex ', alignItems: 'center', justifyContent:'center', height:'70%'}}>
-        <h2>Welcome to 
-                    <span className='text-gradient'>Glitch Home Page</span>, please log in to use
+      {/* <div className="App" style={{ display: 'flex ', alignItems: 'center', justifyContent:'center', height:'70%'}}>
+        <h2>Welcome to
+                    <span className='text-gradient'> Home Page</span>, please log in to use
                     <span className='text-gradient'> Glitch</span>
         </h2>
-      </div>
+      </div> */}
+      <section class="py-5 bg-gradient-primary-to-secondary text-white" style={{marginTop:'4%', display: 'flex ', alignItems: 'center', justifyContent:'center', height:'70%'}}>
+        <div class="container px-5 my-5">
+          <div class="text-center">
+            <h2 class="display-6 fw-bolder mb-6">Welcome to Home Page, please log in to use Glitch</h2>
+          </div>
+        </div>
+      </section>
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </div>
   );

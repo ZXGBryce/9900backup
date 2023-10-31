@@ -97,3 +97,12 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.bg-gradient-primary-to-secondary {
+  background: #1e30f3;
+  background: linear-gradient(135deg, #1e30f3 0%, #e21e80 100%);
+}
+.text-white {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+}
