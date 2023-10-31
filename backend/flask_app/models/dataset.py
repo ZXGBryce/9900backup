@@ -9,16 +9,14 @@ class DataSetTab(BaseModel):
     framework = p.CharField()
     indicator_name = p.CharField()
     indicator_value = p.FloatField()
-    sasb_materiality = p.CharField()
+    sasb_materiality = p.IntegerField() # 1/0
     region = p.CharField()
     sector = p.CharField()
-    environment = p.BooleanField()
-    social = p.BooleanField()
-    governance = p.BooleanField()
+    environment = p.IntegerField() # 1/0
+    social = p.IntegerField() # 1/0
+    governance = p.IntegerField() # 1/0
     timestamp = p.DateField(formats=['%Y/%m/%d, %H:%M:%S'])
     data_source = p.CharField()
 
-    class Meta:
-        database = database
 
 database.create_tables([DataSetTab])

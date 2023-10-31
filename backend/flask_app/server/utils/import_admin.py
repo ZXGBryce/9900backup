@@ -2,6 +2,7 @@ from flask_app.libs.data_access import DataAccess
 from flask_app.libs.db.db import database
 from flask_app.server.utils.password import hash_password
 from flask_app.models.user import AuthUserTab
+from flask_app.libs.registry import DependencyRegistry as dep
 
 # 初始化 DataAccess
 data_access = DataAccess(database)
