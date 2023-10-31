@@ -8,7 +8,7 @@ const AnalysisHistory = (props) => {
             <Header/>
             <div className='main-container'>
                 <div className='container-block'>
-                    <h1>Analysis History</h1>
+                    <h2 style={{textAlign:'center'}}>Analysis History</h2>
                 </div>
             </div>
             <Footer/>

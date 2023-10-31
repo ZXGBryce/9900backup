@@ -6,7 +6,7 @@
     background-color: #f5f6ff;
 }
 
-.container-block {
+.dashboard-container-block {
     flex: 1;
     background-color: white;
     border-radius: 10px; 
@@ -14,6 +14,10 @@
     padding: 20px;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 42vh; /* This sets the maximum height to 45% of the viewport height. Adjust as needed. */
+    overflow-y: auto; /* This ensures that if the content inside exceeds this height, it becomes scrollable. */
+    margin-bottom: 3em !important;
+    
 }
 
 .news-bloclk{
