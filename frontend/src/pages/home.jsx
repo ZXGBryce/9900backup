@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Link, Route, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { Copyright } from '../helper';
@@ -12,9 +12,6 @@ const CustomButton = styled(Button)({
   height: '5%',
   padding: '1%',
   margin: '1.2%',
-  // marginLeft: '4%',
-  backgroundColor: '#4dabf5',
-  color: '#fff',
   '& .MuiButton-label': { fontSize: '100%',},
   '&:hover': { backgroundColor: '#1976d2',},
 });
@@ -45,8 +42,8 @@ const Home = () => {
           <h1>Glitch</h1>
         </div>
         <div style={{ display: 'flex ', alignItems: 'center', width: '100%',height: '100%'}}>
-          <CustomButton onClick={() => navigate('/register')} sx={{marginLeft: '70%', height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Register</CustomButton>
-          <CustomButton onClick={() => navigate('/login')} sx={{height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Login</CustomButton>
+          <CustomButton variant="contained" color="primary" onClick={() => navigate('/register')} sx={{marginLeft: '70%', height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Register</CustomButton>
+          <CustomButton variant="contained" color="primary" onClick={() => navigate('/login')} sx={{height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Login</CustomButton>
         </div>
       </div>
       <hr />

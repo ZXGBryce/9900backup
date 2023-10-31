@@ -70,17 +70,15 @@ const Login = (props) => {
             </Avatar>
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '5%'}}><h2>Sign In</h2></div>
             <div style={{ display: 'flex' }} >
-              {/* <div style={{ display: 'flex', alignItems: 'center', marginRight: '40px' }}>Email: </div> */}
               <TextField onChange={(e) =>  setUsername_or_Email(e.target.value)} label='Email/User Name*' value={ username_or_email} variant="outlined" style={{ width: '100%'}}/>
             </div>
             <br />
             <div style={{ display: 'flex' }} >
-              {/* <div style={{ display: 'flex', alignItems: 'center' }}>Password: &nbsp;</div> */}
               <TextField onChange={(e) => setPassword(e.target.value)} label='Password*' value={password} variant="outlined"  type="password" style={{ width: '100%'}}/>
             </div>
             <br />
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <MyButton disabled={!readyToSubmit} onClick={LoginAction} text={readyToSubmit ? 'Login' : 'Please Enter valid Details'}></MyButton>
+              <MyButton style={{width:'100%'}} disabled={!readyToSubmit} onClick={LoginAction} text={readyToSubmit ? 'Login' : 'Please Enter valid Details'}></MyButton>
             </div>
             
             <Link to="/register" variant="body2" style={{ display: 'flex', justifyContent: 'center', marginTop: '5%'}}> 

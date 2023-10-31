@@ -6,8 +6,6 @@ import { useEmptyValidation, useEmailValidation, Copyright} from '../helper';
 import { BrowserRouter, Routes, Link, Route, useNavigate, useLocation } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-
 
 const Register = (props) => {
   const [email, setEmail] = React.useState('');
@@ -28,7 +26,6 @@ const Register = (props) => {
     }
   }, [email, password, username, emailIsValid, passwordIsValid, nameIsValid, repeat_password]);
   
-  //TODO: Wait for backend to be ready, then change the API call
   const registerAction = async () => {
     if (readyToSubmit) {
       const res = await fetch('http://127.0.0.1:5000/auth/sign_up', {
@@ -74,33 +71,26 @@ const Register = (props) => {
           <div style={{ width: '30%'}}>
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main',  margin: '0 auto'}}> 
             </Avatar>
-            {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main',  margin: '0 auto'}}>
-              <LockOutlinedIcon />
-            </Avatar> */}
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '5%'}}><h2>Sign Up</h2></div>
             <div style={{ display: 'flex'}} >
-              {/* <div style={{ display: 'flex', alignItems: 'center', marginRight: '31px' }}>Email: &nbsp;</div> */}
               <TextField onChange={(e) => setEmail(e.target.value)} label='Email*' value={email} variant="outlined" style={{ width: '100%'}}/>
             </div>
             <br />
             <div style={{ display: 'flex' }} >
-              {/* <div style={{ display: 'flex', alignItems: 'center', marginRight: '27px' }}>Name: &nbsp;</div> */}
               <TextField onChange={(e) => setName(e.target.value)} label='User Name*' value={username} variant="outlined" style={{ width: '100%'}}/>
             </div>
             <br />
             <div style={{ display: 'flex' }} >
-              {/* <div style={{ display: 'flex', alignItems: 'center', marginRight: '27px' }}>Password: &nbsp;</div> */}
               <TextField onChange={(e) => setPassword(e.target.value)} label='Password*' value={password} variant="outlined"  type="password" style={{ width: '100%'}}/>
             </div>
             <br />
             <div style={{ display: 'flex' }} >
-              {/* <div style={{ display: 'flex', alignItems: 'center', marginRight: '27px' }}>Confirm Password: &nbsp;</div> */}
               <TextField onChange={(e) => setConfirmPassword(e.target.value)} label='Confirm Password*' value={repeat_password} variant="outlined"  type="password" style={{ width: '100%'}}/>
             </div>
             <br />
             
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <MyButton onClick={registerAction} disabled={!readyToSubmit} text={readyToSubmit ? 'Register' : 'Please Enter valid Details'}></MyButton>
+              <MyButton style={{width:'100%'}} onClick={registerAction} disabled={!readyToSubmit} text={readyToSubmit ? 'Register' : 'Please Enter valid Details'}></MyButton>
             </div>
             
             <Link to="/login" href="#" variant="body2" style={{ display: 'flex', justifyContent: 'center', marginTop: '5%'}}>
