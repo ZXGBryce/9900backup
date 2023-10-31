@@ -14,6 +14,7 @@ const CustomButton = styled(Button)({
   margin: '1.2%',
   '& .MuiButton-label': { fontSize: '100%',},
   '&:hover': { backgroundColor: '#1976d2',},
+  marginRight: '3%',
 });
 
 const Home = () => {
@@ -42,8 +43,8 @@ const Home = () => {
           <h1 className='text-gradient'>Glitch</h1>
         </div>
         <div style={{ display: 'flex ', alignItems: 'center', justifyContent: 'flex-end',width: '100%',height: '100%'}}>
-          <CustomButton variant="contained" color="primary" onClick={() => navigate('/register')} sx={{height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Register</CustomButton>
-          <CustomButton variant="contained" color="primary" onClick={() => navigate('/login')} sx={{height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Login</CustomButton>
+          {/* <CustomButton variant="contained" color="primary" onClick={() => navigate('/register')} sx={{height:'60%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Register</CustomButton> */}
+          <CustomButton variant="contained" color="primary" onClick={() => navigate('/login')} sx={{height:'60%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Login</CustomButton>
         </div>
       </div>
       <hr />
