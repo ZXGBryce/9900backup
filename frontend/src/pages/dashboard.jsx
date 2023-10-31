@@ -56,7 +56,7 @@ const Dashboard = (props) => {
     
     const boxes2ndVersion = () => {
       return (
-        <section>
+        <section style={{display:'flex'}}>
           <div class="dashboard-container-block card shadow border-0 rounded-4 ">
             <h2 style={{textAlign:'center'}}>Weekly News</h2>
             <div class="card-body p-6">
