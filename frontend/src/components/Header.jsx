@@ -52,7 +52,7 @@ function Header() {
               navigate('admin')
             }
             else{
-              alert("You are not an admin, please login as an admin to access this page")
+              alert("Sorry, you are not an admin. Please login as an admin to access the Admin Page!")
             }
           }
         )

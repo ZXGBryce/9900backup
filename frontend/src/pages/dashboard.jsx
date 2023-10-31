@@ -48,7 +48,7 @@ const Dashboard = (props) => {
             <div className='news-bloclk'>
               <p><h5>Version 2.0.1 - Released on [03 Nov 2023]</h5></p>
               <p><h5>1.Account Management Enhancements:</h5><b>·</b> Streamlined user registration process with reduced steps.</p>
-              <p><h5>2.Framework Selection:</h5><b>·</b> Added three ESG frameworks to the list.<br/><b>·</b> Enhanced UI for easier framework browsing.</p>
+              <p><h5>2.Framework Selection:</h5><b>·</b> Added four ESG frameworks to the list.<br/><b>·</b> Enhanced UI for easier framework browsing.</p>
             </div>
           </div>
         </div>
