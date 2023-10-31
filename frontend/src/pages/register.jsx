@@ -61,7 +61,7 @@ const Register = (props) => {
       <div style={{ display: 'flex', alignItems: 'center', height:'10%'}}>
       <div style={{marginLeft: '2%', display: 'flex ', alignItems: 'center',  cursor: 'pointer',}} onClick={ () => navigate('/') }>
         <AutoGraphIcon style={{ color: 'blue' }} fontSize="large" />
-        <h1>Glitch</h1>
+        <h1 className='text-gradient'>Glitch</h1>
       </div>
         
       </div>

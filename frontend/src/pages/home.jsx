@@ -39,7 +39,7 @@ const Home = () => {
         
         <div style={{marginLeft: '2%', display: 'flex ', alignItems: 'center'}}>
           <AutoGraphIcon style={{ color: 'blue' }} fontSize="large" />
-          <h1>Glitch</h1>
+          <h1 className='text-gradient'>Glitch</h1>
         </div>
         <div style={{ display: 'flex ', alignItems: 'center', justifyContent: 'flex-end',width: '100%',height: '100%'}}>
           <CustomButton variant="contained" color="primary" onClick={() => navigate('/register')} sx={{height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Register</CustomButton>
@@ -49,7 +49,10 @@ const Home = () => {
       <hr />
       
       <div className="App" style={{ display: 'flex ', alignItems: 'center', justifyContent:'center', height:'70%'}}>
-        <h2>Welcome to Glitch Home Page, please log in to use Glitch</h2>
+        <h2>Welcome to 
+                    <span className='text-gradient'>Glitch Home Page</span>, please log in to use
+                    <span className='text-gradient'> Glitch</span>
+        </h2>
       </div>
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </div>

@@ -13,7 +13,7 @@ const Profile = (props) => {
                 <div className='container-block'>
                     <h1>Profile</h1>
                     <div className='profile-container'>
-                        <h3 style={{textAlign: 'center'}}>Hi, {username_or_email}. Welcome to Profile Page!</h3>
+                        <h3 style={{textAlign: 'center'}}>Howdy, <span className='text-gradient'>{username_or_email}</span>!</h3>
                     </div>
                 </div>
             </div>
