@@ -41,8 +41,8 @@ const Home = () => {
           <AutoGraphIcon style={{ color: 'blue' }} fontSize="large" />
           <h1>Glitch</h1>
         </div>
-        <div style={{ display: 'flex ', alignItems: 'center', width: '100%',height: '100%'}}>
-          <CustomButton variant="contained" color="primary" onClick={() => navigate('/register')} sx={{marginLeft: '70%', height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Register</CustomButton>
+        <div style={{ display: 'flex ', alignItems: 'center', justifyContent: 'flex-end',width: '100%',height: '100%'}}>
+          <CustomButton variant="contained" color="primary" onClick={() => navigate('/register')} sx={{height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Register</CustomButton>
           <CustomButton variant="contained" color="primary" onClick={() => navigate('/login')} sx={{height:'80%', width:'10%', fontSize: 'calc(0.8vw + 0.8vh)'}}>Login</CustomButton>
         </div>
       </div>
