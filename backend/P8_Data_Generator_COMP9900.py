@@ -78,6 +78,7 @@ def generate_esg_frameworks():
         "Remuneration risks": "G"
     }
 
+
     ESG_FRAMEWORKS_DICT = {"TCFD":TCFD_INDICATORS, "TNFD": TNFD_INDICATORS, 
                            "APRA_CPG_229":APRA_CPG_229_INDICATORS, 
                            "IFRS":IFRS_INDICATORS}

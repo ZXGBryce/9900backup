@@ -6,6 +6,7 @@ import { useEmptyValidation, useEmailValidation, Copyright } from '../helper';
 import { Link, useNavigate } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
 import { hover } from '@testing-library/user-event/dist/hover';
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 
 
 const Login = (props) => {
@@ -26,7 +27,6 @@ const Login = (props) => {
 
   const navigate = useNavigate()
 
-  //TODO: Wait for backend to be ready, then change the API call
   const LoginAction = async () => {
     if (readyToSubmit) {
       const res = await fetch('http://127.0.0.1:5000/auth/sign_in', {
@@ -48,7 +48,8 @@ const Login = (props) => {
       } else {
         props.setToken(data.data.token);
         localStorage.setItem('token', data.data.token);
-        localStorage.setItem(' username_or_email',  username_or_email);
+        localStorage.setItem('username_or_email',  username_or_email);
+        navigate('/dashboard');
       }
     }
   };
@@ -56,7 +57,10 @@ const Login = (props) => {
   return (
     <div style={{height:'100vh'}}>
       <div style={{ display: 'flex', alignItems: 'center', height:'10%'}}>
-        <div style={{marginLeft: '5%', display: 'flex ', alignItems: 'center',  cursor: 'pointer',}} onClick={ () => navigate('/') }><h1>Glitch</h1></div>
+        <div style={{marginLeft: '2%', display: 'flex ', alignItems: 'center',  cursor: 'pointer',}} onClick={ () => navigate('/') }>
+          <AutoGraphIcon style={{ color: 'blue' }} fontSize="large" />
+          <h1 className='text-gradient'>Glitch</h1>
+        </div>
       </div>
       
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height:'90%' }}>
@@ -66,17 +70,15 @@ const Login = (props) => {
             </Avatar>
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '5%'}}><h2>Sign In</h2></div>
             <div style={{ display: 'flex' }} >
-              {/* <div style={{ display: 'flex', alignItems: 'center', marginRight: '40px' }}>Email: </div> */}
               <TextField onChange={(e) =>  setUsername_or_Email(e.target.value)} label='Email/User Name*' value={ username_or_email} variant="outlined" style={{ width: '100%'}}/>
             </div>
             <br />
             <div style={{ display: 'flex' }} >
-              {/* <div style={{ display: 'flex', alignItems: 'center' }}>Password: &nbsp;</div> */}
               <TextField onChange={(e) => setPassword(e.target.value)} label='Password*' value={password} variant="outlined"  type="password" style={{ width: '100%'}}/>
             </div>
             <br />
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <MyButton disabled={!readyToSubmit} onClick={LoginAction} text={readyToSubmit ? 'Login' : 'Please Enter valid Details'}></MyButton>
+              <MyButton style={{width:'100%'}} disabled={!readyToSubmit} onClick={LoginAction} text={readyToSubmit ? 'Login' : 'Please Enter valid Details'}></MyButton>
             </div>
             
             <Link to="/register" variant="body2" style={{ display: 'flex', justifyContent: 'center', marginTop: '5%'}}> 

@@ -8,11 +8,15 @@ import Navbar from './NavBar'
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import "../css/Header.css"
+import callAPI from '../callAPI';
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
 function Header() {
     const [drawerOpen, setDrawerOpen] = useState(window.innerWidth <= 1000 ? false : true);
     const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1000);
     const navigate = useCustomNavigate();
+    const token = localStorage.getItem('token')
+    const usernameInitial = localStorage.getItem('username_or_email')[0]
 
     // open close drawer
     function toggleDrawer() {
@@ -24,7 +28,7 @@ function Header() {
     // responsive window
     useEffect(() => {
         function handleResize() {
-            if (window.innerWidth > 1000) {
+            if (window.innerWidth > 1300) {
                 setIsMobileView(false);
                 setDrawerOpen(true);
             } else {
@@ -39,13 +43,31 @@ function Header() {
             window.removeEventListener('resize', handleResize);
         };
     }, [isMobileView, drawerOpen]);
-
+    
+    //admin function
+    function handleAdminOnClick(){
+        console.log(token)
+        callAPI('GET','admin/check_admin', token)
+          .then(response => {
+            console.log(response)
+            if (response.code === 20001){
+              navigate('admin')
+            }
+            else{
+              alert("Sorry, you are not an admin. Please login as an admin to access the Admin Page!")
+            }
+          }
+        )
+        .catch(error => {
+          console.error('Error:', error)
+        })
+      }
+      
     //logout function
     function logoutAction () {
         logout()
-        navigate('/')
+        navigate('')
     }
-
     return (
         <div>
             <header style={{
@@ -61,14 +83,14 @@ function Header() {
                 </div>
                 
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Button variant="contained" color="primary" style={{ marginRight: '30px' }} onClick={() => {navigate('admin')}}>
+                    <Button variant="contained" color="primary" style={{ marginRight: '20px' }} onClick={handleAdminOnClick}>
                         <SupervisorAccountIcon/>
                         <div className='btn-text'>
                             Admin
                         </div>
                     </Button>
-
-                    <Avatar src="path_to_profile_picture.jpg" style={{ marginRight: '10px' }} onClick={() => {navigate('profile')}} />
+                    {/* <Avatar src="path_to_profile_picture.jpg" style={{ marginRight: '20px', cursor: 'pointer'}} onClick={() => {navigate('profile')}} /> */}
+                    <Avatar sx={{ bgcolor: deepOrange[500] }} style={{ marginRight: '20px', cursor: 'pointer'}} onClick={() => {navigate('profile')}}>{usernameInitial}</Avatar>
                     <Button variant="contained" color="secondary" onClick={() => {logoutAction()}}>
                         <ExitToAppIcon/>
                         <div className='btn-text'>

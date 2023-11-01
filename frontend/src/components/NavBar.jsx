@@ -24,10 +24,10 @@ function Navbar({ drawerOpen }) {
       open={drawerOpen}
     >
 
-      <div className='logo-box'>
-          <div style={{ display: 'flex', justifyContent:'center', alignItems: 'center' }}>
+      <div className='logo-box' style={{ display: 'flex ', alignItems: 'center', height:'10%'}}>
+          <div style={{ marginLeft: 'calc(2vw)', display: 'flex', justifyContent:'center', alignItems: 'center' }}>
             <AutoGraphIcon style={{ color: 'blue' }} fontSize="large" />
-            <h3 className='logo-text'>Glitch</h3>
+            <h1 className='logo-text, text-gradient'>Glitch</h1>
           </div>
       </div>
 
