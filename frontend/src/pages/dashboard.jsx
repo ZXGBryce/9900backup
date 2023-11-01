@@ -1,5 +1,5 @@
 import { Copyright } from '../helper';
-import { BrowserRouter, Routes, Link, Route, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import callAPI from '../callAPI';
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -10,7 +10,7 @@ import "../css/Site.css"
 const Dashboard = (props) => {
     const navigate = useNavigate();
     // const token = localStorage.getItem('token')
-    //TODO: Wait for backend to be ready, then change the API call
+    //TODO: Logout: Wait for backend to be ready, then change the API call
     // const logoutAction = async () => {
     //   const res = await fetch('http://localhost:5005/user/auth/logout', {
     //     method: 'POST',
