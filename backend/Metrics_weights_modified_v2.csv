@@ -1,0 +1,32 @@
+framework,indicator_name,indicator_weight,sub_category,sub_category_weight,category,category_weight
+APRA_CPG_229,Policy changes,12,Policy and legal,0.1,Transition Risk,0.1
+APRA_CPG_229,Technological innovation,5,Technology,0.1,Transition Risk,0.2
+APRA_CPG_229,Social adaptation,11,Market,0.3,Transition Risk,0.1
+APRA_CPG_229,Changing climate conditions,5,Reputation,0.1,Transition Risk,0.2
+APRA_CPG_229,Extreme weather events,10,Acute,0.2,Physical Risk,0.1
+APRA_CPG_229,Stakeholder litigation risks,1,Stakeholder litigation,0.1,Liability Risk,0.1
+APRA_CPG_229,Regulatory enforcement risks,9,Regulatory enforcement,0.1,Liability Risk,0.2
+TNFD,Proportion and total annual revenue exposed to transition risks,6,Policy and Legal,0.1,Transition Risk,0.1
+TNFD,Proportion and value of assets exposed to transition risks.,4,Market,0.1,Transition Risk,0.1
+TNFD,Proportion and value of assets exposed to risks due to technological changes.,3,Technology,0.2,Transition Risk,0.2
+TNFD,Proportion and total annual revenue affected by negative stakeholder feedback.,10,Reputation,0,Transition Risk,0.2
+TNFD,Proportion and total annual revenue exposed to acute physical risks.,1,Acute risks,0.1,Physical Risk,0.1
+TNFD,Proportion and value of assets exposed to chronic physical risks.,2,Chronic risks,0.1,Physical Risk,0.1
+TNFD,Proportion and value of assets exposed to risks of ecosystem collapse.,10,Ecosystem collapse,0.3,Systemic Risk,0.1
+TNFD,Cumulative risk exposure due to aggregated minor risk events.,8,Aggregated,0,Systemic Risk,0
+TNFD,Proportion and value of assets exposed to contagion risks.,7,Contagion,0.1,Systemic Risk,0.1
+TCFD,Increased pricing of GHG emissions,10,Policy and Legal,0.2,Transition Risk,0.1
+TCFD,Enhanced emissions-reporting obligations,7,Policy and Legal,0.1,Transition Risk,0.1
+TCFD,Costs to transition to lower emissions technology,3,Technology,0.1,Transition Risk,0.3
+TCFD,Uncertainty in market signals,9,Market,0.1,Transition Risk,0.2
+TCFD,Increased stakeholder concern or negative stakeholder feedback,10,Reputation,0.2,Transition Risk,0.1
+TCFD,Increased severity of extreme weather events such as cyclones and floods,11,Acute,0.1,Physical Risk,0.1
+TCFD,Rising mean temperatures,3,Chronic ,0.2,Physical Risk,0.1
+IFRS,The amount and percentage of assets or bussiness activities vulnerable to Regulatory,8,Regulatory,0.1,Transition Risk,0
+IFRS,The amount and percentage of assets or bussiness activities vulnerable to Technological,5,Technological,0.2,Transition Risk,0.1
+IFRS,The amount and percentage of assets or bussiness activities vulnerable to Market,9,Market,0.2,Transition Risk,0.2
+IFRS,The amount and percentage of assets or bussiness activities vulnerable to legal or reputational risks,4,Legal or reputation risks,0.2,Transition Risk,0.2
+IFRS,The amount and percentage of assets or bussiness activities vulnerable to acute physical risks,3,Acute,0.1,Physical Risk,0.1
+IFRS,The amount and percentage of assets or bussiness activities vulnerable to chronic physical risks,10,Chronic,0.1,Physical Risk,0.2
+IFRS,Internal carbon price risks,6,Internal carbon price,0,Other,0.1
+IFRS,Remuneration risks,2,Remuneration ,0.1,Other,0.1

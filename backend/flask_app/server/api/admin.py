@@ -31,8 +31,6 @@ def upload_csv():
 
     # 插入数据
     df = pd.read_csv(csv_file.stream)
-    for col in ['environment', 'social', 'governance']:
-        df[col] = df[col].map({'Yes': True, 'No': False})
     with dep.data_access.db.atomic():
         for index, row in df.iterrows():
             DataSetTab.create(
