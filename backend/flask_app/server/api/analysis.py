@@ -123,9 +123,12 @@ def framework(framework_request: FrameworkDataRequest) -> Response[FrameworkData
 class CalculationRequest(BaseModel):
     __root__: Dict[str, Framework]
 
-class CalculationResponse(BaseModel):
-    ESGscore: Dict[str, str]
+class CategoryScores(BaseModel):
+    total: float
+    categories: Dict[str, float]
 
+class CalculationResponse(BaseModel):
+    ESGscore: Dict[str, CategoryScores]
 
 @analysis_blueprint.post("/calculation")
 @handle_with_pydantic(CalculationRequest)
@@ -159,12 +162,6 @@ def calculation(calculation_request: CalculationRequest) -> Response[Calculation
                             government=indicator_data.government
                         )
     ESG_score = {}
-    """
-    TODO: 对于一个company 和 framework的组合 的 ESGscore 的计算公式为 
-    (（indicator1*indicator1_weight) + (indicator2*indicator2_weight) + ...) * sub_category_weight + (（indicator3*indicator3_weight) + (indicator4*indicator4_weight) + ...) * sub_category_weight + ...
-    请根据Cusmetrics 表里面的数据， 按照以上公式计算 calculationrequest 中 每一组 company 和 framework 组合的 ESGscore。 
-    注：sub_category_weight 是 每一组 indicators 对应的 那个 sub category 的 weight
-    """
 
     for framework_name, framework_data in calculation_request.__root__.items():
         modified_framework_name = f"{framework_name}_{username}_{timestamp}"
@@ -176,25 +173,39 @@ def calculation(calculation_request: CalculationRequest) -> Response[Calculation
             )
 
             score = 0.0
+            category_scores = {}
             # Group by sub_category
             sub_category_data = {}
+
             for record in records:
                 if record.sub_category not in sub_category_data:
                     sub_category_data[record.sub_category] = []
                 sub_category_data[record.sub_category].append(record)
 
-            # Calculate ESG score
-            for sub_category, indicators in sub_category_data.items():
-                sub_category_total = 0.0
-                sub_category_weight = indicators[0].sub_category_weight
-                for indicator in indicators:
-                    sub_category_total += indicator.indicator_value * indicator.indicator_weight
-                score += sub_category_total * sub_category_weight
+                # Calculate ESG score
+                for sub_category, indicators in sub_category_data.items():
+                    sub_category_total = 0.0
+                    sub_category_weight = indicators[0].sub_category_weight
+                    for indicator in indicators:
+                        sub_category_total += indicator.indicator_value * indicator.indicator_weight
+                    category_name = indicators[0].category
+                    if category_name not in category_scores:
+                        category_scores[category_name] = 0.0
+                    category_scores[category_name] += sub_category_total * sub_category_weight
+                    score += sub_category_total * sub_category_weight
 
-            ESG_score[f"{company_name}"] = score * 10
+                # Update the ESG_score dictionary
+                ESG_score[f"{company_name}"] = {
+                    "total": score,
+                    "categories": category_scores
+                }
 
 
     return Response(data=CalculationResponse(ESGscore=ESG_score).dict(), code=Code.OK)
+
+
+
+
 
 
 

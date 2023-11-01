@@ -5,6 +5,7 @@ import pandas as pd
 import json
 from flask_app.models.user import AuthUserTab
 from flask_app.models.dataset import DataSetTab
+from flask_app.models.customised_metrics import CusMetrics
 
 
 class DataAccess:
