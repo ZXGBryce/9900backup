@@ -141,72 +141,77 @@ def calculation(calculation_request: CalculationRequest) -> Response[Calculation
     # Get timestamp
     timestamp = int(time.time())
 
-    # Read data from CalculationRequest
-    for framework_name, framework_data in calculation_request.__root__.items():
-        modified_framework_name = f"{framework_name}_{username}_{timestamp}"
-        for company_name, company_data in framework_data.__root__.items():
-            for category_name, category_data in company_data.__root__.items():
-                for sub_category_name, sub_category_data in category_data.__root__.items():
-                    for indicator_name, indicator_data in sub_category_data.indicators.items():
-                        CusMetrics.create(
-                            framework=modified_framework_name,
-                            company=company_name,
-                            indicator_name=indicator_name,
-                            indicator_value=float(indicator_data.value),
-                            indicator_weight=float(indicator_data.indicator_weight),
-                            sub_category=sub_category_name,
-                            sub_category_weight=sub_category_data.sub_category_weight,
-                            category=category_name,
-                            environment=indicator_data.environment,
-                            social=indicator_data.social,
-                            government=indicator_data.government
-                        )
-    ESG_score = {}
+    dep.data_access.store_cus_framework(calculation_request, timestamp, username)
 
-    for framework_name, framework_data in calculation_request.__root__.items():
-        modified_framework_name = f"{framework_name}_{username}_{timestamp}"
-        for company_name, _ in framework_data.__root__.items():
-            # Retrieve data from CusMetrics for the current framework and company
-            records = CusMetrics.select().where(
-                (CusMetrics.framework == modified_framework_name) &
-                (CusMetrics.company == company_name)
-            )
-
-            score = 0.0
-            category_scores = {}
-            # Group by sub_category
-            sub_category_data = {}
-
-            for record in records:
-                if record.sub_category not in sub_category_data:
-                    sub_category_data[record.sub_category] = []
-                sub_category_data[record.sub_category].append(record)
-
-                # Calculate ESG score
-                for sub_category, indicators in sub_category_data.items():
-                    sub_category_total = 0.0
-                    sub_category_weight = indicators[0].sub_category_weight
-                    for indicator in indicators:
-                        sub_category_total += indicator.indicator_value * indicator.indicator_weight
-                    category_name = indicators[0].category
-                    if category_name not in category_scores:
-                        category_scores[category_name] = 0.0
-                    category_scores[category_name] += sub_category_total * sub_category_weight
-                    score += sub_category_total * sub_category_weight
-
-                # Update the ESG_score dictionary
-                ESG_score[f"{company_name}"] = {
-                    "total": score,
-                    "categories": category_scores
-                }
-
+    ESG_score = dep.data_access.metrics_calculation(calculation_request, timestamp, username)
 
     return Response(data=CalculationResponse(ESGscore=ESG_score).dict(), code=Code.OK)
 
 
+class HistoryResponse(BaseModel):
+    cusframeworks: list
+
+
+@analysis_blueprint.get("/history")
+def history():
+
+    # Get username from jwt token
+    jwt_token = request.headers.get('Authorization').split(' ')[1]
+    payload = dep.jwt_manager.decode_token(jwt_token)
+    username = payload.get("username")
+
+    # Fetch the relevant frameworks for the given username from the CusMetrics table
+    query = CusMetrics.select(CusMetrics.framework).where(CusMetrics.framework.contains(f"_{username}_")).distinct()
+    frameworks = [entry.framework for entry in query]
+
+    return Response(data=HistoryResponse(cusframeworks=frameworks).dict(), code=Code.OK).dict()
 
 
 
+class ResetFrameworkRequest(BaseModel):
+    framework_name: str
+
+
+class ResetFrameworkResponse(BaseModel):
+    __root__: Dict[str, Framework]
+
+
+@analysis_blueprint.post("/resetframework")
+@handle_with_pydantic(ResetFrameworkRequest)
+def resetframework(resetframework_request: ResetFrameworkRequest) -> Response[ResetFrameworkResponse]:
+    framework = resetframework_request.framework_name
+
+    # 根据 framework 从 CusMetrics 表中抓取数据
+    metrics_records = CusMetrics.select().where(CusMetrics.framework == framework)
+
+    # 开始构建 FrameworkDataResponse 结构
+    metrics = {framework: {}}
+
+    for record in metrics_records:
+        if record.company not in metrics[framework]:
+            metrics[framework][record.company] = {}
+
+        company_data = metrics[framework][record.company]
+        category = record.category
+        sub_category = record.sub_category
+
+        if category not in company_data:
+            company_data[category] = {}
+        if sub_category not in company_data[category]:
+            company_data[category][sub_category] = {
+                "indicators": {},
+                "sub_category_weight": record.sub_category_weight
+            }
+
+        company_data[category][sub_category]["indicators"][record.indicator_name] = {
+            "value": str(record.indicator_value),
+            "indicator_weight": str(record.indicator_weight),
+            "environment": record.environment,
+            "social": record.social,
+            "government": record.government
+        }
+
+    return Response(data=FrameworkDataResponse(__root__=metrics).dict(), code=Code.OK)
 
 
 data =  {
