@@ -30,8 +30,6 @@ function App() {
       setToken(lsToken);
       if (pathname === '/login') {
         navigate('/dashboard');
-      } else if (pathname === '/register'){
-        navigate('/login');
       }
     }
     // If the user is not logged in, redirect to landing page
