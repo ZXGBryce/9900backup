@@ -94,23 +94,12 @@ function Metrics () {
         });
     }
 
-    function handleIndicatorValueChange(companyName, categoryName, subCategoryName, indicatorName, newValue) {
-        setMetricList(prevMetricList => {
-            const updatedMetricList = { ...prevMetricList };
-            const newValueNumber = parseFloat(newValue); // Convert the new value to a number
-            if (!isNaN(newValueNumber)) {
-                updatedMetricList.framework[companyName][categoryName][subCategoryName].indicators[indicatorName].value = newValueNumber.toString();
-            }
-            return updatedMetricList;
-        });
-    }
-
 
 
     console.log(metricList)
 
 
-    const renderIndicatorsTable = (companyName, categoryName, subCategoryName, indicators) => {
+    const renderIndicatorsTable = (indicators) => {
         return (
             <TableContainer component={Paper} sx={{ marginTop: '10px' }}>
                 <Table aria-label="indicators table" size="small">
@@ -130,14 +119,7 @@ function Metrics () {
                                 <TableCell component="th" scope="row">
                                     {indicatorName}
                                 </TableCell>
-                                <TableCell align="right">
-                                    <TextField
-                                        type="number"
-                                        size="small"
-                                        value={indicatorDetails.value}
-                                        onChange={(e) => handleIndicatorValueChange(companyName, categoryName, subCategoryName, indicatorName, e.target.value)}
-                                    />
-                                </TableCell>
+                                <TableCell align="right">{indicatorDetails.value}</TableCell>
                                 <TableCell align="right">{indicatorDetails.indicator_weight}</TableCell>
                                 <TableCell align="right">{indicatorDetails.environment}</TableCell>
                                 <TableCell align="right">{indicatorDetails.social}</TableCell>
@@ -192,7 +174,7 @@ function Metrics () {
                             }}
                         />
                     </Box>
-                    {isExpanded && renderIndicatorsTable(companyName, categoryName, subCategoryName, subCategoryDetails.indicators)}
+                    {isExpanded && renderIndicatorsTable(subCategoryDetails.indicators)}
                 </Box>
             );
         });

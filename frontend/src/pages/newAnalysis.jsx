@@ -43,6 +43,7 @@ const NewAnalysis = (props) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundColor: active ? shadeColor(bgcolor, -30) : bgcolor,
       background: `linear-gradient(45deg, ${bgcolor}, ${shadeColor(bgcolor, -20)})`,
       transition: 'all 0.3s ease', 
     

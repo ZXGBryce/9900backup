@@ -1,0 +1,70 @@
+
+.container-block {
+    margin-top: 20px;
+    flex: 1;
+    height: 50%;
+    background-color: white;
+    border-radius: 10px; 
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.metrics-container-block {
+    margin-top: 20px;
+    flex: 1;
+    height: 50%;
+    background-color: white;
+    border-radius: 10px; 
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.analysis-title{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+
+.option-block{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+@media (min-width: 1024px) {
+    .container-block  {
+        width: 800px;
+    }
+    .metrics-container-block{
+        width: 800px;
+    }
+}
+
+@media (min-width: 750px) and (max-width: 1024px) {
+    .container-block {
+        width: 600px;  
+    }
+    .metrics-container-block{
+        width: 700px;
+    }
+}
+
+@media (max-width: 750px) {
+    .container-block {
+        overflow-y: auto; /* Vertical scroll */
+        min-width: 370px;
+        width: 100%;
+    }
+    .companyList-button {
+        font-size: smaller; /* You can use a specific size like '12px' if 'smaller' is too vague */
+    }
+    .metrics-container-block {
+        overflow-x: auto; /* Enable horizontal scrolling */
+        min-width: 370px; /* Set the minimum width to your desired value */
+        width: 100%; /* Make the block take the full width of the parent */
+    }
+}

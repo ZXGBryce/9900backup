@@ -4,6 +4,8 @@ import { Table, TableBody, TableCell, TableHead, TableRow, Checkbox, Box} from '
 import Button from '@mui/material/Button';
 import {useCustomNavigate} from '../../utils'
 
+import '../../css/pages/Analysis/CompanyBox.css'
+
 function CompanyBox ({ companyList, onCompanySelect, frameworkId }) {
 
     const [checkedCompanies, setCheckedCompanies] = useState([])
@@ -24,9 +26,20 @@ function CompanyBox ({ companyList, onCompanySelect, frameworkId }) {
         // send APIcall to backend to extract metrics 
     }
 
+
+    const boxStyles = {
+        maxHeight: '550px',
+        overflowY: 'auto', // Enable vertical scrolling
+        overflowX: 'auto', // Enable horizontal scrolling
+        marginTop: '50px',
+        minWidth: '350px', // This should be your desired minimum width for the content
+        width: '100%', // This ensures the box takes the full width of its parent
+    }
+
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
-            <Box style={{ maxHeight: '550px', overflow: 'auto', marginTop:'50px' }}>
+            <Box className='company-box'>
                 <Table>
                     <TableHead>
                         <TableRow>

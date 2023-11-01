@@ -19,15 +19,13 @@ const Dropdown = ({ title, options, onToggle }) => {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-                MenuProps={{
-                    PaperProps: {
-                        style: {
-                            maxHeight: '50px',
-                            overflow: 'auto',
-                        },
-                    },
-                }}
-            >
+                paper={{ 
+                    style: {
+                        maxHeight: '50px',
+                        overflow: 'auto',
+        },
+    }}
+>
                 {options.map((option, index) => (
                     <MenuItem key={index}>
                         <FormControlLabel

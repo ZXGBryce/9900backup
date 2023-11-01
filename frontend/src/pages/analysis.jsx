@@ -12,7 +12,7 @@ import Dropdown from '../components/analysis/Dropdown'
 import Category from '../components/MetricsBox'
 // css files 
 import "../css/Site.css"
-import "../css/pages/Analysis.css"
+import "../css/pages/Analysis/Analysis.css"
 
 
 
@@ -142,6 +142,8 @@ function Analysis () {
         setSelectedCompanies([])
     };
 
+    console.log(selectedCompanies)
+
     return (
         <div className='site-struct'>
             <Header/>
@@ -156,11 +158,11 @@ function Analysis () {
                         <div className='option-block'>
                             <Dropdown title="Region" options={regions} onToggle={handleRegionToggle} />
                             <Dropdown title="Sector" options={sectors} onToggle={handleSectorToggle} />
-                            <Button style={{ color:"#a50221" }} onClick={handleReset}>Reset Filters</Button>
-                            <Button style={{ color:"#a50221" }} onClick={handleClear}>Clear</Button>
+                            <Button className='companyList-button' style={{ color:"#a50221" }} onClick={handleReset}>Reset Filters</Button>
+                            <Button className='companyList-button' style={{ color:"#a50221" }} onClick={handleClear}>Clear</Button>
                         </div>
                         <CompanyBox companyList={filteredCompanies} onCompanySelect={handleCompanySelect} frameworkId={frameworkId}/>
-                        </div>
+                    </div>
                 </div>
 
             </div>
