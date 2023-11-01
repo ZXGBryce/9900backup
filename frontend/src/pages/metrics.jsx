@@ -26,14 +26,14 @@ function Metrics () {
                                 "Policy changes": {
                                     "value": "0.45231",
                                     "indicator_weight": "15",
-                                    "enviroment": 1,
+                                    "environment": 1,
                                     "social": 0,
                                     "governance":0
                                 },
                                 "Technological innovation": {
                                     "value": "0.234566",
                                     "indicator_weight": "5",
-                                    "enviroment": 0,
+                                    "environment": 0,
                                     "social": 1,
                                     "governance":0
                                 }
@@ -45,7 +45,7 @@ function Metrics () {
                                 "Stakeholder litigation risks": {
                                     "value": "0.1245",
                                     "indicator_weight": "35",
-                                    "enviroment": 0,
+                                    "environment": 0,
                                     "social": 1,
                                     "governance":0
                                 }
@@ -59,7 +59,7 @@ function Metrics () {
                                 "Regulatory enforcement risks": {
                                     "value": "0.46125",
                                     "indicator_weight": "12",
-                                    "enviroment": 0,
+                                    "environment": 0,
                                     "social": 1,
                                     "governance":0
                                 }
@@ -105,10 +105,20 @@ function Metrics () {
         });
     }
 
+    function handleIndicatorWeightChange(companyName, categoryName, subCategoryName, indicatorName, newWeight) {
+        setMetricList(prevMetricList => {
+            const updatedMetricList = { ...prevMetricList };
+            const newWeightNumber = parseInt(newWeight, 10); // Convert the new weight to an integer
+            if (!isNaN(newWeightNumber)) {
+                updatedMetricList.framework[companyName][categoryName][subCategoryName].indicators[indicatorName].indicator_weight = newWeightNumber.toString();
+            }
+            return updatedMetricList;
+        });
+    }
+
 
 
     console.log(metricList)
-
 
     const renderIndicatorsTable = (companyName, categoryName, subCategoryName, indicators) => {
         return (
@@ -138,7 +148,14 @@ function Metrics () {
                                         onChange={(e) => handleIndicatorValueChange(companyName, categoryName, subCategoryName, indicatorName, e.target.value)}
                                     />
                                 </TableCell>
-                                <TableCell align="right">{indicatorDetails.indicator_weight}</TableCell>
+                                <TableCell align="right">
+                                    <TextField
+                                        type="number"
+                                        size="small"
+                                        value={indicatorDetails.indicator_weight}
+                                        onChange={(e) => handleIndicatorWeightChange(companyName, categoryName, subCategoryName, indicatorName, e.target.value)}
+                                    />
+                                </TableCell>
                                 <TableCell align="right">{indicatorDetails.environment}</TableCell>
                                 <TableCell align="right">{indicatorDetails.social}</TableCell>
                                 <TableCell align="right">{indicatorDetails.governance}</TableCell>
@@ -147,8 +164,8 @@ function Metrics () {
                     </TableBody>
                 </Table>
             </TableContainer>
-        );
-    };
+        )
+    }
     
 
 
