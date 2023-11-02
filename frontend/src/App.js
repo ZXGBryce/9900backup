@@ -48,7 +48,7 @@ function App() {
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/dashboard" element={<Dashboard token />} />
-        <Route path='/newAnalysis' element={<NewAnalysis token />} />
+        <Route path='/analysis' element={<NewAnalysis token />} />
         <Route path='/admin' element={<Admin token />} />
         <Route path='/analysis/:frameworkId' element={<Analysis token />} />
         <Route path='/analysis/:frameworkId/metrics' element={<Metrics token />} />

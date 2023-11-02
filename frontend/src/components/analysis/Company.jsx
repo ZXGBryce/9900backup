@@ -1,15 +1,18 @@
 import {useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableHead, TableRow, Checkbox, Box} from '@mui/material'
 import Button from '@mui/material/Button';
-import {useCustomNavigate} from '../../utils'
+
 
 import '../../css/pages/Analysis/CompanyBox.css'
+import callAPI from '../../callAPI'
+
 
 function CompanyBox ({ companyList, onCompanySelect, frameworkId }) {
 
     const [checkedCompanies, setCheckedCompanies] = useState([])
-    const navigate = useCustomNavigate();
+    const navigate = useNavigate();
+    const token = localStorage.getItem('token')
     
 
     const handleToggle = (company, isChecked) => {
@@ -21,19 +24,39 @@ function CompanyBox ({ companyList, onCompanySelect, frameworkId }) {
         onCompanySelect(company, isChecked)
     }
 
-    function handleNextButtonClick(){
-        navigate(`analysis/${frameworkId}/metrics`)
-        // send APIcall to backend to extract metrics 
+    const handleNextButtonClick = async () => {
+        if (checkedCompanies.length === 0) {
+            alert('Please select at least one company.');
+        } else {
+            const payload = {
+                "companyList" : checkedCompanies
+            }
+            try {
+                const response = await callAPI('POST', 'analysis/framework', token, payload)
+                const data = response.data
+                console.log("")
+                console.log(response)
+
+                navigate(`/analysis/${frameworkId}/metrics`, { state: { data } })
+
+                console.log(" analysis company metrics ")
+                console.log(data)
+
+            } catch (error) {
+                console.error('Failed to fetch companies:', error);
+            }
+        }
     }
 
+    console.log(checkedCompanies)
 
     const boxStyles = {
         maxHeight: '550px',
-        overflowY: 'auto', // Enable vertical scrolling
-        overflowX: 'auto', // Enable horizontal scrolling
+        overflowY: 'auto', 
+        overflowX: 'auto', 
         marginTop: '50px',
-        minWidth: '350px', // This should be your desired minimum width for the content
-        width: '100%', // This ensures the box takes the full width of its parent
+        minWidth: '350px', 
+        width: '100%', 
     }
 
 

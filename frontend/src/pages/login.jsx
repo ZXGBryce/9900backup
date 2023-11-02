@@ -29,7 +29,7 @@ const Login = (props) => {
 
   const LoginAction = async () => {
     if (readyToSubmit) {
-      const res = await fetch('http://127.0.0.1:5000/auth/sign_in', {
+      const res = await fetch('https://glitch9900f15a.au.ngrok.io/auth/sign_in', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

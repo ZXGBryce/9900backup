@@ -56,7 +56,7 @@ function Navbar({ drawerOpen }) {
           </Box>
         </ListItem>
 
-        <ListItem className='navbar-item' onClick={() => {navigate('newAnalysis')}}>
+        <ListItem className='navbar-item' onClick={() => {navigate('analysis')}}>
           <Box className='navbar-box'>
             <ListItemIcon className='navbar-icon'>
               <FiberNewIcon style={{color:'grey'}}/>

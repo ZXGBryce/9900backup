@@ -6,12 +6,13 @@ import Footer from '../components/Footer'
 import "../css/Site.css"
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import callAPI from '../callAPI'
 
-import { useCustomNavigate, } from '../utils'
 
 const NewAnalysis = (props) => {
-    const navigate = useCustomNavigate()
     const [activeBox, setActiveBox] = useState(null)
+    const token = localStorage.getItem('token')
+    const navigate = useNavigate()
 
     //TODO: Wait for backend to be ready, then change the API call
     // const logoutAction = async () => {
@@ -124,10 +125,20 @@ const NewAnalysis = (props) => {
     }
     
 
-    const handleBoxClick = (boxName) => {
+    const handleBoxClick = async (boxName) => {
       setActiveBox(boxName);
-      navigate(`analysis/${boxName}`)
-
+      const payload = {
+        "framework": boxName
+      };
+      try {
+        const response = await callAPI('POST', 'analysis/company', token, payload);
+        const data = response.data
+        navigate(`/analysis/${boxName}`, { state: { companyList : data.company_list} });
+        console.log("transfered data from new analysis")
+        console.log(data.company_list)
+      } catch (error) {
+        console.error('Failed to fetch companies:', error);
+      }
     };
     
     return (

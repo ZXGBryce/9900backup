@@ -68,16 +68,19 @@ function Metrics () {
                         }
                     }
                 },
-            }
+                "company_name_2": {}
+            },
         }
     )
+    
 
     const [expandedSubCategories, setExpandedSubCategories] = useState({})
     
+
     function handleSubCategoryWeightChange(companyName, categoryName, subCategoryName, newWeight) {
         setMetricList(prevMetricList => {
             const updatedMetricList = { ...prevMetricList };
-            const newWeightNumber = parseFloat(newWeight); // Convert the new weight to a number
+            const newWeightNumber = parseFloat(newWeight); 
             if (!isNaN(newWeightNumber)) {
                 updatedMetricList.framework[companyName][categoryName][subCategoryName].sub_category_weight = newWeightNumber;
             }
@@ -97,7 +100,7 @@ function Metrics () {
     function handleIndicatorValueChange(companyName, categoryName, subCategoryName, indicatorName, newValue) {
         setMetricList(prevMetricList => {
             const updatedMetricList = { ...prevMetricList };
-            const newValueNumber = parseFloat(newValue); // Convert the new value to a number
+            const newValueNumber = parseFloat(newValue);
             if (!isNaN(newValueNumber)) {
                 updatedMetricList.framework[companyName][categoryName][subCategoryName].indicators[indicatorName].value = newValueNumber.toString();
             }
@@ -108,7 +111,7 @@ function Metrics () {
     function handleIndicatorWeightChange(companyName, categoryName, subCategoryName, indicatorName, newWeight) {
         setMetricList(prevMetricList => {
             const updatedMetricList = { ...prevMetricList };
-            const newWeightNumber = parseInt(newWeight, 10); // Convert the new weight to an integer
+            const newWeightNumber = parseInt(newWeight, 10); 
             if (!isNaN(newWeightNumber)) {
                 updatedMetricList.framework[companyName][categoryName][subCategoryName].indicators[indicatorName].indicator_weight = newWeightNumber.toString();
             }
@@ -144,6 +147,7 @@ function Metrics () {
                                     <TextField
                                         type="number"
                                         size="small"
+                                        style={{ width: '100px' }} 
                                         value={indicatorDetails.value}
                                         onChange={(e) => handleIndicatorValueChange(companyName, categoryName, subCategoryName, indicatorName, e.target.value)}
                                     />
@@ -152,6 +156,7 @@ function Metrics () {
                                     <TextField
                                         type="number"
                                         size="small"
+                                        style={{ width: '60px' }} 
                                         value={indicatorDetails.indicator_weight}
                                         onChange={(e) => handleIndicatorWeightChange(companyName, categoryName, subCategoryName, indicatorName, e.target.value)}
                                     />
@@ -167,8 +172,6 @@ function Metrics () {
         )
     }
     
-
-
 
     const renderSubCategories = (companyName, categoryName, subCategories) => {
         return Object.entries(subCategories).map(([subCategoryName, subCategoryDetails], index) => {
