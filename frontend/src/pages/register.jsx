@@ -28,7 +28,7 @@ const Register = (props) => {
   
   const registerAction = async () => {
     if (readyToSubmit) {
-      const res = await fetch('http://127.0.0.1:5000/auth/sign_up', {
+      const res = await fetch('https://glitch9900f15a.au.ngrok.io/auth/sign_up', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

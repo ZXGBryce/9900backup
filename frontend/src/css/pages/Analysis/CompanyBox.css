@@ -1,5 +1,6 @@
 .company-box {
     max-height: 550px;
+    max-width: 100%;
     overflow-y: auto;
     margin-top: 50px;
 }

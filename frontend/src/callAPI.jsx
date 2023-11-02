@@ -14,7 +14,7 @@ if (method === 'GET') {
     delete options.body;
 }
 // console.log('calling fetch')
-const response = await fetch(`http://127.0.0.1:5000/${path}`, options);
+const response = await fetch(`https://glitch9900f15a.au.ngrok.io/${path}`, options);
 const data = await response.json();
 if (data.error) {
     console.log(data.error);

@@ -13,67 +13,80 @@ import Category from '../components/MetricsBox'
 // css files 
 import "../css/Site.css"
 import "../css/pages/Analysis/Analysis.css"
+import { useLocation, } from 'react-router-dom';
 
 
-
+        // dummy company list 
+    // const [companies, setCompanies] = useState([
+    //     {
+    //         "name": "Top Company 1 - APRA_CPG_229 TNFD",
+    //         "region": "Japan,New Zealand,China",
+    //         "sector": "Education"
+    //     },
+    //     {
+    //         "name": "Top Company 2 - TCFD",
+    //         "region": "New Zealand",
+    //         "sector": "Health"
+    //     },
+    //     {
+    //         "name": "Top Company 3 - TCFD",
+    //         "region": "New Zealand,China",
+    //         "sector": "Health,Energy,Hospitality,Legal,Agriculture"
+    //     },
+    //     {
+    //         "name": "Top Company 4 - TNFD IFRS",
+    //         "region": "US",
+    //         "sector": "Agriculture"
+    //     },
+    //     {
+    //         "name": "Top Company 5 - IFRS TNFD TCFD",
+    //         "region": "Australia",
+    //         "sector": "Mining"
+    //     },
+    //     {
+    //         "name": "Top Company 6 - APRA_CPG_229 TNFD",
+    //         "region": "Japan,New Zealand,China",
+    //         "sector": "Education"
+    //     },
+    //     {
+    //         "name": "Top Company 7 - TCFD",
+    //         "region": "New Zealand",
+    //         "sector": "Health"
+    //     },
+    //     {
+    //         "name": "Top Company 8 - TCFD",
+    //         "region": "New Zealand,China",
+    //         "sector": "Health,Energy,Hospitality,Legal,Agriculture"
+    //     },
+    //     {
+    //         "name": "Top Company 9 - TNFD IFRS",
+    //         "region": "US",
+    //         "sector": "Agriculture"
+    //     },
+    //     {
+    //         "name": "Top Company 10 - IFRS TNFD TCFD",
+    //         "region": "Australia",
+    //         "sector": "Mining"
+    //     }
+    // ])
 
 
 
 
 function Analysis () {
-        // dummy company list 
-    const [companies, setCompanies] = useState([
-        {
-            "name": "Top Company 1 - APRA_CPG_229 TNFD",
-            "region": "Japan,New Zealand,China",
-            "sector": "Education"
-        },
-        {
-            "name": "Top Company 2 - TCFD",
-            "region": "New Zealand",
-            "sector": "Health"
-        },
-        {
-            "name": "Top Company 3 - TCFD",
-            "region": "New Zealand,China",
-            "sector": "Health,Energy,Hospitality,Legal,Agriculture"
-        },
-        {
-            "name": "Top Company 4 - TNFD IFRS",
-            "region": "US",
-            "sector": "Agriculture"
-        },
-        {
-            "name": "Top Company 5 - IFRS TNFD TCFD",
-            "region": "Australia",
-            "sector": "Mining"
-        },
-        {
-            "name": "Top Company 6 - APRA_CPG_229 TNFD",
-            "region": "Japan,New Zealand,China",
-            "sector": "Education"
-        },
-        {
-            "name": "Top Company 7 - TCFD",
-            "region": "New Zealand",
-            "sector": "Health"
-        },
-        {
-            "name": "Top Company 8 - TCFD",
-            "region": "New Zealand,China",
-            "sector": "Health,Energy,Hospitality,Legal,Agriculture"
-        },
-        {
-            "name": "Top Company 9 - TNFD IFRS",
-            "region": "US",
-            "sector": "Agriculture"
-        },
-        {
-            "name": "Top Company 10 - IFRS TNFD TCFD",
-            "region": "Australia",
-            "sector": "Mining"
+
+    const [companies, setCompanies ] = useState([])
+    const location = useLocation()
+
+    useEffect(() => {
+        // If there's any state passed in the location object, use that
+        if (location.state && location.state.companyList) {
+            setCompanies(location.state.companyList || []);
         }
-    ])
+    }, [location]);
+
+    console.log("companies starts ")
+    console.log(companies)
 
     // for company checkbox
     const [selectedCompanies, setSelectedCompanies] = useState([])
