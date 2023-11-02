@@ -3,7 +3,7 @@ import { Box, Checkbox, FormControlLabel, Typography, Button } from '@mui/materi
 import { styled } from '@mui/system'
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import { useParams } from 'react-router-dom';
-
+import { useLocation } from 'react-router-dom';
 // components
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -13,7 +13,7 @@ import Category from '../components/MetricsBox'
 // css files 
 import "../css/Site.css"
 import "../css/pages/Analysis/Analysis.css"
-import { useLocation, } from 'react-router-dom';
+
 
 
         // dummy company list 
@@ -83,10 +83,7 @@ function Analysis () {
         if (location.state && location.state.companyList) {
             setCompanies(location.state.companyList || []);
         }
-    }, [location]);
-
-    console.log("companies starts ")
-    console.log(companies)
+    }, [location])
 
     // for company checkbox
     const [selectedCompanies, setSelectedCompanies] = useState([])

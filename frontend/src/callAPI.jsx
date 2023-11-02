@@ -9,7 +9,7 @@ export default async function callAPI (method, path, token, payload) {
     Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(payload),
-};
+}
 if (method === 'GET') {
     delete options.body;
 }
