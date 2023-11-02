@@ -20,6 +20,7 @@ class AuthUserTab(BaseModel):
     create_at = p.BigIntegerField(default=timestamp)  # 账号创建的时间戳，默认值为当前时间戳，timestamp是个函数不是固定值
     last_login_at = p.BigIntegerField(null=True)  # 最后一次登录时间戳，如果没登陆过就是null
     is_admin = p.BooleanField(default=False) # 用户身份 默认为false
+    current_framework = p.CharField(default="None") # 记录用户正在使用的 default framework
 
 
 database.create_tables([AuthUserTab])

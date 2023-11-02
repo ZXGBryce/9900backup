@@ -3,12 +3,15 @@
 Created on Tue Oct  3 21:20:53 2023
 
 @author: Samyz
+
+Modified by Xiangeng Zhao on Mon Oct 30
 """
 import pandas as pd
 import random
 import datetime
 import numpy as np
 import sys
+import os
 
 def generate_csv_data(top_companies_count=5000,mid_companies_count=5000,bottom_companies_count=5000):
     #esg_df = create_esg_df()
@@ -39,62 +42,43 @@ def generate_esg_frameworks():
                        "Increased stakeholder concern or negative stakeholder feedback":"SG",
                        "Increased severity of extreme weather events such as cyclones and floods":"E",
                        "Rising mean temperatures":"E"
-                       }    
-    TNFD_INDICATORS = {"Proportion of annual revenue exposed to acute physical risks": "G",
-                       "Total annual revenue exposed to acute physical risks": "G",
-                       "Proportion of annual revenue exposed to chronic physical risks": "G",
-                       "Total annual revenue exposed to chronic physical risks": "G",
-                       "Proportion of annual revenue exposed to policy and legal transition risks": "SG",
-                       "Total annual revenue exposed to policy and legal transition risks": "SG",
-                       "Proportion of annual revenue exposed to market transition risks": "SG",
-                       "Total annual revenue exposed to market transition risks": "SG",
-                       "Proportion of annual revenue exposed to technology transition risks": "SG",
-                       "Total annual revenue exposed to technology transition risks": "SG",
-                       "Proportion of annual revenue exposed to reputation transition risks": "SG",
-                       "Total annual revenue exposed to reputation transition risks": "SG",
-                       "Proportion of assets exposed to nature-related physical risks": "EG",
-                       "Value of assets exposed to nature-related physical risks": "EG",
-                       "Proportion of assets exposed to nature-related transition risks": "ESG",
-                       "Value of assets exposed to nature-related transition risks": "ESG"
                        }
-    APRA_CPG_229_INDICATORS = {"Policy changes":"SG",
-                               "Technological innovation": "G",
-                               "Social adaptation":"S",
-                               "Changing climate conditions":"E",
-                               "Extreme weather events":"E",
-                               "Stakeholder litigation vulnerability":"SG"
-                               }
+    TNFD_INDICATORS = {
+        "Proportion and total annual revenue exposed to transition risks": "S",
+        "Proportion and value of assets exposed to transition risks.": "S",
+        "Proportion and value of assets exposed to risks due to technological changes.": "E",
+        "Proportion and total annual revenue affected by negative stakeholder feedback.": "S",
+        "Proportion and total annual revenue exposed to acute physical risks.": "E",
+        "Proportion and value of assets exposed to chronic physical risks.": "E",
+        "Proportion and value of assets exposed to risks of ecosystem collapse.": "E",
+        "Cumulative risk exposure due to aggregated minor risk events.": "G",
+        "Proportion and value of assets exposed to contagion risks.": "G"
+    }
+
+    APRA_CPG_229_INDICATORS = {
+        "Policy changes": "SG",
+        "Technological innovation": "G",
+        "Social adaptation": "S",
+        "Changing climate conditions": "E",
+        "Extreme weather events": "E",
+        "Stakeholder litigation risks": "SG",
+        "Regulatory enforcement risks": "G"
+    }
+
     # The first 4 indicators in Ming's document were clipped short at
     # valunerable to, so I guessed that they were vulnerable to transition risks
-    IFRS_INDICATORS = {"Amount of assets vulnerable to regulatory transition risks":"G",
-                       "Percentage of assets vulnerable to regulatory transition risks":"G",
-                       "Amount of business activities vulnerable to regulatory transition risks":"G",
-                       "Percentage of business activities vulnerable to regulatory transition risks":"G",
-                       "Amount of assets vulnerable to technological transition risks":"G",
-                       "Percentage of assets vulnerable to technological transition risks":"G",
-                       "Amount of business activities vulnerable to technological transition risks":"G",
-                       "Percentage of business activities vulnerable to technological transition risks":"G",
-                       "Amount of assets vulnerable to market transition risks":"G",
-                       "Percentage of assets vulnerable to market transition risks":"G",
-                       "Amount of business activities vulnerable to market transition risks":"G",
-                       "Percentage of business activities vulnerable to market transition risks":"G",
-                       "Amount of assets vulnerable to legal transition risks":"G",
-                       "Percentage of assets vulnerable to legal transition risks":"G",
-                       "Amount of business activities vulnerable to legal transition risks":"G",
-                       "Percentage of business activities vulnerable to legal transition risks":"G",
-                       "Amount of assets vulnerable to reputation transition risks":"G",
-                       "Percentage of assets vulnerable to reputation transition risks":"G",
-                       "Amount of business activities vulnerable to reputation transition risks":"G",
-                       "Percentage of business activities vulnerable to reputation transition risks":"G",
-                       "Amount of assets vulnerable to acute physical risks":"EG",
-                       "Percentage of assets vulnerable to acute physical risks":"EG",
-                       "Amount of business activities vulnerable to acute physical risks":"EG",
-                       "Percentage of business activities vulnerable to acute physical risks":"EG",
-                       "Amount of assets vulnerable to chronic physical risks":"EG",
-                       "Percentage of assets vulnerable to chronic physical risks":"EG",
-                       "Amount of business activities vulnerable to chronic physical risks":"EG",
-                       "Percentage of business activities vulnerable to chronic physical risks":"EG"
-                       }
+    IFRS_INDICATORS = {
+        "The amount and percentage of assets or business activities vulnerable to Regulatory": "G",
+        "The amount and percentage of assets or business activities vulnerable to Technological": "G",
+        "The amount and percentage of assets or business activities vulnerable to Market": "G",
+        "The amount and percentage of assets or business activities vulnerable to legal or reputational risks": "G",
+        "The amount and percentage of assets or business activities vulnerable to acute physical risks": "E",
+        "The amount and percentage of assets or business activities vulnerable to chronic physical risks": "E",
+        "Internal carbon price risks": "G",
+        "Remuneration risks": "G"
+    }
+
+
     ESG_FRAMEWORKS_DICT = {"TCFD":TCFD_INDICATORS, "TNFD": TNFD_INDICATORS, 
                            "APRA_CPG_229":APRA_CPG_229_INDICATORS, 
                            "IFRS":IFRS_INDICATORS}
@@ -147,7 +131,7 @@ def generate_company_data(company_number, company_tier):
             company_info_dict, framework, framework_indicators)
         # Using addition rather than append here because I want to have 
         # the elements from both lists in a single list, rather than appending 
-        # a list to a list and have a list of frame work lists. 
+        # a list to a list and have a list of framework lists.
         complete_company_dataset_list = complete_company_dataset_list + company_framework_data_list
     # The complete_company_dataset_list here is just a list of dictionaries, 
     # where each dictionary represents a single datapoint.
@@ -207,12 +191,12 @@ def generate_company_framework_data(company_info_dict, framework,
                              'indicator_name': indicator,
                              'indicator_value': get_indicator_value_from_distribution(
                                  company_info_dict['modifier']),
-                             'sasb_materiality': random.choice(['Yes','No']),
+                             'sasb_materiality': random.choice([1,0]),
                              'region': company_info_dict['region'],
                              'sector': company_info_dict['sector'],
-                             'environment': "Yes" if "E" in pillars else "No",
-                             'social': "Yes" if "S" in pillars else "No",
-                             'governance': "Yes" if "G" in pillars else "No",
+                             'environment': 1 if "E" in pillars else 0,
+                             'social': 1 if "S" in pillars else 0,
+                             'governance': 1 if "G" in pillars else 0,
                              'timestamp': timestamp,
                              'data_source': "Synthetic data for " + company_info_dict['company_name']}
         company_framework_dataset_list.append(company_datapoint)    
@@ -249,9 +233,12 @@ def create_dataframe_from_data(data):
     esg_df = pd.DataFrame.from_dict(data)
     return esg_df
 
+
 def export_dataframe_to_csv(esg_df):
-    esg_df.to_csv('C:\\Users\\Samyz\\OneDrive\\Desktop\\Education\\COMP9900_Information_Technology_Project\\software\\synthetic_esg_data.csv',
-                  index=False)
+    current_directory = os.path.dirname(os.path.realpath(__file__))
+    file_path = os.path.join(current_directory, 'synthetic_esg_data.csv')
+    esg_df.to_csv(file_path, index=False)
+
     
 if __name__ == "__main__":
     top_companies_count = int(input("Enter number of top companies:"))

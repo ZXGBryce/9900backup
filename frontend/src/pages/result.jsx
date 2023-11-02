@@ -4,23 +4,10 @@ import SaveResultModal from '../components/saveResultModal';
 import React, { useState, useEffect } from 'react';
 import { Button, TextField, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 // import Loading from './Loading';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const Result = (props) => {
     const [isModalOpen, setModalOpen] = useState(false);
-  
-    // // Example of a 1 second Loading screen with a 0.1 second delay
-    // const [loading, setLoading] = useState(false);
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setLoading(true);
-    //         setTimeout(() => {
-    //             setLoading(false);
-    //         }, 1000); // 1 seconds loading
-    //     }, 100); // 0.1 seconds delay
-    //   }, []);
-    // if (loading) {
-    //     return <Loading />;
-    // }
     
     const handleOpenModal = () => {
       setModalOpen(true);
@@ -34,8 +21,18 @@ const Result = (props) => {
         // e.preventDefault();
         console.log('Submit')
     };
-
-
+    
+    // Random data for Transition Risk Analysis
+    const newData = []
+    for (let i = 2012; i<2022;i++) {
+        newData.push({
+            Year: i+1,
+            Technology_Risk:(Math.random() * 20 + 20). toFixed(2), 
+            Market_Risk: (Math.random() * 10 + 10). toFixed (2)
+        }) 
+    }
+    console.log(newData)
+    
     return (
         <div className='site-struct'>
             <Header/>
