@@ -72,8 +72,10 @@ def sign_in(request: SignInRequest) -> Response[SignInResponse]:
     # 生成 JWT
     jwt_token = dep.jwt_manager.generate_token(user)
 
+    message = "admin" if user.is_admin else "regular"
+
     # 以下可以是生成和返回JWT token的逻辑，这里为简化示例，我们只返回一个静态token
-    return Response(data=SignInResponse(token=jwt_token), code=Code.OK)
+    return Response(data=SignInResponse(token=jwt_token), code=Code.OK, message=message)
 
 
 
