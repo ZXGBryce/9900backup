@@ -22,16 +22,10 @@ def userprofile():
 
     # Get username from jwt token
     jwt_token = request.headers.get('Authorization').split(' ')[1]
-    if not jwt_token:
-        return Response(data={"message": "JWT token missing."}, code=Code.REQ_JSON_INVALID).dict()
-
     payload = dep.jwt_manager.decode_token(jwt_token)
-    if not payload:
-        return Response(data={"message": "JWT token invalid or expired."}, code=Code.REQ_JSON_INVALID).dict()
 
     username = payload.get("username")
-    user = dep.data_access.get_user_by_username(payload.get("username"))
-    email = user.email
+    email = payload.get("email")
 
     # Fetch the relevant frameworks for the given username from the CusMetrics table
     query = CusMetrics.select(CusMetrics.framework).where(CusMetrics.framework.contains(f"_{username}_")).distinct()

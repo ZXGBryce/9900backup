@@ -31,7 +31,7 @@ DependencyRegistry.init_jwt_manager() # 初始化JWT Manager
 # 初始化结束
 
 def run_debug_server():
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(debug=True)
 
 
 if __name__ == '__main__':
