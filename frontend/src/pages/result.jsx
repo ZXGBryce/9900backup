@@ -3,11 +3,21 @@ import Footer from '../components/Footer';
 import SaveResultModal from '../components/saveResultModal';
 import React, { useState, useEffect } from 'react';
 import { Button, TextField, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 // import Loading from './Loading';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LineChart, Line, CartesianGrid, ResponsiveContainer } from 'recharts';
 
 const Result = (props) => {
     const [isModalOpen, setModalOpen] = useState(false);
+    const [chartWidth,setCharWidth] = useState(window.innerWidth * 0.5);
+    const [chartHeight,setCharHeight] = useState(window.innerHeight * 0.5);
+    //transfer esg scores
+    const [result, setResult] = useState({})
+    const location = useLocation()
+    useEffect(() => {
+        setResult(location.state || []);
+    }, [location]);
+    console.log('result',result)
     
     const handleOpenModal = () => {
       setModalOpen(true);
@@ -22,23 +32,90 @@ const Result = (props) => {
         console.log('Submit')
     };
     
-    // Random data for Transition Risk Analysis
-    const newData = []
-    for (let i = 2012; i<2022;i++) {
-        newData.push({
-            Year: i+1,
-            Technology_Risk:(Math.random() * 20 + 20). toFixed(2), 
-            Market_Risk: (Math.random() * 10 + 10). toFixed (2)
-        }) 
-    }
-    console.log(newData)
+    useEffect(() => {
+        setCharWidth(window.innerWidth * 0.4);
+        setCharHeight(window.innerHeight * 0.4);
+    }, []);
     
+    console.log('result', result);
+
+    
+    const getRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+    
+    const transformData = (result) => {
+        // Extract all unique risks
+        let allRisks = [];
+        for (let company in result.data.ESGscore) {
+            allRisks.push(...Object.keys(result.data.ESGscore[company].categories));
+        }
+        // remove any duplicates
+        const uniqueRisks = [...new Set(allRisks)]; 
+        
+        // Transform data for each risk
+        const riskData = uniqueRisks.map(risk => {
+            let dataItem = { name: risk };
+            for (let company in result.data.ESGscore) {
+                dataItem[company] = result.data.ESGscore[company].categories[risk] || 0;
+            }
+            return dataItem;
+        });
+    
+        // Add total data
+        const totalData = {
+            name: "Total",
+            ...Object.entries(result.data.ESGscore).reduce((acc, [company, scores]) => {
+                acc[company] = scores.total;
+                return acc;
+            }, {})
+        };
+        
+        return [...riskData, totalData];
+    }
+    
+    const [transformedData, setTransformedData] = useState([]);
+    useEffect(() => {
+        if (result.data && result.data.ESGscore) {
+            const newData = transformData(result);
+            setTransformedData(newData);
+        }
+    }, [result]);
+    
+    console.log('transformedData', transformedData);
+
+
+    
+
+
     return (
         <div className='site-struct'>
             <Header/>
             <div className='main-container'>
-                <div className='container-block'>
-                    <h1>Analysis Result</h1>
+                <div className='container-block'  style={{alignContent: 'center'}}>
+                    <h2 style={{textAlign:'center'}}>Analysis Result</h2>
+                    <br /><br />
+                    <div style={{width: '100%', height: '100%', overflow: 'hidden', display:'flex', alignContent: 'center'}}>
+                        {transformedData.length > 0 && transformedData[0] && (
+                            <BarChart width={chartWidth} height={chartHeight} data={transformedData} margin={{ top: 20, right: 30, bottom: 5 }}>
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                {Object.keys(transformedData[0]).filter(key => key !== 'name').map(company => (
+                                    <Bar key={company} dataKey={company} name={company} fill={getRandomColor()} />
+                                ))}
+                            </BarChart>
+                        )}
+
+                    </div>
+
+
                 </div>
                 {/* <Button style={{ marginTop:'10px', backgroundColor:'white'}} onClick={() => console.log('Save Result')}>Save Result</Button> */}
                 <Button variant="contained" color="primary" onClick={handleOpenModal}  style={{ marginTop:'10px'}}>Save Result</Button>

@@ -52,7 +52,7 @@ function App() {
         <Route path='/admin' element={<Admin token={token} />} />
         <Route path='/analysis/:frameworkId' element={<Analysis token={token} />} />
         <Route path='/analysis/:frameworkId/metrics' element={<Metrics token={token} />} />
-        <Route path='/analysis/:frameworkId/:analysisId/result' element={<Result token={token} />} />
+        <Route path='/analysis/:frameworkId/result' element={<Result token={token} />} />
         <Route path='/profile' element={<Profile token={token} />} />
         <Route path='/analysisHistory' element={<AnalysisHistory token={token} />} />
       </Routes>
