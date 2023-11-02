@@ -17,7 +17,8 @@ function Header() {
     const navigate = useCustomNavigate();
     const token = localStorage.getItem('token')
     const usernameInitial = localStorage.getItem('username_or_email')[0]
-
+    const isRegularStr = localStorage.getItem('regular')
+    
     // open close drawer
     function toggleDrawer() {
         if (isMobileView) {
@@ -83,7 +84,7 @@ function Header() {
                 </div>
                 
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Button variant="contained" color="primary" style={{ marginRight: '20px' }} onClick={handleAdminOnClick}>
+                    <Button variant="contained" color="primary" style={{ display: isRegularStr === 'true' ? 'none' : 'flex', marginRight: '20px' }} onClick={handleAdminOnClick}>
                         <SupervisorAccountIcon/>
                         <div className='btn-text'>
                             Admin

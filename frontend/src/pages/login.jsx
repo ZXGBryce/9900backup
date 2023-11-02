@@ -49,6 +49,7 @@ const Login = (props) => {
         props.setToken(data.data.token);
         localStorage.setItem('token', data.data.token);
         localStorage.setItem('username_or_email',  username_or_email);
+        localStorage.setItem('regular', data.message==='regular');
         navigate('/dashboard');
       }
     }

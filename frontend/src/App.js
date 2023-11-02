@@ -47,14 +47,14 @@ function App() {
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/reset" element={<Reset />} />
-        <Route path="/dashboard" element={<Dashboard token />} />
-        <Route path='/analysis' element={<NewAnalysis token />} />
-        <Route path='/admin' element={<Admin token />} />
-        <Route path='/analysis/:frameworkId' element={<Analysis token />} />
-        <Route path='/analysis/:frameworkId/metrics' element={<Metrics token />} />
-        <Route path='/analysis/:frameworkId/:analysisId/result' element={<Result token />} />
-        <Route path='/profile' element={<Profile token />} />
-        <Route path='/analysisHistory' element={<AnalysisHistory token />} />
+        <Route path="/dashboard" element={<Dashboard token={token} />} />
+        <Route path='/analysis' element={<NewAnalysis token={token} />} />
+        <Route path='/admin' element={<Admin token={token} />} />
+        <Route path='/analysis/:frameworkId' element={<Analysis token={token} />} />
+        <Route path='/analysis/:frameworkId/metrics' element={<Metrics token={token} />} />
+        <Route path='/analysis/:frameworkId/:analysisId/result' element={<Result token={token} />} />
+        <Route path='/profile' element={<Profile token={token} />} />
+        <Route path='/analysisHistory' element={<AnalysisHistory token={token} />} />
       </Routes>
     </>
   );

@@ -6,14 +6,53 @@ import '../css/Profile.css';
 
 const Profile = (props) => {
     const username_or_email = localStorage.getItem('username_or_email');
+    const [cusframeworks, setCusframeworks] = useState([]);
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const GetProfileAction= async () => {
+        const res = await fetch('https://glitch9900f15a.au.ngrok.io/profile/userprofile', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${props.token}`
+            }
+        });
+        const data = await res.json();
+        if (data.error) {
+            alert(data.error);
+        } else {
+            setCusframeworks(data.data.cusframeworks);
+            setEmail(data.data.email);
+            setUsername(data.data.username);
+        }
+    };
+    
+    React.useEffect(() => {
+        GetProfileAction();
+    }, []);
+    
+    console.log(cusframeworks, email, username);
+    
     return (
         <div className='site-struct'>
             <Header/>
             <div className='main-container'>
                 <div className='container-block'>
                     <h2 style={{textAlign:'center'}}>Profile</h2>
-                    <div className='profile-container'>
-                        <h3 style={{textAlign: 'center'}}>Welcome to Profile Page, <span className='text-gradient'>{username_or_email}</span>!</h3>
+                    <div className='profile-container' style={{display:'flex', flexDirection: 'column'}}>
+                        {/* <h3 style={{textAlign: 'center'}}>Welcome to Profile Page, <span className='text-gradient'>{username_or_email}</span>!</h3> */}
+                        <div class="row align-items-center gx-5" style={{width:'100%'}}>
+                            <div class="col text-center text-lg-start mb-4 mb-lg-0" style={{width:'100%'}}>
+                              <div class="bg-light p-4 rounded-4" style={{display:'flex'}}>
+                                <div class="text-primary fw-bolder mb-2">User Name:</div>
+                                <div class="small text-muted" style={{marginLeft: '10%'}}>{username}</div>
+                              </div>
+                              <div class="bg-light p-4 rounded-4" style={{display:'flex', marginTop: '2%'}}>
+                                <div class="text-primary fw-bolder mb-2">User Email:</div>
+                                <div class="small text-muted" style={{marginLeft: '10%'}}>{email}</div>
+                              </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
