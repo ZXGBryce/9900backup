@@ -13,7 +13,6 @@ function CompanyBox ({ companyList, onCompanySelect, frameworkId }) {
     const [checkedCompanies, setCheckedCompanies] = useState([])
     const navigate = useNavigate();
     const token = localStorage.getItem('token')
-    
 
     const handleToggle = (company, isChecked) => {
         if (isChecked) {
@@ -29,19 +28,14 @@ function CompanyBox ({ companyList, onCompanySelect, frameworkId }) {
             alert('Please select at least one company.');
         } else {
             const payload = {
-                "companyList" : checkedCompanies
+                "company_list" : checkedCompanies
             }
             try {
                 const response = await callAPI('POST', 'analysis/framework', token, payload)
                 const data = response.data
-                console.log("")
-                console.log(response)
-
-                navigate(`/analysis/${frameworkId}/metrics`, { state: { data } })
-
-                console.log(" analysis company metrics ")
-                console.log(data)
-
+                navigate(`/analysis/${frameworkId}/metrics`, { state: { categories : data.__root__ } })
+                console.log("data information")
+                console.log(data.__root__)
             } catch (error) {
                 console.error('Failed to fetch companies:', error);
             }
