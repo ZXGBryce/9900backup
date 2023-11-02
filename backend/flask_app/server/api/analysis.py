@@ -130,6 +130,7 @@ class CategoryScores(BaseModel):
 class CalculationResponse(BaseModel):
     ESGscore: Dict[str, CategoryScores]
 
+
 @analysis_blueprint.post("/calculation")
 @handle_with_pydantic(CalculationRequest)
 def calculation(calculation_request: CalculationRequest) -> Response[CalculationResponse]:

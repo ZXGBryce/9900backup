@@ -14,6 +14,9 @@ def import_csv_to_model(csv_file_path, model_class):
         for index, row in df.iterrows():
             model_class.create(**row.to_dict())
 
+def delete_existing_data(model_class):
+    model_class.delete().execute()
+
 if __name__ == "__main__":
     """
     csv_path = input("Enter the path to your CSV file: ")
@@ -26,5 +29,8 @@ if __name__ == "__main__":
     else:
         print("Invalid model choice.")
     """
+
+    # delete corresponding table data
+    # delete_existing_data(DataSetTab)
     import_csv_to_model("/Users/xiangengzhao/capstone-project-9900f15aglitch/backend/Metrics_weights_modified_v2.csv", RiskIndicator)
     import_csv_to_model("/Users/xiangengzhao/capstone-project-9900f15aglitch/backend/synthetic_esg_data.csv", DataSetTab)
