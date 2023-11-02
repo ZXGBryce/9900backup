@@ -46,3 +46,32 @@ Created and implemented agenda for Team Meeting
 Created script for generating the synthetic dataset required for our project.
 Monitoring team progress and commitments for sprint 1. 
 
+Week 5: 
+Implementing updates to the input company data format for our project
+Providing regular feedback on the UI and functions of the UI
+Attempting to establish cut-off times for the team prior to our demo presentation
+Logging issues that we had in the first sprint to be added to the retrospective. 
+Planning Demo script
+Narrative part of the demo for Rachid
+Planning and leading communication for preferred demo approach for Ming
+Narrating Demo for Ming 
+Planning user stories for sprint 6
+Leading retrospective meeting and making notes
+Writing majority of and submitting the retrospective document 
+
+
+Week 6:
+Scheduling meetings
+Creating more questions for Ming and communicating these questions to Ming, along with sharing our Demo for feedback
+Planning out tasks for team members
+Planning interface with Ray
+Meeting with Ray to plan Sprint 2
+Team mutually agreeing to use week 6 to catch up on other subjects and return to working on the COMP9900 project in week 7
+
+
+Week 7:
+Scheduling meetings
+Planning out back-end implementation of new analysis page with Dongxuan and Xiangeng
+Planning out the interaction between front end and back end with team so that tasks could be started. 
+Planning out tasks for the week for front and back end teams.
+Learning more of the backend infrastructure so I can effectively implement my parts of the back-end

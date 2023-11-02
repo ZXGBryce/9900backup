@@ -35,3 +35,26 @@ Raised critical questions regarding data sources and the workings of the ESG fra
 Designed the website's user registration and authentication process.
 
 Finely formatted and optimized the entire proposal.
+
+week4
+
+Essentially completed the design of the entire framework.
+
+Completed some of the backend interfaces required for sprint 1.
+
+Implemented the backend database management system.
+
+Communicated with front-end designers about interface docking.
+
+week5
+Essentially completed the design of all interfaces required for sprint 1.
+
+Added a new database table.
+
+Integrated with the front-end code and conducted detailed testing.
+
+week6
+
+Participated in discussions on the design of sprint 2's code.
+
+Summarized feedback from client's demo 1.

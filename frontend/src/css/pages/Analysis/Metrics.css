@@ -1,0 +1,25 @@
+
+
+
+
+@media (max-width: 750px) {
+    .company-block {
+        overflow-x: auto; 
+        min-width: 500px; 
+        width: 100%; 
+    }
+}
+
+
+.textfield-custom {
+    max-width: 150px;
+    height: 40px;
+    padding: 5px;
+}
+
+
+@media (max-width: 750px) {
+    .textfield-custom {
+    max-width: 100px;
+    }
+}

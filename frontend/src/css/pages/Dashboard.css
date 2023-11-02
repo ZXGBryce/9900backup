@@ -1,0 +1,25 @@
+.main-container {
+    justify-content: center;
+    flex: 1;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f5f6ff;
+}
+
+.dashboard-container-block {
+    flex: 1;
+    background-color: white;
+    border-radius: 10px; 
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* max-height: 80vh; 
+    overflow-y: auto; /* scrollable. */
+    margin-bottom: 3em !important;
+    margin-left: 2em !important;
+}
+
+.news-bloclk{
+    margin-top: 5%;
+}

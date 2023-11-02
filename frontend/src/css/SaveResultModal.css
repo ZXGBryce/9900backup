@@ -1,0 +1,20 @@
+.modalBaseStyle {
+    overflow-y: scroll;
+}
+
+.modalBaseStyle::-webkit-scrollbar {
+    width: 15px;
+}
+
+.modalBaseStyle::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.modalBaseStyle::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.modalBaseStyle::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
