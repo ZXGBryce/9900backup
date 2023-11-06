@@ -2,5 +2,4 @@
 **/.DS_Store
 .idea
 __pycache__
-flask_app.db
 install_dependencies.sh
