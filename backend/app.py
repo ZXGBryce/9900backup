@@ -10,7 +10,6 @@ from flask_app.server.api.analysis import analysis_blueprint
 from flask_app.server.api.profile import profile_blueprint
 from flask_app.configs.startup_config import config
 from flask_cors import CORS
-import flask_app.server.utils.import_data
 
 # 实例化flask app
 app = Flask(__name__)
