@@ -1,0 +1,16 @@
+{
+  "db": {
+    "db_name": "flask_app.db"
+  },
+  "mail": {
+    "MAIL_SERVER": "smtp.glitch.com",
+    "MAIL_PORT": 587,
+    "MAIL_USERNAME": "9900f15aglitch@gmail.com",
+    "MAIL_PASSWORD": "ajis vdqp zctu tchi",
+    "MAIL_USE_TLS": true,
+    "MAIL_USE_SSL": false
+  },
+  "jwt": {
+    "SECRET_KEY": "ASDFGHJKL"
+  }
+}
