@@ -31,6 +31,6 @@ if __name__ == "__main__":
     """
 
     # delete corresponding table data
-    # delete_existing_data(DataSetTab)
-    import_csv_to_model("/Users/xiangengzhao/capstone-project-9900f15aglitch/backend/Metrics_weights_modified_v2.csv", RiskIndicator)
-    import_csv_to_model("/Users/xiangengzhao/capstone-project-9900f15aglitch/backend/synthetic_esg_data.csv", DataSetTab)
+    delete_existing_data(DataSetTab)
+    # import_csv_to_model("/Users/xiangengzhao/capstone-project-9900f15aglitch/backend/Metrics_weights_modified_v2.csv", RiskIndicator)
+    import_csv_to_model("/Users/xiangengzhao/9900backup/backend/synthetic_esg_data_v2.csv", DataSetTab)

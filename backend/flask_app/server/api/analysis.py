@@ -77,7 +77,7 @@ def framework(framework_request: FrameworkDataRequest) -> Response[FrameworkData
     # 根据 request 的 company list 和 framework_name 来调取 datasettab 和 RiskIndicator 两个表的数据
     dataset_records = DataSetTab.select().where(
         (DataSetTab.framework == framework_name) &
-        (DataSetTab.company_name.in_(framework_request.company_list))
+        (DataSetTab.company_name.in_(framework_request.company_list)) & (DataSetTab.timestamp == "2019/01/01")
     )
 
     risk_indicator_records = RiskIndicator.select().where(
