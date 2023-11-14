@@ -17,6 +17,7 @@ class Code(int, Enum):
     PERMISSION_DENY = 40009
     NO_FILE_PROVIDED = 40010
     TOKEN_EXPIRY = 40011
+    EMPTY_REQUEST = 40012
 
 
 Response_T = TypeVar("Response_T", bound=BaseModel)

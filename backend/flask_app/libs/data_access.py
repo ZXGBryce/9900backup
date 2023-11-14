@@ -44,6 +44,11 @@ class DataAccess:
         user.jwt_version += 1
         user.save()
 
+    def update_user_verification_code(self, user: AuthUserTab, code: str):
+        """" update user verification code """
+        user.verification_code = code
+        user.save()
+
     def update_user_framework(self, user: AuthUserTab, framework: str):
         """ record the framework the user is using """
         user.current_framework = framework
@@ -71,9 +76,7 @@ class DataAccess:
 
         return company_list
 
-    def store_cus_framework(self, calculation_request, timestamp, username):
-
-        """ Read data from CalculationRequest and store them"""
+    def store_cus_framework(self, calculation_request,timestamp, username):
 
         for framework_name, framework_data in calculation_request.__root__.items():
             modified_framework_name = f"{framework_name}_{username}_{timestamp}"
@@ -81,19 +84,54 @@ class DataAccess:
                 for category_name, category_data in company_data.__root__.items():
                     for sub_category_name, sub_category_data in category_data.__root__.items():
                         for indicator_name, indicator_data in sub_category_data.indicators.items():
-                            CusMetrics.create(
-                                framework=modified_framework_name,
-                                company=company_name,
-                                indicator_name=indicator_name,
-                                indicator_value=float(indicator_data.value),
-                                indicator_weight=float(indicator_data.indicator_weight),
-                                sub_category=sub_category_name,
-                                sub_category_weight=sub_category_data.sub_category_weight,
-                                category=category_name,
-                                environment=indicator_data.environment,
-                                social=indicator_data.social,
-                                government=indicator_data.government
-                            )
+
+                            # 检查指标是否存在于 DataSetTab
+                            existing_indicator = DataSetTab.select().where(
+                                (DataSetTab.company_name == company_name) &
+                                (DataSetTab.framework == framework_name) &
+                                (DataSetTab.indicator_name == indicator_name)
+                            ).exists()
+
+                            if existing_indicator:
+                                # 对于已存在的指标，提取并存储五个年份的值
+                                for year in range(2019, 2024):
+                                    dataset_record = DataSetTab.get(
+                                        (DataSetTab.company_name == company_name) &
+                                        (DataSetTab.framework == framework_name) &
+                                        (DataSetTab.indicator_name == indicator_name) &
+                                        (DataSetTab.timestamp == f"{year}/01/01")
+                                    )
+                                    CusMetrics.create(
+                                        framework=modified_framework_name,
+                                        company=company_name,
+                                        indicator_name=indicator_name,
+                                        indicator_value=dataset_record.indicator_value,
+                                        indicator_weight=float(indicator_data.indicator_weight),
+                                        sub_category=sub_category_name,
+                                        sub_category_weight=sub_category_data.sub_category_weight,
+                                        category=category_name,
+                                        environment=indicator_data.environment,
+                                        social=indicator_data.social,
+                                        government=indicator_data.government,
+                                        timestamp=f"{year}/01/01"
+                                    )
+                            else:
+                                # 对于新指标，使用相同的值和权重创建五个年份的记录
+                                for year in range(2019, 2024):
+                                    CusMetrics.create(
+                                        framework=modified_framework_name,
+                                        company=company_name,
+                                        indicator_name=indicator_name,
+                                        indicator_value=float(indicator_data.value),
+                                        indicator_weight=float(indicator_data.indicator_weight),
+                                        sub_category=sub_category_name,
+                                        sub_category_weight=sub_category_data.sub_category_weight,
+                                        category=category_name,
+                                        environment=indicator_data.environment,
+                                        social=indicator_data.social,
+                                        government=indicator_data.government,
+                                        timestamp=f"{year}/01/01"
+                                    )
 
     def metrics_calculation(self, calculation_request, timestamp, username):
 
@@ -101,23 +139,26 @@ class DataAccess:
         for framework_name, framework_data in calculation_request.__root__.items():
             modified_framework_name = f"{framework_name}_{username}_{timestamp}"
             for company_name, _ in framework_data.__root__.items():
-                # Retrieve data from CusMetrics for the current framework and company
-                records = CusMetrics.select().where(
-                    (CusMetrics.framework == modified_framework_name) &
-                    (CusMetrics.company == company_name)
-                )
+                ESG_score[company_name] = {}
+                for year in range(2019, 2024):
+                    # Retrieve data from CusMetrics for the current framework, company, and year
+                    records = CusMetrics.select().where(
+                        (CusMetrics.framework == modified_framework_name) &
+                        (CusMetrics.company == company_name) &
+                        (CusMetrics.timestamp == f"{year}/01/01")
+                    )
 
-                score = 0.0
-                category_scores = {}
-                # Group by sub_category
-                sub_category_data = {}
+                    score = 0.0
+                    category_scores = {}
+                    # Group by sub_category
+                    sub_category_data = {}
 
-                for record in records:
-                    if record.sub_category not in sub_category_data:
-                        sub_category_data[record.sub_category] = []
-                    sub_category_data[record.sub_category].append(record)
+                    for record in records:
+                        if record.sub_category not in sub_category_data:
+                            sub_category_data[record.sub_category] = []
+                        sub_category_data[record.sub_category].append(record)
 
-                    # Calculate ESG score
+                    # Calculate ESG score for each sub_category
                     for sub_category, indicators in sub_category_data.items():
                         sub_category_total = 0.0
                         sub_category_weight = indicators[0].sub_category_weight
@@ -129,10 +170,10 @@ class DataAccess:
                         category_scores[category_name] += sub_category_total * sub_category_weight
                         score += sub_category_total * sub_category_weight
 
-                    # Update the ESG_score dictionary
-                    ESG_score[f"{company_name}"] = {
+                    # Update the ESG_score dictionary for the year
+                    ESG_score[company_name][year] = {
                         "total": score,
-                        "categories": category_scores
+                        "scores": category_scores
                     }
 
         return ESG_score

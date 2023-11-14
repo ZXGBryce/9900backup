@@ -123,12 +123,13 @@ def framework(framework_request: FrameworkDataRequest) -> Response[FrameworkData
 class CalculationRequest(BaseModel):
     __root__: Dict[str, Framework]
 
-class CategoryScores(BaseModel):
+
+class YearlyScores(BaseModel):
     total: float
-    categories: Dict[str, float]
+    scores: Dict[str, float]
 
 class CalculationResponse(BaseModel):
-    ESGscore: Dict[str, CategoryScores]
+    ESGscore: Dict[str, Dict[int, YearlyScores]]
 
 
 @analysis_blueprint.post("/calculation")
@@ -141,6 +142,20 @@ def calculation(calculation_request: CalculationRequest) -> Response[Calculation
 
     # Get timestamp
     timestamp = int(time.time())
+
+
+    # Check for empty indicators
+    for framework in calculation_request.__root__.values():
+        for company in framework.__root__.values():
+            trigger = 0
+            for category in company.__root__.values():
+                for subcategory in category.__root__.values():
+                    if subcategory.indicators:
+                        trigger = 1
+            if trigger == 0:
+                return Response(code=Code.EMPTY_REQUEST, message=f"No indicators present")
+
+
 
     dep.data_access.store_cus_framework(calculation_request, timestamp, username)
 
@@ -183,7 +198,7 @@ def resetframework(resetframework_request: ResetFrameworkRequest) -> Response[Re
     framework = resetframework_request.framework_name
 
     # 根据 framework 从 CusMetrics 表中抓取数据
-    metrics_records = CusMetrics.select().where(CusMetrics.framework == framework)
+    metrics_records = CusMetrics.select().where((CusMetrics.framework == framework) & (CusMetrics.timestamp == "2019/01/01"))
 
     # 开始构建 FrameworkDataResponse 结构
     metrics = {framework: {}}

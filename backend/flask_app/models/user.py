@@ -21,6 +21,7 @@ class AuthUserTab(BaseModel):
     last_login_at = p.BigIntegerField(null=True)  # 最后一次登录时间戳，如果没登陆过就是null
     is_admin = p.BooleanField(default=False) # 用户身份 默认为false
     current_framework = p.CharField(default="None") # 记录用户正在使用的 default framework
+    verification_code = p.CharField(default="123456") # 记录用户验证码
 
 
 database.create_tables([AuthUserTab])

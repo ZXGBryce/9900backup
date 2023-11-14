@@ -17,6 +17,7 @@ class CusMetrics(BaseModel):
     environment = p.IntegerField()  # 1/0
     social = p.IntegerField()  # 1/0
     government = p.IntegerField()  # 1/0
+    timestamp = p.DateField(formats=['%Y/%m/%d, %H:%M:%S'])
 
 # Creating the table in the SQLite database
 database.create_tables([CusMetrics])
