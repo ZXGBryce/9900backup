@@ -7,6 +7,7 @@ from flask_app.libs.registry import DependencyRegistry
 from flask_app.server.api.auth import auth_blueprint
 from flask_app.server.api.admin import admin_blueprint
 from flask_app.server.api.analysis import analysis_blueprint
+from flask_app.server.api.mailer import mailer_blueprint
 from flask_app.server.api.profile import profile_blueprint
 from flask_app.configs.startup_config import config
 from flask_cors import CORS
@@ -21,6 +22,7 @@ app.register_blueprint(auth_blueprint)
 app.register_blueprint(admin_blueprint)
 app.register_blueprint(analysis_blueprint)
 app.register_blueprint(profile_blueprint)
+app.register_blueprint(mailer_blueprint)
 
 # 初始化DependencyRegistry，正常这里应该是所有的依赖，比如访问数据库，访问缓存，消息队列，目前只有数据库
 DependencyRegistry.init(DataAccess(database)) # 初始化数据库

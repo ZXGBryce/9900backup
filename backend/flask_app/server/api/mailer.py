@@ -7,24 +7,24 @@ from flask_app.server.utils.password import hash_password, check_password
 from flask_app.server.utils.request_parser import handle_with_pydantic
 from flask_app.server.utils.verification_code import generate_verification_code
 from flask_app.models.user import AuthUserTab
+from flask_app.server.utils.password import hash_password
 
 
-auth_blueprint = Blueprint('mailer', __name__, url_prefix="/mailer")
+mailer_blueprint = Blueprint('mailer', __name__, url_prefix="/mailer")
 
 
-# TODO 完成接口1: 接收request中的用户邮箱， 然后利用registry.py中已经定义好的mail sever向用户邮箱发送验证码同时更新AutheUserTab中对应用户中的verification_code，记得使用generate_verification_code 生成验证码并验证用户邮箱是否为有效邮箱。如果用户邮箱不是有效邮箱返回错误message
 
 class SendMailcodeRequest(BaseModel):
     email: str
+    username: str
 
-@auth_blueprint.post('/send_mailcode')  # 在blueprint注册请求
+@mailer_blueprint.post('/send_mailcode')  # 在blueprint注册请求
 @handle_with_pydantic(SendMailcodeRequest)  # 这里点进去看
 def send_mailcode(SendMailcodeRequest) -> Response:
 
-    # Get username from jwt token
-    jwt_token = request.headers.get('Authorization').split(' ')[1]
-    payload = dep.jwt_manager.decode_token(jwt_token)
-    username = payload.get("username")
+    email = SendMailcodeRequest.email
+
+    username = SendMailcodeRequest.username
 
     user = dep.data_access.get_user_by_username(username)
 
@@ -32,25 +32,48 @@ def send_mailcode(SendMailcodeRequest) -> Response:
 
     dep.data_access.update_user_verification_code(user,code)
 
-    return Response
+    mailer = dep.mail
+
+    mailer.send_verification_code(email, code)
+
+    return Response(code=Code.OK)
 
 
 
-# TODO 接口2: 接收request 发来的用户输入的验证码，然后验证AuthUserTab中的正确验证码和发来的验证码是否一致，返回验证消息
 class VerifyCodeRequest(BaseModel):
     code: str
+    username: str
 
-@auth_blueprint.post('/verify_code')  # 在blueprint注册请求
-@handle_with_pydantic(VerifyCodeRequest)  # 这里点进去看
-def verfi_code(VerifyCodeRequest) -> Response:
+@mailer_blueprint.post('/verify_code')
+@handle_with_pydantic(VerifyCodeRequest)
+def verify_code(VerifyCodeRequest) -> Response:
 
-    # Get username from jwt token
-    jwt_token = request.headers.get('Authorization').split(' ')[1]
-    payload = dep.jwt_manager.decode_token(jwt_token)
-    username = payload.get("username")
+    username = VerifyCodeRequest.username
 
     user = dep.data_access.get_user_by_username(username)
 
     correct_code = user.verification_code
 
-    return Response
+    if VerifyCodeRequest.code == correct_code:
+        return Response(code=Code.OK)
+    else:
+        return Response(code=Code.WRONG_CODE)
+
+
+class ChangepasswordRequest(BaseModel):
+    username: str
+    newpassword: str
+
+@mailer_blueprint.post('/change_new_password')
+@handle_with_pydantic(ChangepasswordRequest)
+def change_password(ChangepasswordRequest) -> Response:
+
+    username = ChangepasswordRequest.username
+
+    user = dep.data_access.get_user_by_username(username)
+
+    user.password = hash_password(ChangepasswordRequest.newpassword)
+
+    user.save()
+
+    return Response(code=Code.OK)

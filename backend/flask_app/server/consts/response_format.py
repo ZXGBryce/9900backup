@@ -18,6 +18,7 @@ class Code(int, Enum):
     NO_FILE_PROVIDED = 40010
     TOKEN_EXPIRY = 40011
     EMPTY_REQUEST = 40012
+    WRONG_CODE= 40013
 
 
 Response_T = TypeVar("Response_T", bound=BaseModel)
