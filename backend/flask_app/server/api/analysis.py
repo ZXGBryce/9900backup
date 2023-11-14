@@ -229,6 +229,25 @@ def resetframework(resetframework_request: ResetFrameworkRequest) -> Response[Re
 
     return Response(data=FrameworkDataResponse(__root__=metrics).dict(), code=Code.OK)
 
+class DeleteCusFramework(BaseModel):
+    deleted_framework: str
+
+
+@analysis_blueprint.post("/delete_cusframework")
+@handle_with_pydantic(DeleteCusFramework)
+def delete_framework(DeleteCusFramework) -> Response:
+    deleted_framework = DeleteCusFramework.deleted_framework
+
+    # 查询与deleted_framework匹配的所有行
+    query = CusMetrics.delete().where(CusMetrics.framework == deleted_framework)
+
+    # 执行删除操作
+    deleted_count = query.execute()
+
+    return Response(code=Code.OK)
+
+
+
 
 data =  {
         "__root__": {

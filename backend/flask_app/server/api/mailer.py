@@ -28,6 +28,12 @@ def send_mailcode(SendMailcodeRequest) -> Response:
 
     user = dep.data_access.get_user_by_username(username)
 
+    if not user:
+        return Response(code=Code.WRONG_USERNAME_OR_EMAIL,message="User not exist")
+
+    if user.email != email:
+        return Response(code=Code.WRONG_USERNAME_OR_EMAIL, message="Wrong Email Address")
+
     code = generate_verification_code()
 
     dep.data_access.update_user_verification_code(user,code)
