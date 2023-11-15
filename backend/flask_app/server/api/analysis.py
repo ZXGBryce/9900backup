@@ -123,18 +123,18 @@ def framework(framework_request: FrameworkDataRequest) -> Response[FrameworkData
 class CalculationRequest(BaseModel):
     __root__: Dict[str, Framework]
 
-
+"""
 class YearlyScores(BaseModel):
     total: float
     scores: Dict[str, float]
 
 class CalculationResponse(BaseModel):
     ESGscore: Dict[str, Dict[int, YearlyScores]]
-
+"""
 
 @analysis_blueprint.post("/calculation")
 @handle_with_pydantic(CalculationRequest)
-def calculation(calculation_request: CalculationRequest) -> Response[CalculationResponse]:
+def calculation(calculation_request: CalculationRequest) -> Response:
     # Get username from jwt token
     jwt_token = request.headers.get('Authorization').split(' ')[1]
     payload = dep.jwt_manager.decode_token(jwt_token)
@@ -143,9 +143,11 @@ def calculation(calculation_request: CalculationRequest) -> Response[Calculation
     # Get timestamp
     timestamp = int(time.time())
 
+    selectframework = ""
 
     # Check for empty indicators
-    for framework in calculation_request.__root__.values():
+    for frameworkname, framework in calculation_request.__root__.items():
+        selectframework = frameworkname
         for company in framework.__root__.values():
             trigger = 0
             for category in company.__root__.values():
@@ -159,9 +161,137 @@ def calculation(calculation_request: CalculationRequest) -> Response[Calculation
 
     dep.data_access.store_cus_framework(calculation_request, timestamp, username)
 
-    ESG_score = dep.data_access.metrics_calculation(calculation_request, timestamp, username)
+    ESG_scores = dep.data_access.metrics_calculation(calculation_request, timestamp, username)
 
-    return Response(data=CalculationResponse(ESGscore=ESG_score).dict(), code=Code.OK)
+    """
+    Todo 按照计算公式 category_score = (indicator1_value * indicator1_weight + indicator2_value * indicator2_weight + ...) * subcategory1_weight + ...  （indicators都是属于对应subcategory中的， subcategorys都是属于 category中的）
+    根据 DataSetTab 和 RiskIndicator 两张表中的信息计算selectframework下所有公司的category score 和 total score， total_score = category1 score + category2 score + ... 然后根据这些公司的数量求取每个category score 的平均值 和 total score的平均值
+    """
+
+    # Calculate 5 years scores separately
+    yearly_benchmark_ESG_score = {}
+    for year in range(2019, 2024):
+        # Fetching data from DataSetTab and RiskIndicator with specific timestamp
+        dataset_records = DataSetTab.select().where(
+            (DataSetTab.framework == selectframework) &
+            (DataSetTab.timestamp == f"{year}/01/01")
+        )
+
+        # Data structures to store intermediate and final results
+        company_scores = {}
+        company_category_scores = {}  # Storing total scores for each category per company
+        category_avg_scores = {}
+        total_avg_score = 0
+
+        # Calculate scores for each company
+        for record in dataset_records:
+            company_name = record.company_name
+            indicator_info = RiskIndicator.get((RiskIndicator.indicator_name == record.indicator_name) & (RiskIndicator.framework == selectframework))
+            category = indicator_info.category
+            sub_category = indicator_info.sub_category
+
+            # Initialize company score structure
+            if company_name not in company_scores:
+                company_scores[company_name] = {}
+            if category not in company_scores[company_name]:
+                company_scores[company_name][category] = {}
+
+            # Calculate subcategory score
+            if sub_category not in company_scores[company_name][category]:
+                company_scores[company_name][category][sub_category] = 0
+
+            indicator_weight = indicator_info.indicator_weight
+            company_scores[company_name][category][sub_category] += record.indicator_value * indicator_weight
+
+        # Calculate subcategory scores
+        for company, categories in company_scores.items():
+            for category, subcategories in categories.items():
+                for subcategory, score in subcategories.items():
+                    subcategory_weight = RiskIndicator.get((RiskIndicator.sub_category == subcategory) & (RiskIndicator.framework == selectframework)).sub_category_weight
+                    subcategories[subcategory] = score * subcategory_weight
+
+        # Calculate category scores and total score
+        for company, categories in company_scores.items():
+            company_category_scores[company] = {}
+            for category, subcategories in categories.items():
+                company_category_scores[company][category] = sum(subcategories.values())
+
+        # Sum up category scores for total score and calculate averages
+        total_score_sum = 0
+        for company, categories in company_category_scores.items():
+            company_total = sum(categories.values())
+            total_score_sum += company_total
+            for category, score in categories.items():
+                category_avg_scores[category] = category_avg_scores.get(category, 0) + score
+
+        total_avg_score = total_score_sum / len(company_scores)
+        category_avg_scores = {k: v / len(company_scores) for k, v in category_avg_scores.items()}
+
+        yearly_benchmark_ESG_score[year] = {'total': total_avg_score, 'categories': category_avg_scores}
+
+    # Calculate the ave score base on these 5 years
+    benchmark_ESG_score = {'total': 0}
+    for year, scores in yearly_benchmark_ESG_score.items():
+        benchmark_ESG_score['total'] += scores['total'] / 5
+        for category, avg_score in scores['categories'].items():
+            if category not in benchmark_ESG_score:
+                benchmark_ESG_score[category] = 0
+            benchmark_ESG_score[category] += avg_score / 5
+
+
+
+    yearly_company_ave_score = {}
+    category_avg_scores_based_on_select_company = {}
+    """
+    TODO
+    根据 ESG_scores 里面的数据 分别计算 yearly_company_ave_score 和 category_avg_scores_based_on_select_company。 
+    yearly_company_ave_score 的结构为 key是 ESG_scores 中 的 companies， value 是 5个年份 'total' 的平均值 和 'scores' 里面的 每个 category 的平均值
+    category_avg_scores_based_on_select_company是根据 已经计算完的 yearly_company_ave_score 中的数据，以yearly_company_ave_score 中的 'total' 和 每个 category
+    为 key， 以 yearly_company_ave_score 中的company为基础计算平均值。
+    """
+
+    # Calculate yearly_company_ave_score
+    yearly_company_ave_score = {}
+    for company, years_data in ESG_scores.items():
+        company_total = 0
+        company_category_totals = {}
+        count_years = len(years_data)
+
+        for year, data in years_data.items():
+            company_total += data['total']
+            for category, score in data['scores'].items():
+                if category not in company_category_totals:
+                    company_category_totals[category] = 0
+                company_category_totals[category] += score
+
+        yearly_company_ave_score[company] = {
+            'total': company_total / count_years,
+            'scores': {category: total / count_years for category, total in company_category_totals.items()}
+        }
+
+    # Calculate category_avg_scores_based_on_select_company
+    category_avg_scores_based_on_select_company = {}
+    total_avg = 0
+    count_companies = len(yearly_company_ave_score)
+
+    for company, data in yearly_company_ave_score.items():
+        total_avg += data['total'] / count_companies
+        for category, score in data['scores'].items():
+            if category not in category_avg_scores_based_on_select_company:
+                category_avg_scores_based_on_select_company[category] = 0
+            category_avg_scores_based_on_select_company[category] += score / count_companies
+
+    # Adding 'total' to category_avg_scores_based_on_select_company
+    category_avg_scores_based_on_select_company['total'] = total_avg
+
+    # Populate the response data
+    responsedata = {}
+    responsedata['ESG_scores'] = ESG_scores
+    responsedata['benchmark_ESG_score'] = benchmark_ESG_score
+    responsedata['yearly_company_ave_score'] = yearly_company_ave_score
+    responsedata['category_avg_scores_based_on_select_company'] = category_avg_scores_based_on_select_company
+
+    return Response(data=responsedata, code=Code.OK)
 
 
 class HistoryResponse(BaseModel):
@@ -245,6 +375,8 @@ def delete_framework(DeleteCusFramework) -> Response:
     deleted_count = query.execute()
 
     return Response(code=Code.OK)
+
+
 
 
 

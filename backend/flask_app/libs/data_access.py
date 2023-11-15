@@ -178,4 +178,4 @@ class DataAccess:
 
         return ESG_score
 
-
+        
