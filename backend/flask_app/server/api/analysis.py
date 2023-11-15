@@ -1,8 +1,10 @@
 from flask import Blueprint, Request, jsonify, make_response, request
 from pydantic import BaseModel
 import time
-
 from typing import Dict
+from openai import OpenAI
+
+from flask_app.server.utils.chatgpt import generate_description
 from flask_app.server.consts.response_format import Response, Code
 from flask_app.libs.registry import DependencyRegistry as dep
 from flask_app.models.metrics import RiskIndicator
@@ -291,7 +293,10 @@ def calculation(calculation_request: CalculationRequest) -> Response:
     responsedata['yearly_company_ave_score'] = yearly_company_ave_score
     responsedata['category_avg_scores_based_on_select_company'] = category_avg_scores_based_on_select_company
 
-    return Response(data=responsedata, code=Code.OK)
+
+    # Generate chatgpt description
+    message = generate_description(selectframework, responsedata)
+    return Response(data=responsedata, code=Code.OK, message=message)
 
 
 class HistoryResponse(BaseModel):
