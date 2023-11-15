@@ -6,7 +6,7 @@ from openai import OpenAI
 
 def generate_description(esg_data1, esg_data2):
     client = OpenAI(
-        api_key='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',
+        api_key='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',
     )
 
     chat_completion = client.chat.completions.create(
