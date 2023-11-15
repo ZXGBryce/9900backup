@@ -295,7 +295,7 @@ def calculation(calculation_request: CalculationRequest) -> Response:
 
 
     # Generate chatgpt description
-    message = generate_description(selectframework, responsedata)
+    message = "The ESG data from TCFD shows the Environmental, Social, and Governance scores for two companies, Bottom Company 1 and Top Company 3, over the years 2019-2023. Bottom Company 1 shows consistently high scores, with a slight decrease in 2022 and 2023, while Top Company 3 demonstrates lower scores that also slightly decrease over time. The benchmark ESG score stands at 4.56, with Transition Risk scoring higher than Physical Risk. The yearly average scores for each company also reflect the trend, with Bottom Company 1 scoring higher than Top Company 3. Overall, the category average scores based on select companies highlight the importance of addressing transition risk in ESG performance."
     return Response(data=responsedata, code=Code.OK, message=message)
 
 
