@@ -13,5 +13,6 @@
   },
   "jwt": {
     "SECRET_KEY": "ASDFGHJKL"
+
   }
 }

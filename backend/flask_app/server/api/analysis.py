@@ -149,7 +149,11 @@ def calculation(calculation_request: CalculationRequest) -> Response:
 
     # Check for empty indicators
     for frameworkname, framework in calculation_request.__root__.items():
-        selectframework = frameworkname
+        if frameworkname == "APRA_CPG_229":
+            parts = frameworkname.split("_")
+            selectframework = "_".join(parts[:3])
+        else:
+            selectframework = frameworkname.split("_")[0]
         for company in framework.__root__.values():
             trigger = 0
             for category in company.__root__.values():
@@ -160,7 +164,6 @@ def calculation(calculation_request: CalculationRequest) -> Response:
                 return Response(code=Code.EMPTY_REQUEST, message=f"No indicators present")
 
 
-
     dep.data_access.store_cus_framework(calculation_request, timestamp, username)
 
     ESG_scores = dep.data_access.metrics_calculation(calculation_request, timestamp, username)
@@ -169,7 +172,6 @@ def calculation(calculation_request: CalculationRequest) -> Response:
     Todo 按照计算公式 category_score = (indicator1_value * indicator1_weight + indicator2_value * indicator2_weight + ...) * subcategory1_weight + ...  （indicators都是属于对应subcategory中的， subcategorys都是属于 category中的）
     根据 DataSetTab 和 RiskIndicator 两张表中的信息计算selectframework下所有公司的category score 和 total score， total_score = category1 score + category2 score + ... 然后根据这些公司的数量求取每个category score 的平均值 和 total score的平均值
     """
-
     # Calculate 5 years scores separately
     yearly_benchmark_ESG_score = {}
     for year in range(2019, 2024):
@@ -184,10 +186,10 @@ def calculation(calculation_request: CalculationRequest) -> Response:
         company_category_scores = {}  # Storing total scores for each category per company
         category_avg_scores = {}
         total_avg_score = 0
-
         # Calculate scores for each company
         for record in dataset_records:
             company_name = record.company_name
+
             indicator_info = RiskIndicator.get((RiskIndicator.indicator_name == record.indicator_name) & (RiskIndicator.framework == selectframework))
             category = indicator_info.category
             sub_category = indicator_info.sub_category
@@ -227,6 +229,7 @@ def calculation(calculation_request: CalculationRequest) -> Response:
                 category_avg_scores[category] = category_avg_scores.get(category, 0) + score
 
         total_avg_score = total_score_sum / len(company_scores)
+
         category_avg_scores = {k: v / len(company_scores) for k, v in category_avg_scores.items()}
 
         yearly_benchmark_ESG_score[year] = {'total': total_avg_score, 'categories': category_avg_scores}
@@ -266,6 +269,7 @@ def calculation(calculation_request: CalculationRequest) -> Response:
                     company_category_totals[category] = 0
                 company_category_totals[category] += score
 
+
         yearly_company_ave_score[company] = {
             'total': company_total / count_years,
             'scores': {category: total / count_years for category, total in company_category_totals.items()}
@@ -286,6 +290,9 @@ def calculation(calculation_request: CalculationRequest) -> Response:
     # Adding 'total' to category_avg_scores_based_on_select_company
     category_avg_scores_based_on_select_company['total'] = total_avg
 
+
+
+
     # Populate the response data
     responsedata = {}
     responsedata['ESG_scores'] = ESG_scores
@@ -295,7 +302,7 @@ def calculation(calculation_request: CalculationRequest) -> Response:
 
 
     # Generate chatgpt description
-    message = "The ESG data from TCFD shows the Environmental, Social, and Governance scores for two companies, Bottom Company 1 and Top Company 3, over the years 2019-2023. Bottom Company 1 shows consistently high scores, with a slight decrease in 2022 and 2023, while Top Company 3 demonstrates lower scores that also slightly decrease over time. The benchmark ESG score stands at 4.56, with Transition Risk scoring higher than Physical Risk. The yearly average scores for each company also reflect the trend, with Bottom Company 1 scoring higher than Top Company 3. Overall, the category average scores based on select companies highlight the importance of addressing transition risk in ESG performance."
+    message = generate_description(selectframework, responsedata)
     return Response(data=responsedata, code=Code.OK, message=message)
 
 

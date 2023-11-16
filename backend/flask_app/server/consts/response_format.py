@@ -19,6 +19,7 @@ class Code(int, Enum):
     TOKEN_EXPIRY = 40011
     EMPTY_REQUEST = 40012
     WRONG_CODE= 40013
+    WRONG_CSV_FILE_FORMAT = 40014
 
 
 Response_T = TypeVar("Response_T", bound=BaseModel)

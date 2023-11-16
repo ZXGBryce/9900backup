@@ -22,11 +22,11 @@ TCFD,Uncertainty in market signals,9,Market,0.1,Transition Risk,0.2
 TCFD,Increased stakeholder concern or negative stakeholder feedback,10,Reputation,0.2,Transition Risk,0.1
 TCFD,Increased severity of extreme weather events such as cyclones and floods,11,Acute,0.1,Physical Risk,0.1
 TCFD,Rising mean temperatures,3,Chronic ,0.2,Physical Risk,0.1
-IFRS,The amount and percentage of assets or bussiness activities vulnerable to Regulatory,8,Regulatory,0.1,Transition Risk,0
-IFRS,The amount and percentage of assets or bussiness activities vulnerable to Technological,5,Technological,0.2,Transition Risk,0.1
-IFRS,The amount and percentage of assets or bussiness activities vulnerable to Market,9,Market,0.2,Transition Risk,0.2
-IFRS,The amount and percentage of assets or bussiness activities vulnerable to legal or reputational risks,4,Legal or reputation risks,0.2,Transition Risk,0.2
-IFRS,The amount and percentage of assets or bussiness activities vulnerable to acute physical risks,3,Acute,0.1,Physical Risk,0.1
-IFRS,The amount and percentage of assets or bussiness activities vulnerable to chronic physical risks,10,Chronic,0.1,Physical Risk,0.2
+IFRS,The amount and percentage of assets or business activities vulnerable to Regulatory,8,Regulatory,0.1,Transition Risk,0
+IFRS,The amount and percentage of assets or business activities vulnerable to Technological,5,Technological,0.2,Transition Risk,0.1
+IFRS,The amount and percentage of assets or business activities vulnerable to Market,9,Market,0.2,Transition Risk,0.2
+IFRS,The amount and percentage of assets or business activities vulnerable to legal or reputational risks,4,Legal or reputation risks,0.2,Transition Risk,0.2
+IFRS,The amount and percentage of assets or business activities vulnerable to acute physical risks,3,Acute,0.1,Physical Risk,0.1
+IFRS,The amount and percentage of assets or business activities vulnerable to chronic physical risks,10,Chronic,0.1,Physical Risk,0.2
 IFRS,Internal carbon price risks,6,Internal carbon price,0,Other,0.1
 IFRS,Remuneration risks,2,Remuneration ,0.1,Other,0.1

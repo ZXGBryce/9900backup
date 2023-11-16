@@ -60,17 +60,19 @@ class DataAccess:
 
         # 查询包含给定framework的所有独特的公司名称及其对应的region和sector
         query = (DataSetTab.select(
-            DataSetTab.company_name, DataSetTab.region, DataSetTab.sector
+            DataSetTab.company_name, DataSetTab.region, DataSetTab.sector, DataSetTab.data_source
         )
                  .where(DataSetTab.framework == framework_input)
                  .distinct()
                  .tuples())
 
-        for company_name, region, sector in query:
+        for company_name, region, sector, datasource in query:
             company_info = {
                 "name": company_name,
                 "region": region,
-                "sector": sector
+                "sector": sector,
+                "data_source": datasource
+
             }
             company_list.append(company_info)
 

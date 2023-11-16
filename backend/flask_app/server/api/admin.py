@@ -27,10 +27,28 @@ def upload_csv():
         return Response(code=Code.NO_FILE_PROVIDED).dict()
     csv_file = request.files['csv_file']
 
-    # 对文件进行安全检查， 检查文件大小，文件类型等
+    if csv_file.filename == '':
+        return Response(code=Code.NO_FILE_PROVIDED).dict()
+
+    # 然后尝试读取文件
+    try:
+        df = pd.read_csv(csv_file.stream)
+    except pd.errors.EmptyDataError:
+        return Response(code=Code.WRONG_CSV_FILE_FORMAT).dict()
+
+    # 文件检查: 检查列数和列名
+
+    expected_columns = {
+        'company_name', 'framework', 'indicator_name', 'indicator_value',
+        'sasb_materiality', 'region', 'sector', 'environment',
+        'social', 'governance', 'timestamp', 'data_source'
+    }
+    if set(df.columns) != expected_columns:
+        return Response(code=Code.WRONG_CSV_FILE_FORMAT).dict()
+
 
     # 插入数据
-    df = pd.read_csv(csv_file.stream)
+
     with dep.data_access.db.atomic():
         for index, row in df.iterrows():
             DataSetTab.create(
