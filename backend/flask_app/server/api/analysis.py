@@ -274,7 +274,9 @@ def calculation(calculation_request: CalculationRequest) -> Response:
     responsedata['category_avg_scores_based_on_select_company'] = category_avg_scores_based_on_select_company
 
     # Generate chatgpt description
-    message = generate_description(selectframework, responsedata)
+    message = ("You have downloaded the backend code version from GitHub. Due to the security protocols for ChatGPT's API key, we are unable to upload the code containing the API key to GitHub. Therefore, the analysis report feature cannot be displayed here. If you wish to experience this functionality, please connect the frontend to the backend server on AWS as per the instructions provided.")
+
+    #message = generate_description(selectframework, responsedata)
     return Response(data=responsedata, code=Code.OK, message=message)
 
 
