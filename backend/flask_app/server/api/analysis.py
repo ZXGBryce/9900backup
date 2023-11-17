@@ -141,7 +141,7 @@ def calculation(calculation_request: CalculationRequest) -> Response:
 
     # Check for empty indicators
     for frameworkname, framework in calculation_request.__root__.items():
-        if frameworkname == "APRA_CPG_229":
+        if frameworkname == "APRA_CPG_229" or "APRA_CPG_229" in frameworkname:
             parts = frameworkname.split("_")
             selectframework = "_".join(parts[:3])
         else:
@@ -156,8 +156,8 @@ def calculation(calculation_request: CalculationRequest) -> Response:
                 return Response(code=Code.EMPTY_REQUEST, message=f"No indicators present")
 
 
-    dep.data_access.store_cus_framework(calculation_request, timestamp, username)
-    ESG_scores = dep.data_access.metrics_calculation(calculation_request, timestamp, username)
+    dep.data_access.store_cus_framework(calculation_request, timestamp, username, selectframework)
+    ESG_scores = dep.data_access.metrics_calculation(calculation_request, timestamp, username, selectframework)
 
     # Calculate 5 years scores separately
     yearly_benchmark_ESG_score = {}
@@ -274,9 +274,9 @@ def calculation(calculation_request: CalculationRequest) -> Response:
     responsedata['category_avg_scores_based_on_select_company'] = category_avg_scores_based_on_select_company
 
     # Generate chatgpt description
-    #message = ("You have downloaded the backend code version from GitHub. Due to the security protocols for ChatGPT's API key, we are unable to upload the code containing the API key to GitHub. Therefore, the analysis report feature cannot be displayed here. If you wish to experience this functionality, please connect the frontend to the backend server on AWS as per the instructions provided.")
+    message = ("You have downloaded the backend code version from GitHub. Due to the security protocols for ChatGPT's API key, we are unable to upload the code containing the API key to GitHub. Therefore, the analysis report feature cannot be displayed here. If you wish to experience this functionality, please connect the frontend to the backend server on AWS as per the instructions provided.")
 
-    message = generate_description(selectframework, responsedata)
+    #message = generate_description(selectframework, responsedata)
     return Response(data=responsedata, code=Code.OK, message=message)
 
 

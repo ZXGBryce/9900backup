@@ -75,11 +75,11 @@ class DataAccess:
 
         return company_list
 
-    def store_cus_framework(self, calculation_request,timestamp, username):
+    def store_cus_framework(self, calculation_request,timestamp, username, selectframework):
 
         """ Store a user customised metrics to CusMetrics table """
         for framework_name, framework_data in calculation_request.__root__.items():
-            modified_framework_name = f"{framework_name}_{username}_{timestamp}"
+            modified_framework_name = f"{selectframework}_{username}_{timestamp}"
             for company_name, company_data in framework_data.__root__.items():
                 for category_name, category_data in company_data.__root__.items():
                     for sub_category_name, sub_category_data in category_data.__root__.items():
@@ -88,7 +88,7 @@ class DataAccess:
                             # Check if the indicator exists in DataSetTab
                             existing_indicator = DataSetTab.select().where(
                                 (DataSetTab.company_name == company_name) &
-                                (DataSetTab.framework == framework_name) &
+                                (DataSetTab.framework == selectframework) &
                                 (DataSetTab.indicator_name == indicator_name)
                             ).exists()
 
@@ -97,7 +97,7 @@ class DataAccess:
                                 for year in range(2019, 2024):
                                     dataset_record = DataSetTab.get(
                                         (DataSetTab.company_name == company_name) &
-                                        (DataSetTab.framework == framework_name) &
+                                        (DataSetTab.framework == selectframework) &
                                         (DataSetTab.indicator_name == indicator_name) &
                                         (DataSetTab.timestamp == f"{year}/01/01")
                                     )
@@ -133,12 +133,12 @@ class DataAccess:
                                         timestamp=f"{year}/01/01"
                                     )
 
-    def metrics_calculation(self, calculation_request, timestamp, username):
+    def metrics_calculation(self, calculation_request, timestamp, username, selectframework):
 
         """ Calculation ESG score and other statistics value for front end """
         ESG_score = {}
         for framework_name, framework_data in calculation_request.__root__.items():
-            modified_framework_name = f"{framework_name}_{username}_{timestamp}"
+            modified_framework_name = f"{selectframework}_{username}_{timestamp}"
             for company_name, _ in framework_data.__root__.items():
                 ESG_score[company_name] = {}
                 for year in range(2019, 2024):
