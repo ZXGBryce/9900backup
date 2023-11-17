@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+# Define the Mail Server config structure
 class MailConfig(BaseModel):
     MAIL_SERVER: str
     MAIL_PORT: int

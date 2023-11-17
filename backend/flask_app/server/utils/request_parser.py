@@ -13,31 +13,32 @@ TypedHandler_F = Callable[[RT], Response]
 
 def handle_with_pydantic(request_class: Type[RT]):
     """
-    调用handle_with_pydantic可以获得一个装饰器
-    这个装饰器以TypedHandler_F为参数，返回一个RouteCallable——一个标准的flask请求处理函数
-    下面的代码中：
-    装饰器就是wrapper
-    TypedHandler_F类型的参数是func
-    返回的标准的flask请求处理函数是inner
+    Calling handle_with_pydantic provides a decorator.
+    This decorator takes a TypedHandler_F as an argument and returns a RouteCallable — a standard Flask request handling function.
+    In the code below:
+
+    The decorator is referred to as wrapper.
+    The TypedHandler_F type argument is func.
+    The returned standard Flask request handling function is inner.
     """
 
     def wrapper(func: TypedHandler_F) -> RouteCallable:
-        @functools.wraps(func)  # 装饰器本质是接受一个函数作为参数然后返回一个新的函数的函数的语法糖。这一行可以理解是固定写法。
+        @functools.wraps(func)
         def inner() -> ResponseReturnValue:
-            # 1. 解析请求的json，把它变成python的类便于后续使用
-            # 如果出错就返回请求json错误
+            # 1. Parse the request's JSON and convert it into a Python class for easier use later.
+            # If there is an error, return that the request JSON is incorrect.
             try:
                 req_data: RT = request_class(**request.json)
             except ValidationError as e:
-                print(e.json())  # 这将打印详细的错误信息。
+                print(e.json())  # print error message
                 return Response(code=Code.REQ_JSON_INVALID).dict()
 
-            # 2. 调用用户写的请求处理函数，这里可以加错误处理，也可以在中间件加错误处理
+            # 2. Invoke the user-written request handling function. Error handling can be added here, or it can be implemented in middleware.
             res: Response = func(req_data)
 
-            # 3. 返回用户写的处理函数返回的结果
+            # 3. Return the result produced by the user-written processing function.
             return res.dict()
 
-        return inner # wrapper函数接受了func函数作为参数，
+        return inner # wrapper accept func as parameter
 
     return wrapper

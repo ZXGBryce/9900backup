@@ -4,7 +4,7 @@ from flask_app.models.base import BaseModel
 
 
 class DataSetTab(BaseModel):
-    """ dataset format """
+    """ Dataset format """
     company_name = p.CharField()
     framework = p.CharField()
     indicator_name = p.CharField()

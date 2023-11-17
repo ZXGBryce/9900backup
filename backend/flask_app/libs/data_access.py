@@ -1,8 +1,6 @@
 from typing import Optional
 
 from peewee import Database
-import pandas as pd
-import json
 from flask_app.models.user import AuthUserTab
 from flask_app.models.dataset import DataSetTab
 from flask_app.models.customised_metrics import CusMetrics
@@ -11,17 +9,16 @@ from flask_app.models.customised_metrics import CusMetrics
 class DataAccess:
     def __init__(self, db: Database):
         self.db = db
-        #locate_directories(self)
 
 
     def get_user_by_username(self, username: str) -> Optional[AuthUserTab]:
-        """ 检查用户名是否存在 """
+        """ Check if the username is existed """
         return AuthUserTab.get_or_none(
             AuthUserTab.username == username
         )
 
     def create_new_user(self, username: str, hashed_password: str, email: str) -> AuthUserTab:
-        """ 创建新用户 """
+        """ Create a new user account """
         return AuthUserTab.create(
             username=username,
             password=hashed_password,
@@ -29,28 +26,28 @@ class DataAccess:
         )
 
     def get_user_by_email(self, email: str) -> Optional[AuthUserTab]:
-        """ 检查邮件是否存在 """
+        """ Check if the email is already existed """
         return AuthUserTab.get_or_none(
             AuthUserTab.email == email
         )
 
     def set_user_jwt_version(self, username: str) -> Optional[int]:
-        """ 为用户设置 JWT """
+        """ Create JWT token for user """
         user = self.get_user_by_username(username)
         return user.jwt_version if user else None
 
     def increment_jwt_version(self, user: AuthUserTab):
-        """ 更新版本号 """
+        """ Update token version """
         user.jwt_version += 1
         user.save()
 
     def update_user_verification_code(self, user: AuthUserTab, code: str):
-        """" update user verification code """
+        """" Update user verification code """
         user.verification_code = code
         user.save()
 
     def update_user_framework(self, user: AuthUserTab, framework: str):
-        """ record the framework the user is using """
+        """ Record the framework the user is using """
         user.current_framework = framework
         user.save()
 
@@ -58,7 +55,7 @@ class DataAccess:
         """ Get company details for a specific framework from dataset table """
         company_list = []
 
-        # 查询包含给定framework的所有独特的公司名称及其对应的region和sector
+        # Search and return the companies info under a given framework
         query = (DataSetTab.select(
             DataSetTab.company_name, DataSetTab.region, DataSetTab.sector, DataSetTab.data_source
         )
@@ -80,6 +77,7 @@ class DataAccess:
 
     def store_cus_framework(self, calculation_request,timestamp, username):
 
+        """ Store a user customised metrics to CusMetrics table """
         for framework_name, framework_data in calculation_request.__root__.items():
             modified_framework_name = f"{framework_name}_{username}_{timestamp}"
             for company_name, company_data in framework_data.__root__.items():
@@ -87,7 +85,7 @@ class DataAccess:
                     for sub_category_name, sub_category_data in category_data.__root__.items():
                         for indicator_name, indicator_data in sub_category_data.indicators.items():
 
-                            # 检查指标是否存在于 DataSetTab
+                            # Check if the indicator exists in DataSetTab
                             existing_indicator = DataSetTab.select().where(
                                 (DataSetTab.company_name == company_name) &
                                 (DataSetTab.framework == framework_name) &
@@ -95,7 +93,7 @@ class DataAccess:
                             ).exists()
 
                             if existing_indicator:
-                                # 对于已存在的指标，提取并存储五个年份的值
+                                # For the existing indicator, select and store 5 years value in dict
                                 for year in range(2019, 2024):
                                     dataset_record = DataSetTab.get(
                                         (DataSetTab.company_name == company_name) &
@@ -118,7 +116,7 @@ class DataAccess:
                                         timestamp=f"{year}/01/01"
                                     )
                             else:
-                                # 对于新指标，使用相同的值和权重创建五个年份的记录
+                                # For new created indicator, use same value and weight create 5 years data
                                 for year in range(2019, 2024):
                                     CusMetrics.create(
                                         framework=modified_framework_name,
@@ -137,6 +135,7 @@ class DataAccess:
 
     def metrics_calculation(self, calculation_request, timestamp, username):
 
+        """ Calculation ESG score and other statistics value for front end """
         ESG_score = {}
         for framework_name, framework_data in calculation_request.__root__.items():
             modified_framework_name = f"{framework_name}_{username}_{timestamp}"

@@ -4,9 +4,15 @@ from flask_app.server.utils.password import hash_password
 from flask_app.models.user import AuthUserTab
 from flask_app.libs.registry import DependencyRegistry as dep
 
-# 初始化 DataAccess
+# Initialize DataAccess
 data_access = DataAccess(database)
 
+
+
+"""
+This py file is for backend stuff to create an admin account
+When they run this python file, they will be guided to fill in the new admin information
+"""
 def create_user():
     print("Create New Account")
     username = input("Enter Username: ")
@@ -15,22 +21,22 @@ def create_user():
     repeat_password = input("Confirm Password: ")
     is_adm = input("admin? (yes/no): ") # yes or no
 
-    # 检查两次输入的密码是否匹配
+    # Check if the two input passwords is matching
     if password != repeat_password:
         print("Passwords does not match")
         return
 
-    # 检查用户名是否已经存在
+    # Check if username already exists
     if data_access.get_user_by_username(username):
         print("User already exists!")
         return
 
-    # 检查电子邮件是否已经存在
+    # Check if the email address already exists
     if data_access.get_user_by_email(email):
         print("Email already exists!")
         return
 
-    hashed_password = hash_password(password)  # 使用你的 hash_password 函数来哈希密码
+    hashed_password = hash_password(password)  # Using hash password function to hash password
     newuser = data_access.create_new_user(username, hashed_password, email)
     if is_adm == "yes":
         newuser.is_admin = True

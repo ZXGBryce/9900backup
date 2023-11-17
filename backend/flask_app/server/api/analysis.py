@@ -2,7 +2,6 @@ from flask import Blueprint, Request, jsonify, make_response, request
 from pydantic import BaseModel
 import time
 from typing import Dict
-from openai import OpenAI
 
 from flask_app.server.utils.chatgpt import generate_description
 from flask_app.server.consts.response_format import Response, Code
@@ -25,6 +24,7 @@ class CompanyResponse(BaseModel):
 @analysis_blueprint.post('/company')
 @handle_with_pydantic(CompanyResquest)
 def company(company_request: CompanyResquest) -> Response[CompanyResponse]:
+
     # From DataSetTab to get distinct company name list
     company_info = dep.data_access.get_company_info(company_request.framework)
 
@@ -69,6 +69,7 @@ class FrameworkDataResponse(BaseModel):
 @analysis_blueprint.post('/framework')
 @handle_with_pydantic(FrameworkDataRequest)
 def framework(framework_request: FrameworkDataRequest) -> Response[FrameworkDataResponse]:
+
     # Get username from jwt token
     jwt_token = request.headers.get('Authorization').split(' ')[1]
     payload = dep.jwt_manager.decode_token(jwt_token)
@@ -76,7 +77,7 @@ def framework(framework_request: FrameworkDataRequest) -> Response[FrameworkData
 
     framework_name = user.current_framework
 
-    # 根据 request 的 company list 和 framework_name 来调取 datasettab 和 RiskIndicator 两个表的数据
+    # According to company list and framework_name of request to search the records in datasettab and riskindicator
     dataset_records = DataSetTab.select().where(
         (DataSetTab.framework == framework_name) &
         (DataSetTab.company_name.in_(framework_request.company_list)) & (DataSetTab.timestamp == "2019/01/01")
@@ -86,10 +87,10 @@ def framework(framework_request: FrameworkDataRequest) -> Response[FrameworkData
         RiskIndicator.framework == framework_name
     )
 
-    # 创建一个方便查询的RiskIndicator字典
+    # Create a RiskIndicator Dict for convenient search
     risk_indicator_dict = {ri.indicator_name: ri for ri in risk_indicator_records}
 
-    # 开始构建 FrameworkDataResponse 结构
+    # Construct FrameworkDataResponse structure
     metrics = {framework_name: {}}
 
     for record in dataset_records:
@@ -125,15 +126,6 @@ def framework(framework_request: FrameworkDataRequest) -> Response[FrameworkData
 class CalculationRequest(BaseModel):
     __root__: Dict[str, Framework]
 
-"""
-class YearlyScores(BaseModel):
-    total: float
-    scores: Dict[str, float]
-
-class CalculationResponse(BaseModel):
-    ESGscore: Dict[str, Dict[int, YearlyScores]]
-"""
-
 @analysis_blueprint.post("/calculation")
 @handle_with_pydantic(CalculationRequest)
 def calculation(calculation_request: CalculationRequest) -> Response:
@@ -165,16 +157,12 @@ def calculation(calculation_request: CalculationRequest) -> Response:
 
 
     dep.data_access.store_cus_framework(calculation_request, timestamp, username)
-
     ESG_scores = dep.data_access.metrics_calculation(calculation_request, timestamp, username)
 
-    """
-    Todo 按照计算公式 category_score = (indicator1_value * indicator1_weight + indicator2_value * indicator2_weight + ...) * subcategory1_weight + ...  （indicators都是属于对应subcategory中的， subcategorys都是属于 category中的）
-    根据 DataSetTab 和 RiskIndicator 两张表中的信息计算selectframework下所有公司的category score 和 total score， total_score = category1 score + category2 score + ... 然后根据这些公司的数量求取每个category score 的平均值 和 total score的平均值
-    """
     # Calculate 5 years scores separately
     yearly_benchmark_ESG_score = {}
     for year in range(2019, 2024):
+
         # Fetching data from DataSetTab and RiskIndicator with specific timestamp
         dataset_records = DataSetTab.select().where(
             (DataSetTab.framework == selectframework) &
@@ -243,18 +231,6 @@ def calculation(calculation_request: CalculationRequest) -> Response:
                 benchmark_ESG_score[category] = 0
             benchmark_ESG_score[category] += avg_score / 5
 
-
-
-    yearly_company_ave_score = {}
-    category_avg_scores_based_on_select_company = {}
-    """
-    TODO
-    根据 ESG_scores 里面的数据 分别计算 yearly_company_ave_score 和 category_avg_scores_based_on_select_company。 
-    yearly_company_ave_score 的结构为 key是 ESG_scores 中 的 companies， value 是 5个年份 'total' 的平均值 和 'scores' 里面的 每个 category 的平均值
-    category_avg_scores_based_on_select_company是根据 已经计算完的 yearly_company_ave_score 中的数据，以yearly_company_ave_score 中的 'total' 和 每个 category
-    为 key， 以 yearly_company_ave_score 中的company为基础计算平均值。
-    """
-
     # Calculate yearly_company_ave_score
     yearly_company_ave_score = {}
     for company, years_data in ESG_scores.items():
@@ -290,16 +266,12 @@ def calculation(calculation_request: CalculationRequest) -> Response:
     # Adding 'total' to category_avg_scores_based_on_select_company
     category_avg_scores_based_on_select_company['total'] = total_avg
 
-
-
-
     # Populate the response data
     responsedata = {}
     responsedata['ESG_scores'] = ESG_scores
     responsedata['benchmark_ESG_score'] = benchmark_ESG_score
     responsedata['yearly_company_ave_score'] = yearly_company_ave_score
     responsedata['category_avg_scores_based_on_select_company'] = category_avg_scores_based_on_select_company
-
 
     # Generate chatgpt description
     message = generate_description(selectframework, responsedata)
@@ -312,7 +284,6 @@ class HistoryResponse(BaseModel):
 
 @analysis_blueprint.get("/history")
 def history():
-
     # Get username from jwt token
     jwt_token = request.headers.get('Authorization').split(' ')[1]
     payload = dep.jwt_manager.decode_token(jwt_token)
@@ -325,10 +296,8 @@ def history():
     return Response(data=HistoryResponse(cusframeworks=frameworks).dict(), code=Code.OK).dict()
 
 
-
 class ResetFrameworkRequest(BaseModel):
     framework_name: str
-
 
 class ResetFrameworkResponse(BaseModel):
     __root__: Dict[str, Framework]
@@ -339,10 +308,10 @@ class ResetFrameworkResponse(BaseModel):
 def resetframework(resetframework_request: ResetFrameworkRequest) -> Response[ResetFrameworkResponse]:
     framework = resetframework_request.framework_name
 
-    # 根据 framework 从 CusMetrics 表中抓取数据
+    # Get records according to framework name
     metrics_records = CusMetrics.select().where((CusMetrics.framework == framework) & (CusMetrics.timestamp == "2019/01/01"))
 
-    # 开始构建 FrameworkDataResponse 结构
+    # Construct Response structure
     metrics = {framework: {}}
 
     for record in metrics_records:
@@ -380,10 +349,10 @@ class DeleteCusFramework(BaseModel):
 def delete_framework(DeleteCusFramework) -> Response:
     deleted_framework = DeleteCusFramework.deleted_framework
 
-    # 查询与deleted_framework匹配的所有行
+    # Search the records that match to deleted framework name
     query = CusMetrics.delete().where(CusMetrics.framework == deleted_framework)
 
-    # 执行删除操作
+    # Delete the corresponding records
     deleted_count = query.execute()
 
     return Response(code=Code.OK)

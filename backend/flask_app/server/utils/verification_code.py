@@ -2,5 +2,5 @@ import random
 import string
 
 def generate_verification_code() -> str:
-    """ 生成6位数字随机验证码。"""
+    """ Generate random 6-digits verification code """
     return ''.join(random.choices(string.digits, k=6))

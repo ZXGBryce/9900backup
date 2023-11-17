@@ -5,7 +5,8 @@ from flask_app.models.base import BaseModel
 
 
 class CusMetrics(BaseModel):
-    """Table for customised Metrics based on the CSV structure"""
+
+    """ Table for customised Metrics based on the CSV structure """
     framework = p.CharField()  # e.g., zxg_1_APRA_CPG_229
     company = p.CharField()
     indicator_name = p.CharField()  # e.g., Policy changes

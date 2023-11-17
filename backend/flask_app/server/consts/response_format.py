@@ -5,6 +5,7 @@ from pydantic import BaseModel
 
 
 class Code(int, Enum):
+    """ Definition of each different status code """
     OK = 20000
     IS_ADMIN = 20001
     REQ_JSON_INVALID = 40001
@@ -26,6 +27,7 @@ Response_T = TypeVar("Response_T", bound=BaseModel)
 
 
 class Response(BaseModel, Generic[Response_T]):
+    """" Define a typing of Response """
     code: Code = Code.OK
     data: Optional[Union[Dict, Response_T]] = None
     message: str = ""

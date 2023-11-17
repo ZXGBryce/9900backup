@@ -5,7 +5,8 @@ from flask_app.models.base import BaseModel
 
 
 class RiskIndicator(BaseModel):
-    """Table for risk indicators based on the CSV structure"""
+
+    """ Table for risk indicators based on the CSV structure """
     framework = p.CharField()  # e.g., APRA_CPG_229
     indicator_name = p.CharField()  # e.g., Policy changes
     indicator_weight = p.FloatField()  # e.g., 34
